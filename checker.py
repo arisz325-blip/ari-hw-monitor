@@ -564,7 +564,7 @@ EVENT_META = {
 
 def send_ntfy(events: list[dict], dry_run: bool) -> int:
     topic = os.environ.get("NTFY_TOPIC", "").strip()
-    server = os.environ.get("NTFY_SERVER", "https://ntfy.sh").rstrip("/")
+    server = (os.environ.get("NTFY_SERVER") or "https://ntfy.sh").strip().rstrip("/")
     token = os.environ.get("NTFY_TOKEN", "").strip()
 
     if not events:
