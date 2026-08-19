@@ -54,6 +54,20 @@ def _product_js(handle: str, region_price: int) -> dict:
     }
 
 
+def _product_page_html(handle: str) -> str:
+    """Mirrors the real site: a countdown block that's always present in the
+    template (even for products long since released), only meaningful once
+    the caller checks whether the date it names is still in the future."""
+    launches = CATALOG[handle].get("launches", "")
+    countdown = (
+        f'<div class="cs-countdown__block js-cs-countdown-block hide">'
+        f'<span class="product__status-badge coming-soon">Coming Soon</span>'
+        f'<div class="pre-order-msg countdown">Launches {launches}</div>'
+        f'</div>'
+    ) if launches else ""
+    return f"<!doctype html><html><body>{countdown}</body></html>"
+
+
 def _collection_html(region_price_note: str, collection: str = "hot-wheels") -> str:
     handles = COLLECTIONS.get(collection, list(CATALOG.keys()))
     cards = []
@@ -109,6 +123,12 @@ class Handler(BaseHTTPRequestHandler):
             if handle in CATALOG:
                 return self._send(200, json.dumps(_product_js(handle, price)), "application/json")
             return self._send(404, "{}", "application/json")
+
+        if path.startswith("/products/"):
+            handle = path[len("/products/"):]
+            if handle in CATALOG:
+                return self._send(200, _product_page_html(handle), "text/html")
+            return self._send(404, "not found", "text/plain")
 
         self._send(404, "not found", "text/plain")
 

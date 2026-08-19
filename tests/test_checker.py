@@ -10,10 +10,12 @@ import os
 import subprocess
 import sys
 import tempfile
+from datetime import datetime, timedelta
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from tests import mock_store  # noqa: E402
+from checker import parse_human_drop_time  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 FAILURES: list[str] = []
@@ -280,6 +282,58 @@ def main() -> int:
         check("sold-out entry is actually removed from config.json on disk",
               saved_cfg["stock_probe"]["watchlist"] == [],
               f"{saved_cfg['stock_probe']['watchlist']}")
+
+        print("\nRun 10 — unlaunched cars read as upcoming, not sold out")
+        check("parses the US store's wording",
+              parse_human_drop_time('Launches August 20, 2026 9:00 am PT')
+              == "2026-08-20T16:00:00+00:00")
+        check("parses the AU store's wording (ordinal day, no minutes, AEST)",
+              parse_human_drop_time('Launches 20th August 2026 9am AEST')
+              == "2026-08-19T23:00:00+00:00")
+
+        future = (datetime.now() + timedelta(days=200)).strftime("%B %d, %Y %I:%M %p") + " PT"
+        past = "January 1, 2020 9:00 am PT"
+        drop_catalog = {
+            "hot-wheels-rlc-not-launched": {
+                "title": "Hot Wheels RLC Not Launched Yet", "available": False,
+                "badge": "Details", "tags": ["RLC"], "launches": future,
+            },
+            "hot-wheels-rlc-long-gone": {
+                "title": "Hot Wheels RLC Long Gone", "available": False,
+                "badge": "Details", "tags": ["RLC"], "launches": past,
+            },
+            "hot-wheels-rlc-no-countdown": {
+                "title": "Hot Wheels RLC No Countdown Block", "available": False,
+                "badge": "Details", "tags": ["RLC"],
+            },
+        }
+        mock_store.set_catalog(drop_catalog)
+
+        drop_dir = Path(tmp) / "drop"
+        drop_dir.mkdir()
+        (drop_dir / "checker.py").write_bytes((ROOT / "checker.py").read_bytes())
+        (drop_dir / "docs").mkdir()
+        (drop_dir / "config.json").write_bytes((ROOT / "config.json").read_bytes())
+
+        out = run_checker(drop_dir, base_url, ["--self-test"])
+        report = json.loads(out[out.index("{"):])
+        by_handle = {s["handle"]: s for s in report["sample"]}
+        # self-test only samples the first 3 items, which this 3-item
+        # catalog fits exactly (both regions see the same 3, but sample
+        # dedupes by insertion order across US then AU handles).
+
+        check("a countdown that hasn't happened yet reads as coming_soon",
+              by_handle.get("hot-wheels-rlc-not-launched", {}).get("status") == "coming_soon",
+              f"{by_handle.get('hot-wheels-rlc-not-launched')}")
+        check("its drop_time is populated and in the future",
+              bool(by_handle.get("hot-wheels-rlc-not-launched", {}).get("drop_time")),
+              f"{by_handle.get('hot-wheels-rlc-not-launched', {}).get('drop_time')}")
+        check("a countdown that already passed still reads as sold_out",
+              by_handle.get("hot-wheels-rlc-long-gone", {}).get("status") == "sold_out",
+              f"{by_handle.get('hot-wheels-rlc-long-gone')}")
+        check("no countdown block at all still reads as sold_out",
+              by_handle.get("hot-wheels-rlc-no-countdown", {}).get("status") == "sold_out",
+              f"{by_handle.get('hot-wheels-rlc-no-countdown')}")
 
     server.shutdown()
     print(f"\n{'='*60}")

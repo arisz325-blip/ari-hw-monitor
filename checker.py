@@ -32,6 +32,7 @@ import urllib.parse
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 
 import requests
 
@@ -70,6 +71,62 @@ DROP_TIME_RE = re.compile(
     r'(\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:?\d{2})?)',
     re.I,
 )
+
+# What the product *page* actually uses (collection cards don't carry this) —
+# and the US and AU stores word it differently:
+#   US: `Launches August 20, 2026 9:00 am PT`
+#   AU: `Launches 20th August 2026 9am AEST`
+# This block is static boilerplate present on every product template — even
+# ones long since released — so it's only meaningful once parsed and checked
+# against "now" (see upcoming_drop_from_product_page below).
+DROP_TIME_HUMAN_RE = re.compile(
+    r'Launches?\s+(?:'
+    r'(?P<us>[A-Z][a-z]+ \d{1,2}, \d{4} \d{1,2}(?::\d{2})?\s*[ap]m)'
+    r'|'
+    r'(?P<au>\d{1,2}(?:st|nd|rd|th) [A-Z][a-z]+ \d{4} \d{1,2}(?::\d{2})?\s*[ap]m)'
+    r')(?:\s+(?P<tz>[A-Z]{2,5}))?',
+    re.I,
+)
+
+TZ_ABBREV = {
+    "PT": "America/Los_Angeles", "PST": "America/Los_Angeles", "PDT": "America/Los_Angeles",
+    "MT": "America/Denver", "MST": "America/Denver", "MDT": "America/Denver",
+    "CT": "America/Chicago", "CST": "America/Chicago", "CDT": "America/Chicago",
+    "ET": "America/New_York", "EST": "America/New_York", "EDT": "America/New_York",
+    "AEST": "Australia/Sydney", "AEDT": "Australia/Sydney",
+}
+
+
+def parse_human_drop_time(html: str) -> str | None:
+    """Extract and normalize Mattel's 'Launches <date> <time> <tz>' text to
+    ISO 8601 UTC, in either the US store's or the AU store's wording.
+    Returns None if the text isn't there or doesn't parse — never guess a
+    time zone beyond defaulting unmarked ones to Pacific, which is what the
+    US store means when it omits one."""
+    match = DROP_TIME_HUMAN_RE.search(html)
+    if not match:
+        return None
+    zone = TZ_ABBREV.get((match.group("tz") or "PT").upper(), "America/Los_Angeles")
+
+    if match.group("us"):
+        text = match.group("us").strip()
+        formats = ("%B %d, %Y %I:%M %p", "%B %d, %Y %I %p")
+    else:
+        text = re.sub(r"(\d)(st|nd|rd|th)", r"\1", match.group("au").strip(), flags=re.I)
+        formats = ("%d %B %Y %I:%M %p", "%d %B %Y %I %p")
+    text = re.sub(r"(\d)([ap]m)", r"\1 \2", text, flags=re.I)  # "9am" -> "9 am"
+
+    naive = None
+    for fmt in formats:
+        try:
+            naive = datetime.strptime(text, fmt)
+            break
+        except ValueError:
+            continue
+    if naive is None:
+        return None
+    aware = naive.replace(tzinfo=ZoneInfo(zone))
+    return aware.astimezone(timezone.utc).replace(microsecond=0).isoformat()
 
 
 def now_iso() -> str:
@@ -255,6 +312,26 @@ def extract_drop_time(html: str, handle: str) -> str | None:
     return None
 
 
+def upcoming_drop_from_product_page(fetcher: Fetcher, region_cfg: dict, handle: str,
+                                    prefix: str) -> tuple[bool, str | None]:
+    """Collection cards never carry Mattel's countdown; the product page does,
+    but as boilerplate present on every product regardless of status (see
+    parse_human_drop_time). Only worth calling for items that look
+    unavailable and weren't already resolved by a collection-card badge —
+    it costs one extra request. Returns (is_upcoming, drop_time_iso)."""
+    html = fetcher.get(region_url(region_cfg, f"/products/{handle}", prefix=prefix), quiet=True)
+    if not html:
+        return False, None
+    drop_iso = parse_human_drop_time(html)
+    if not drop_iso:
+        return False, None
+    try:
+        is_future = datetime.fromisoformat(drop_iso) > datetime.now(timezone.utc)
+    except ValueError:
+        return False, None
+    return is_future, drop_iso if is_future else None
+
+
 def money(amount: Any, currency: str) -> str | None:
     """Shopify .js prices are integer cents."""
     if amount is None:
@@ -417,6 +494,18 @@ def scan_region(fetcher: Fetcher, name: str, region_cfg: dict,
             html = page_html.get(handle, "")
             badge = badge_for_handle(html, handle) if html else "unknown"
             status = classify(product, badge)
+
+            # Collection cards never carry Mattel's countdown, so an item
+            # that hasn't launched yet looks identical to one that's dead —
+            # both are just "available: false" with no clear badge. Check
+            # the product page itself before assuming it's sold out for good.
+            human_drop_time = None
+            if status in ("sold_out", "unknown") and not product.get("available"):
+                is_upcoming, human_drop_time = upcoming_drop_from_product_page(
+                    fetcher, region_cfg, handle, prefix)
+                if is_upcoming:
+                    status = "coming_soon"
+
             variants = product.get("variants") or []
             first_available = next(
                 (v for v in variants if v.get("available")), variants[0] if variants else {}
@@ -449,7 +538,7 @@ def scan_region(fetcher: Fetcher, name: str, region_cfg: dict,
                 "variant_count": len(variants),
                 "image": (product.get("images") or [None])[0],
                 "tags": product.get("tags") or [],
-                "drop_time": extract_drop_time(html, handle) if html else None,
+                "drop_time": human_drop_time or (extract_drop_time(html, handle) if html else None),
                 "published_at": product.get("published_at"),
             })
 
