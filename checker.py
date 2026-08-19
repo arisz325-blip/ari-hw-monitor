@@ -7,10 +7,11 @@ items, diffs against the previous run, pushes notifications to an Android
 phone via ntfy.sh, and writes a JSON feed for the dashboard.
 
 Usage:
-    python checker.py                 # normal run
-    python checker.py --dry-run       # check + report, send no notifications
-    python checker.py --self-test     # verify the site is still parseable
-    python checker.py --notify-test   # send one test notification and exit
+    python checker.py                    # normal run
+    python checker.py --dry-run          # check + report, send no notifications
+    python checker.py --self-test        # verify the site is still parseable
+    python checker.py --notify-test      # send one test notification and exit
+    python checker.py --watchlist-check  # fast poll of just the watchlist, no full scan
 
 Environment:
     NTFY_TOPIC     ntfy.sh topic to publish to      (required to notify)
@@ -941,6 +942,68 @@ def run(args: argparse.Namespace) -> int:
     return 0
 
 
+def watchlist_check() -> int:
+    """Lightweight poll for the watchlist only: one .js fetch per item, no
+    collection scan, no sitemap, no countdown-page fetch. Meant to run every
+    few minutes so a restock isn't missed for up to an hour, without the
+    request volume of a full scan (which is what the hourly run is for).
+
+    Only detects a car *becoming* available. Going the other way (sells
+    out) is left to the full scan, which already tracks sell-out duration
+    correctly via became_available_at/sold_out_at in diff() — handling that
+    transition here too would race it and could double-count or clobber
+    that bookkeeping.
+    """
+    cfg = load_config()
+    watchlist = cfg.get("stock_probe", {}).get("watchlist", [])
+    if not watchlist:
+        log("watchlist is empty, nothing to check")
+        return 0
+
+    state = load_state()
+    fetcher = Fetcher(cfg["http"])
+    events: list[dict] = []
+    checked: list[dict] = []
+
+    for key in watchlist:
+        region, _, handle = key.partition(":")
+        region_cfg = cfg["regions"].get(region)
+        record = state["items"].get(key)
+        if not region_cfg or record is None:
+            continue  # nothing to compare against yet — let the hourly scan seed it first
+        product = fetcher.get(
+            region_url(region_cfg, f"/products/{handle}.js"), as_json=True, quiet=True
+        )
+        if not isinstance(product, dict):
+            continue
+
+        stamp = now_iso()
+        record["last_seen"] = stamp
+        checked.append({"key": key})
+
+        if product.get("available") and record.get("status") != "in_stock":
+            record["status"] = "in_stock"
+            record["status_label"] = STATUS_LABEL["in_stock"]
+            record["became_available_at"] = stamp
+            record.pop("sold_out_at", None)
+            log(f"  watchlist: {key} just became available")
+            if cfg.get("notify", {}).get("restock", True):
+                events.append({
+                    "type": "restock", "item": dict(record, key=key),
+                    "detail": "Now live",
+                })
+
+    if not checked:
+        log("  watchlist check: no items had a baseline to compare against yet")
+        return 0
+
+    send_ntfy(events, dry_run=False)
+    save_state(state)
+    write_dashboard_data(state, checked, events, [], now_iso(), cfg)
+    log(f"  watchlist check: {len(checked)} item(s), {len(events)} event(s)")
+    return 0
+
+
 def notify_test() -> int:
     fake = {
         "type": "restock",
@@ -959,10 +1022,14 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="check but send nothing")
     parser.add_argument("--self-test", action="store_true", help="verify the site is parseable")
     parser.add_argument("--notify-test", action="store_true", help="send one test notification")
+    parser.add_argument("--watchlist-check", action="store_true",
+                        help="fast poll of just the watchlist (no full scan)")
     args = parser.parse_args()
 
     if args.notify_test:
         return notify_test()
+    if args.watchlist_check:
+        return watchlist_check()
     return run(args)
 
 

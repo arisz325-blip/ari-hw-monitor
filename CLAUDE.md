@@ -23,9 +23,10 @@ config.json                       all tuning: regions, filters, notify toggles, 
 state.json                        generated — last seen state, the diff baseline
 docs/index.html                   dashboard, incl. the "Watch stock" button
 docs/data.json                    generated — what the dashboard reads
-.github/workflows/check.yml       hourly cron; writes diagnostics to the run Summary
-.github/workflows/watchlist.yml   turns a "[watchlist] ..." issue into a config.json edit
-tests/                            offline suite, 32 checks, mock storefront + mock ntfy + mock cart
+.github/workflows/check.yml            hourly cron; writes diagnostics to the run Summary
+.github/workflows/watchlist-check.yml  every ~5min; watchlist-only fast poll, no full scan
+.github/workflows/watchlist.yml        turns a "[watchlist] ..." issue into a config.json edit
+tests/                                 offline suite, 36 checks, mock storefront + ntfy + cart + sitemap
 ```
 
 ## Facts that cost real debugging time
@@ -110,9 +111,10 @@ passed through both.
 ## Running things
 
 ```bash
-python -m tests.test_checker        # 29 offline checks, no network, ~30s
+python -m tests.test_checker        # 36 offline checks, no network, ~30s
 python checker.py --self-test       # what does the live site look like right now?
 python checker.py --dry-run         # full check, notifies nothing, writes nothing
+python checker.py --watchlist-check # fast watchlist-only poll, no full scan
 NTFY_TOPIC=... python checker.py --notify-test   # one test notification
 ```
 
@@ -179,6 +181,22 @@ everything and deliberately sends no alerts.
    actual redeploy (Edit code → Save and deploy) before a newly-added secret
    is bound — adding the variable alone did not do it live, twice, until we
    redeployed.
+   As of 2026-08-20 there's also `checker.py --watchlist-check`
+   (`watchlist_check()`), run by `.github/workflows/watchlist-check.yml`
+   every ~5 minutes (shares `check.yml`'s concurrency group on purpose, so
+   they queue instead of racing on state.json) — one `.js` fetch per
+   watchlisted item, no collection scan, no sitemap, no countdown fetch.
+   It only detects a car *becoming* available; going the other way is left
+   to the full hourly scan, which already tracks sell-out duration
+   correctly and would conflict with this path if both touched it. A
+   watchlist entry needs a baseline in `state.json` before this does
+   anything with it — the full scan has to see it at least once first. And
+   it interacts with the sold_out auto-clean-up above: a watchlisted car
+   that reads `sold_out` gets removed from the watchlist, which is right
+   for the "stop probing something permanently dead" case but means an
+   item you actually want fast-checked needs to resolve to `coming_soon`
+   (needs a real countdown Mattel published), not bare `sold_out`, or it
+   won't survive on the list to be fast-checked at all.
 3. ~~**`drop_time` is never populated** in real runs~~ — root-caused and fixed
    2026-08-20. The countdown never lives on the collection card at all; it's
    a `cs-countdown__block` on the **product detail page**, present as static

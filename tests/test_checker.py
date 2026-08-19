@@ -61,6 +61,19 @@ def run_checker(workdir: Path, base_url: str, extra: list[str] | None = None) ->
     return result.stdout
 
 
+def run_watchlist_check(workdir: Path, base_url: str) -> str:
+    env = dict(os.environ, BASE_OVERRIDE=base_url, NTFY_TOPIC="", DELAY_OVERRIDE="0")
+    result = subprocess.run(
+        [sys.executable, str(workdir / "checker.py"), "--watchlist-check"],
+        cwd=workdir, env=env, capture_output=True, text=True, timeout=60,
+    )
+    if result.returncode != 0:
+        print(result.stdout)
+        print(result.stderr, file=sys.stderr)
+        raise SystemExit(f"checker exited {result.returncode}")
+    return result.stdout
+
+
 def persist_state(workdir: Path, base_url: str) -> None:
     """--dry-run does not save state, so do a real (notification-free) run."""
     env = dict(os.environ, BASE_OVERRIDE=base_url, NTFY_TOPIC="", DELAY_OVERRIDE="0")
@@ -391,6 +404,63 @@ def main() -> int:
               "hot-wheels-rlc-unlisted" in handles_found, f"{handles_found}")
         check("irrelevant sitemap product is pre-filtered out before a fetch",
               "mega-blocks-irrelevant" not in handles_found, f"{handles_found}")
+
+        print("\nRun 12 — watchlist-check catches a restock without a full scan")
+        # Give the watched car a live future countdown, same as the real R32
+        # right now — otherwise it classifies as plain sold_out on the
+        # baseline run and the auto-clean-up from Run 9 immediately drops it
+        # off the watchlist before watchlist-check ever gets to run.
+        fast_catalog = {
+            "hot-wheels-rlc-watched": {
+                "title": "Hot Wheels RLC Watched Car", "available": False,
+                "badge": "Details", "tags": ["RLC"], "launches": future,
+            },
+            "hot-wheels-rlc-unwatched": {
+                "title": "Hot Wheels RLC Unwatched Car", "available": False,
+                "badge": "Sold Out", "tags": ["RLC"],
+            },
+        }
+        mock_store.set_catalog(fast_catalog)
+        mock_store.set_collections({})
+
+        fast_dir = Path(tmp) / "fast"
+        fast_dir.mkdir()
+        (fast_dir / "checker.py").write_bytes((ROOT / "checker.py").read_bytes())
+        (fast_dir / "docs").mkdir()
+        fast_cfg = json.loads((ROOT / "config.json").read_text())
+        fast_cfg["collections"] = ["hot-wheels"]
+        fast_cfg["regions"]["AU"]["collections"] = ["hot-wheels"]
+        fast_cfg["stock_probe"].update(enabled=False, watchlist=["US:hot-wheels-rlc-watched"])
+        (fast_dir / "config.json").write_text(json.dumps(fast_cfg))
+
+        persist_state(fast_dir, base_url)  # seed a baseline via a full run first
+        baseline = json.loads((fast_dir / "state.json").read_text())
+        baseline_cfg = json.loads((fast_dir / "config.json").read_text())
+        check("baseline run recorded the watched car as coming_soon (not sold_out)",
+              baseline["items"].get("US:hot-wheels-rlc-watched", {}).get("status") == "coming_soon",
+              f"{baseline['items'].get('US:hot-wheels-rlc-watched')}")
+        check("it's still on the watchlist afterwards (coming_soon doesn't get auto-cleaned)",
+              baseline_cfg["stock_probe"]["watchlist"] == ["US:hot-wheels-rlc-watched"],
+              f"{baseline_cfg['stock_probe']['watchlist']}")
+
+        fast_catalog["hot-wheels-rlc-watched"].update(available=True, badge="Add to Cart")
+        fast_catalog["hot-wheels-rlc-unwatched"].update(available=True, badge="Add to Cart")
+        mock_store.set_catalog(fast_catalog)
+        run_watchlist_check(fast_dir, base_url)
+
+        after = json.loads((fast_dir / "state.json").read_text())
+        watched = after["items"].get("US:hot-wheels-rlc-watched", {})
+        unwatched = after["items"].get("US:hot-wheels-rlc-unwatched", {})
+        fast_data = json.loads((fast_dir / "docs" / "data.json").read_text())
+
+        check("watchlist-check catches the watched car going back in stock",
+              watched.get("status") == "in_stock", f"{watched}")
+        check("a restock event is recorded for it",
+              any(e.get("type") == "restock" and "Watched" in e.get("title", "")
+                  for e in fast_data.get("recent_events", [])),
+              f"{fast_data.get('recent_events')}")
+        check("watchlist-check leaves a non-watchlisted car alone, even though it also restocked",
+              unwatched.get("status") == "sold_out", f"{unwatched}")
 
     server.shutdown()
     print(f"\n{'='*60}")

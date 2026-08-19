@@ -1,0 +1,61 @@
+name: Watchlist fast check
+
+# Runs much more often than the full hourly scan, but only checks the small
+# stock_probe.watchlist list (one request per item — no collection scan, no
+# sitemap). Point of this: catch a watchlisted car going on sale within
+# minutes instead of up to an hour. Shares check.yml's concurrency group on
+# purpose, so the two never race writing state.json/docs/data.json — during
+# the ~15-20 min the full scan takes, this queues rather than overlapping.
+# GitHub's scheduler doesn't guarantee the exact minute for either workflow
+# on the free tier, so treat "every 5 minutes" as "roughly every 5 minutes".
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hot-wheels-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run watchlist check
+        run: python checker.py --watchlist-check
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          NTFY_SERVER: ${{ secrets.NTFY_SERVER }}
+          NTFY_TOKEN: ${{ secrets.NTFY_TOKEN }}
+
+      - name: Commit results
+        if: success()
+        run: |
+          git config user.name  "hot-wheels-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          for f in state.json docs/data.json; do
+            if [ -f "$f" ]; then git add "$f"; fi
+          done
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "watchlist check $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git push
+          fi
