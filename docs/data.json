@@ -1,0 +1,1304 @@
+{
+  "generated_at": "2026-08-19T14:13:01+00:00",
+  "started_at": "2026-08-19T14:06:25+00:00",
+  "counts": {
+    "total": 34,
+    "in_stock": 2,
+    "sold_out": 32,
+    "upcoming": 0
+  },
+  "warnings": [],
+  "recent_events": [],
+  "items": [
+    {
+      "region": "US",
+      "handle": "hot-wheels-elite-64-mazda-rx-7-liberty-walk-jcp43",
+      "title": "Hot Wheels Elite 64 Mazda RX-7 Liberty Walk",
+      "url": "https://creations.mattel.com/products/hot-wheels-elite-64-mazda-rx-7-liberty-walk-jcp43",
+      "price": "22.00 USD",
+      "price_cents": 2200,
+      "currency": "USD",
+      "status": "in_stock",
+      "status_label": "In Stock",
+      "stock": null,
+      "variant_id": 48605828841677,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HWC_PDP_JCP43_PS_26_0090.jpg?v=1787007374",
+      "tags": [
+        "2026",
+        "Brand: Hot Wheels Collectors",
+        "Category: Vehicles",
+        "Filter-AgeGrade: Adult",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2026-07-29T16:26:37-05:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "in_stock"
+        }
+      ],
+      "became_available_at": "2026-08-19T14:13:01+00:00",
+      "key": "US:hot-wheels-elite-64-mazda-rx-7-liberty-walk-jcp43",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "hot-wheels-elite-64-mazda-rx-7-liberty-walk-jcp43",
+      "title": "Hot Wheels Elite 64 Mazda RX-7 Liberty Walk",
+      "url": "https://creations.mattel.com/en-au/products/hot-wheels-elite-64-mazda-rx-7-liberty-walk-jcp43?country=AU",
+      "price": "36.00 AUD",
+      "price_cents": 3600,
+      "currency": "AUD",
+      "status": "in_stock",
+      "status_label": "In Stock",
+      "stock": null,
+      "variant_id": 48605828841677,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HWC_PDP_JCP43_PS_26_0090.jpg?v=1787007374",
+      "tags": [
+        "2026",
+        "Brand: Hot Wheels Collectors",
+        "Category: Vehicles",
+        "Filter-AgeGrade: Adult",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2026-07-29T16:26:37-05:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "in_stock"
+        }
+      ],
+      "became_available_at": "2026-08-19T14:13:01+00:00",
+      "key": "AU:hot-wheels-elite-64-mazda-rx-7-liberty-walk-jcp43",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "hwc-special-edition-32-ford-glh85",
+      "title": "HWC Special Edition '32 Ford",
+      "url": "https://creations.mattel.com/products/hwc-special-edition-32-ford-glh85",
+      "price": "24.99 USD",
+      "price_cents": 2499,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850868506829,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/zxmsi9tbs92ibmlhxrub.png?v=1684950387",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2021-11-18T10:59:15-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:hwc-special-edition-32-ford-glh85",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "hwc-special-edition-32-ford-glh85",
+      "title": "HWC Special Edition '32 Ford",
+      "url": "https://creations.mattel.com/en-au/products/hwc-special-edition-32-ford-glh85?country=AU",
+      "price": "40.00 AUD",
+      "price_cents": 4000,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850868506829,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/zxmsi9tbs92ibmlhxrub.png?v=1684950387",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2021-11-18T10:59:15-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:hwc-special-edition-32-ford-glh85",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "hwc-special-edition-64-impala-glh86",
+      "title": "HWC Special Edition \u201964 Impala",
+      "url": "https://creations.mattel.com/products/hwc-special-edition-64-impala-glh86",
+      "price": "29.99 USD",
+      "price_cents": 2999,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850869653709,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/q8brhmjzuwr7tdduybhb.png?v=1763509250",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "Filter-AgeGrade: Adult",
+        "NO_SYNC",
+        "RLC"
+      ],
+      "drop_time": null,
+      "published_at": "2021-11-18T10:59:07-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:hwc-special-edition-64-impala-glh86",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "hwc-special-edition-64-impala-glh86",
+      "title": "HWC Special Edition \u201964 Impala",
+      "url": "https://creations.mattel.com/en-au/products/hwc-special-edition-64-impala-glh86?country=AU",
+      "price": "48.00 AUD",
+      "price_cents": 4800,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850869653709,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/q8brhmjzuwr7tdduybhb.png?v=1763509250",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "Filter-AgeGrade: Adult",
+        "NO_SYNC",
+        "RLC"
+      ],
+      "drop_time": null,
+      "published_at": "2021-11-18T10:59:07-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:hwc-special-edition-64-impala-glh86",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "hwc-special-editions-55-mercedes-benz-300-sl-gxj24",
+      "title": "HWC Special Editions \u201955 Mercedes-Benz 300 SL",
+      "url": "https://creations.mattel.com/products/hwc-special-editions-55-mercedes-benz-300-sl-gxj24",
+      "price": "29.99 USD",
+      "price_cents": 2999,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850868900045,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/wazsll1tisw3gkduj8yr.jpg?v=1763509100",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "Filter-AgeGrade: Adult",
+        "limit_1",
+        "NO_SYNC",
+        "RLC"
+      ],
+      "drop_time": null,
+      "published_at": "2021-11-18T11:12:50-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:hwc-special-editions-55-mercedes-benz-300-sl-gxj24",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "hwc-special-editions-55-mercedes-benz-300-sl-gxj24",
+      "title": "HWC Special Editions \u201955 Mercedes-Benz 300 SL",
+      "url": "https://creations.mattel.com/en-au/products/hwc-special-editions-55-mercedes-benz-300-sl-gxj24?country=AU",
+      "price": "48.00 AUD",
+      "price_cents": 4800,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850868900045,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/wazsll1tisw3gkduj8yr.jpg?v=1763509100",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "Filter-AgeGrade: Adult",
+        "limit_1",
+        "NO_SYNC",
+        "RLC"
+      ],
+      "drop_time": null,
+      "published_at": "2021-11-18T11:12:50-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:hwc-special-editions-55-mercedes-benz-300-sl-gxj24",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-exclusive-1944-willys-mb-gxj27",
+      "title": "Hot Wheels RLC Exclusive 1944 Willys MB",
+      "url": "https://creations.mattel.com/products/rlc-exclusive-1944-willys-mb-gxj27",
+      "price": "35.00 USD",
+      "price_cents": 3500,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 40331458969805,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/t6yxq7huw4jwbecqwvpg.jpg?v=1708503211",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_2",
+        "NO_SYNC",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2023-11-20T10:55:39-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-exclusive-1944-willys-mb-gxj27",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-exclusive-1944-willys-mb-gxj27",
+      "title": "Hot Wheels RLC Exclusive 1944 Willys MB",
+      "url": "https://creations.mattel.com/en-au/products/rlc-exclusive-1944-willys-mb-gxj27?country=AU",
+      "price": "56.00 AUD",
+      "price_cents": 5600,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 40331458969805,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/t6yxq7huw4jwbecqwvpg.jpg?v=1708503211",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_2",
+        "NO_SYNC",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2023-11-20T10:55:39-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-exclusive-1944-willys-mb-gxj27",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-exclusive-2006-bmw-m3-glh84",
+      "title": "Hot Wheels RLC Exclusive 2006 BMW M3 - Yellow",
+      "url": "https://creations.mattel.com/products/rlc-exclusive-2006-bmw-m3-glh84",
+      "price": "24.99 USD",
+      "price_cents": 2499,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850869063885,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/pqwbmxzzzzq65yulzrje_8b81ca41-9805-4bf4-ac61-b0ba69a258e7.jpg?v=1708501494",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "FALLREOFFER24",
+        "limit_3",
+        "NO_SYNC",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2024-09-26T15:24:08-05:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-exclusive-2006-bmw-m3-glh84",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-exclusive-2006-bmw-m3-glh84",
+      "title": "Hot Wheels RLC Exclusive 2006 BMW M3 - Yellow",
+      "url": "https://creations.mattel.com/en-au/products/rlc-exclusive-2006-bmw-m3-glh84?country=AU",
+      "price": "40.00 AUD",
+      "price_cents": 4000,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850869063885,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/pqwbmxzzzzq65yulzrje_8b81ca41-9805-4bf4-ac61-b0ba69a258e7.jpg?v=1708501494",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "FALLREOFFER24",
+        "limit_3",
+        "NO_SYNC",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2024-09-26T15:24:08-05:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-exclusive-2006-bmw-m3-glh84",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-exclusive-2020-super-treasure-hunt-set-glh99",
+      "title": "Hot Wheels RLC Exclusive 2020 Super Treasure Hunt Set",
+      "url": "https://creations.mattel.com/products/rlc-exclusive-2020-super-treasure-hunt-set-glh99",
+      "price": "249.99 USD",
+      "price_cents": 24999,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850869227725,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/vfnb67iaelge6i1onbzi.png?v=1684948471",
+      "tags": [
+        "Brand: Hot Wheels",
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_1",
+        "NO_SYNC",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2021-06-23T15:35:07-05:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-exclusive-2020-super-treasure-hunt-set-glh99",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-exclusive-2020-super-treasure-hunt-set-glh99",
+      "title": "Hot Wheels RLC Exclusive 2020 Super Treasure Hunt Set",
+      "url": "https://creations.mattel.com/en-au/products/rlc-exclusive-2020-super-treasure-hunt-set-glh99?country=AU",
+      "price": "400.00 AUD",
+      "price_cents": 40000,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850869227725,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/vfnb67iaelge6i1onbzi.png?v=1684948471",
+      "tags": [
+        "Brand: Hot Wheels",
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_1",
+        "NO_SYNC",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2021-06-23T15:35:07-05:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-exclusive-2020-super-treasure-hunt-set-glh99",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-exclusive-custom-mustang",
+      "title": "Hot Wheels RLC Exclusive Custom Mustang",
+      "url": "https://creations.mattel.com/products/rlc-exclusive-custom-mustang",
+      "price": "24.99 USD",
+      "price_cents": 2499,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850868146381,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/l7xpb5k96h1cszqwadx2.jpg?v=1708503197",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2021-11-18T10:58:22-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-exclusive-custom-mustang",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-exclusive-custom-mustang",
+      "title": "Hot Wheels RLC Exclusive Custom Mustang",
+      "url": "https://creations.mattel.com/en-au/products/rlc-exclusive-custom-mustang?country=AU",
+      "price": "40.00 AUD",
+      "price_cents": 4000,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850868146381,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/l7xpb5k96h1cszqwadx2.jpg?v=1708503197",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2021-11-18T10:58:22-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-exclusive-custom-mustang",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-exclusive-holiday-64-impala",
+      "title": "Hot Wheels RLC Exclusive Holiday \u201964 Impala",
+      "url": "https://creations.mattel.com/products/rlc-exclusive-holiday-64-impala",
+      "price": "30.00 USD",
+      "price_cents": 3000,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 40378095337677,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/zgakdtfxcrprtifcdufm.jpg?v=1708503221",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_1",
+        "NO_SYNC",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2022-11-21T16:11:08-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-exclusive-holiday-64-impala",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-exclusive-holiday-64-impala",
+      "title": "Hot Wheels RLC Exclusive Holiday \u201964 Impala",
+      "url": "https://creations.mattel.com/en-au/products/rlc-exclusive-holiday-64-impala?country=AU",
+      "price": "48.00 AUD",
+      "price_cents": 4800,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 40378095337677,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/zgakdtfxcrprtifcdufm.jpg?v=1708503221",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_1",
+        "NO_SYNC",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2022-11-21T16:11:08-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-exclusive-holiday-64-impala",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-exclusive-real-riders-wheels-pack-set-3-hgk89",
+      "title": "Hot Wheels RLC Exclusive Real Riders Wheels Pack - Set 3",
+      "url": "https://creations.mattel.com/products/rlc-exclusive-real-riders-wheels-pack-set-3-hgk89",
+      "price": "17.50 USD",
+      "price_cents": 1750,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 40922089554125,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/nxlihuarwfmduzyghtyd.jpg?v=1684953854",
+      "tags": [
+        "2023SUMMERSALE",
+        "ALWAYSONSALE",
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "DEC_LASTCALL",
+        "DEEPDISCOUNTS_2023",
+        "DISCOUNTSUMMER24",
+        "limit_5",
+        "NOV25_WK2-3",
+        "NOV25_WK4",
+        "PROMOAPPLEPAY",
+        "PROMONOV24",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2023-11-08T15:33:41-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-exclusive-real-riders-wheels-pack-set-3-hgk89",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-exclusive-real-riders-wheels-pack-set-3-hgk89",
+      "title": "Hot Wheels RLC Exclusive Real Riders Wheels Pack - Set 3",
+      "url": "https://creations.mattel.com/en-au/products/rlc-exclusive-real-riders-wheels-pack-set-3-hgk89?country=AU",
+      "price": "28.00 AUD",
+      "price_cents": 2800,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 40922089554125,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/nxlihuarwfmduzyghtyd.jpg?v=1684953854",
+      "tags": [
+        "2023SUMMERSALE",
+        "ALWAYSONSALE",
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "DEC_LASTCALL",
+        "DEEPDISCOUNTS_2023",
+        "DISCOUNTSUMMER24",
+        "limit_5",
+        "NOV25_WK2-3",
+        "NOV25_WK4",
+        "PROMOAPPLEPAY",
+        "PROMONOV24",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2023-11-08T15:33:41-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-exclusive-real-riders-wheels-pack-set-3-hgk89",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-exclusive-real-riders-wheels-pack-set-4-hgk90",
+      "title": "Hot Wheels RLC Exclusive Real Riders Wheels Pack \u2013 Set 4",
+      "url": "https://creations.mattel.com/products/rlc-exclusive-real-riders-wheels-pack-set-4-hgk90",
+      "price": "14.00 USD",
+      "price_cents": 1400,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 41030438224077,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/yfjvabrsgoxabhakkunm.jpg?v=1708503224",
+      "tags": [
+        "ALWAYSONSALE",
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "DEC_LASTCALL",
+        "DISCOUNTSUMMER24",
+        "limit_5",
+        "NOV25_WK2-3",
+        "NOV25_WK4",
+        "PROMOAPPLEPAY",
+        "PROMONOV24",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2022-09-09T11:01:53-05:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-exclusive-real-riders-wheels-pack-set-4-hgk90",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-exclusive-real-riders-wheels-pack-set-4-hgk90",
+      "title": "Hot Wheels RLC Exclusive Real Riders Wheels Pack \u2013 Set 4",
+      "url": "https://creations.mattel.com/en-au/products/rlc-exclusive-real-riders-wheels-pack-set-4-hgk90?country=AU",
+      "price": "23.00 AUD",
+      "price_cents": 2300,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 41030438224077,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/yfjvabrsgoxabhakkunm.jpg?v=1708503224",
+      "tags": [
+        "ALWAYSONSALE",
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "DEC_LASTCALL",
+        "DISCOUNTSUMMER24",
+        "limit_5",
+        "NOV25_WK2-3",
+        "NOV25_WK4",
+        "PROMOAPPLEPAY",
+        "PROMONOV24",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2022-09-09T11:01:53-05:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-exclusive-real-riders-wheels-pack-set-4-hgk90",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-exclusive-tv-series-batmobile-hck30",
+      "title": "Hot Wheels RLC Exclusive TV Series Batmobile",
+      "url": "https://creations.mattel.com/products/rlc-exclusive-tv-series-batmobile-hck30",
+      "price": "25.00 USD",
+      "price_cents": 2500,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 40277800845517,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/rm7lkmjynu00ugj5ms1u.jpg?v=1763508992",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "Filter-AgeGrade: Adult",
+        "limit_5",
+        "NO_SYNC",
+        "R: INTL",
+        "R:TEMO",
+        "RLC"
+      ],
+      "drop_time": null,
+      "published_at": "2023-11-20T11:54:44-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-exclusive-tv-series-batmobile-hck30",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-exclusive-tv-series-batmobile-hck30",
+      "title": "Hot Wheels RLC Exclusive TV Series Batmobile",
+      "url": "https://creations.mattel.com/en-au/products/rlc-exclusive-tv-series-batmobile-hck30?country=AU",
+      "price": "40.00 AUD",
+      "price_cents": 4000,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 40277800845517,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/rm7lkmjynu00ugj5ms1u.jpg?v=1763508992",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "Filter-AgeGrade: Adult",
+        "limit_5",
+        "NO_SYNC",
+        "R: INTL",
+        "R:TEMO",
+        "RLC"
+      ],
+      "drop_time": null,
+      "published_at": "2023-11-20T11:54:44-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-exclusive-tv-series-batmobile-hck30",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-exclusive-volkswagen-drag-bus-glh95",
+      "title": "Hot Wheels RLC Exclusive Volkswagen Drag Bus",
+      "url": "https://creations.mattel.com/products/rlc-exclusive-volkswagen-drag-bus-glh95",
+      "price": "24.99 USD",
+      "price_cents": 2499,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850869129421,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/bx3koqefduot4pzurwy9_9142e118-2e7e-44ab-832e-762d2c167d2a.png?v=1708501482",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_1",
+        "NO_SYNC",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2021-06-23T16:17:24-05:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-exclusive-volkswagen-drag-bus-glh95",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-exclusive-volkswagen-drag-bus-glh95",
+      "title": "Hot Wheels RLC Exclusive Volkswagen Drag Bus",
+      "url": "https://creations.mattel.com/en-au/products/rlc-exclusive-volkswagen-drag-bus-glh95?country=AU",
+      "price": "40.00 AUD",
+      "price_cents": 4000,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850869129421,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/bx3koqefduot4pzurwy9_9142e118-2e7e-44ab-832e-762d2c167d2a.png?v=1708501482",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_1",
+        "NO_SYNC",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2021-06-23T16:17:24-05:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-exclusive-volkswagen-drag-bus-glh95",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-exclusive-66-super-nova-gxj07",
+      "title": "Hot Wheels RLC Exclusive \u201966 Super Nova",
+      "url": "https://creations.mattel.com/products/rlc-exclusive-66-super-nova-gxj07",
+      "price": "24.99 USD",
+      "price_cents": 2499,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850868605133,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/cxp4cfbrxi4wrxk9wa4s.jpg?v=1684950211",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_1",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2021-11-18T11:17:50-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-exclusive-66-super-nova-gxj07",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-exclusive-66-super-nova-gxj07",
+      "title": "Hot Wheels RLC Exclusive \u201966 Super Nova",
+      "url": "https://creations.mattel.com/en-au/products/rlc-exclusive-66-super-nova-gxj07?country=AU",
+      "price": "40.00 AUD",
+      "price_cents": 4000,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850868605133,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/cxp4cfbrxi4wrxk9wa4s.jpg?v=1684950211",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_1",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2021-11-18T11:17:50-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-exclusive-66-super-nova-gxj07",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-exclusive-69-chevrolet-camaro-ss-gxj16",
+      "title": "Hot Wheels RLC Exclusive \u201969 Chevrolet Camaro SS",
+      "url": "https://creations.mattel.com/products/rlc-exclusive-69-chevrolet-camaro-ss-gxj16",
+      "price": "25.00 USD",
+      "price_cents": 2500,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 40195342827725,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/bzghozuiabdkji5uoh4q.jpg?v=1684951479",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_1",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "REOFFER_2023",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2023-11-20T11:54:44-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-exclusive-69-chevrolet-camaro-ss-gxj16",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-exclusive-69-chevrolet-camaro-ss-gxj16",
+      "title": "Hot Wheels RLC Exclusive \u201969 Chevrolet Camaro SS",
+      "url": "https://creations.mattel.com/en-au/products/rlc-exclusive-69-chevrolet-camaro-ss-gxj16?country=AU",
+      "price": "40.00 AUD",
+      "price_cents": 4000,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 40195342827725,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/bzghozuiabdkji5uoh4q.jpg?v=1684951479",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_1",
+        "R:TEMO",
+        "rel-lnk-cars",
+        "REOFFER_2023",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2023-11-20T11:54:44-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-exclusive-69-chevrolet-camaro-ss-gxj16",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-selections-41-willys-gasser-glh88",
+      "title": "Hot Wheels RLC sELECTIONs \u201941 Willys Gasser",
+      "url": "https://creations.mattel.com/products/rlc-selections-41-willys-gasser-glh88",
+      "price": "25.00 USD",
+      "price_cents": 2500,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850869293261,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/rgqppio79qmlrfu7s0f0.jpg?v=1724433069",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_1",
+        "NO_SYNC",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2022-11-22T10:05:16-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-selections-41-willys-gasser-glh88",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-selections-41-willys-gasser-glh88",
+      "title": "Hot Wheels RLC sELECTIONs \u201941 Willys Gasser",
+      "url": "https://creations.mattel.com/en-au/products/rlc-selections-41-willys-gasser-glh88?country=AU",
+      "price": "40.00 AUD",
+      "price_cents": 4000,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 39850869293261,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/rgqppio79qmlrfu7s0f0.jpg?v=1724433069",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "limit_1",
+        "NO_SYNC",
+        "rel-lnk-cars",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2022-11-22T10:05:16-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-selections-41-willys-gasser-glh88",
+      "present": true
+    },
+    {
+      "region": "US",
+      "handle": "rlc-selections-82-lamborghini-countach-lp500-s-hgw25",
+      "title": "Hot Wheels RLC sELECTIONs \u201982 Lamborghini Countach LP 500 S",
+      "url": "https://creations.mattel.com/products/rlc-selections-82-lamborghini-countach-lp500-s-hgw25",
+      "price": "30.00 USD",
+      "price_cents": 3000,
+      "currency": "USD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 40889119965389,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/lcwlsbk7flqlki4yj2ma_397dd162-31cc-41b7-b792-f006e856e349.jpg?v=1708501520",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "NO_SYNC",
+        "R:TEMO",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2023-11-20T11:54:47-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "US:rlc-selections-82-lamborghini-countach-lp500-s-hgw25",
+      "present": true
+    },
+    {
+      "region": "AU",
+      "handle": "rlc-selections-82-lamborghini-countach-lp500-s-hgw25",
+      "title": "Hot Wheels RLC sELECTIONs \u201982 Lamborghini Countach LP 500 S",
+      "url": "https://creations.mattel.com/en-au/products/rlc-selections-82-lamborghini-countach-lp500-s-hgw25?country=AU",
+      "price": "48.00 AUD",
+      "price_cents": 4800,
+      "currency": "AUD",
+      "status": "sold_out",
+      "status_label": "Sold Out",
+      "stock": null,
+      "variant_id": 40889119965389,
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/lcwlsbk7flqlki4yj2ma_397dd162-31cc-41b7-b792-f006e856e349.jpg?v=1708501520",
+      "tags": [
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "NO_SYNC",
+        "R:TEMO",
+        "RLC",
+        "Type: Drop"
+      ],
+      "drop_time": null,
+      "published_at": "2023-11-20T11:54:47-06:00",
+      "last_seen": "2026-08-19T14:13:01+00:00",
+      "first_seen": "2026-08-19T14:13:01+00:00",
+      "history": [
+        {
+          "at": "2026-08-19T14:13:01+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        }
+      ],
+      "key": "AU:rlc-selections-82-lamborghini-countach-lp500-s-hgw25",
+      "present": true
+    }
+  ]
+}
