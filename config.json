@@ -1,0 +1,61 @@
+{
+  "_comment": "Mattel Creations Hot Wheels monitor. Edit this file to change what gets watched.",
+
+  "regions": {
+    "US": {
+      "enabled": true,
+      "base": "https://creations.mattel.com",
+      "path_prefix": "",
+      "currency": "USD"
+    },
+    "AU": {
+      "enabled": true,
+      "base": "https://creations.mattel.com",
+      "path_prefix": "/en-au",
+      "path_prefix_fallbacks": ["/en-AU", "/au", ""],
+      "query": {"country": "AU"},
+      "currency": "AUD"
+    }
+  },
+
+  "collections": ["hot-wheels"],
+
+  "filters": {
+    "_comment": "collector = only RLC / Elite 64 style items. Set mode to 'all' to watch every Hot Wheels listing.",
+    "mode": "collector",
+    "include_keywords": [
+      "rlc",
+      "red line club",
+      "elite 64",
+      "elite64"
+    ],
+    "exclude_keywords": [
+      "apparel", "hoodie", "jacket", "hat", "cap", "tee", "t-shirt", "shirt",
+      "socks", "pin", "poster", "print", "mug", "sticker", "bag", "beanie"
+    ]
+  },
+
+  "notify": {
+    "new": true,
+    "restock": true,
+    "drop": true,
+    "price_change": true,
+    "sold_out": false
+  },
+
+  "stock_probe": {
+    "_comment": "OFF by default on purpose. Mattel's robots.txt disallows /cart/ and /cart.js to automated clients, so turning this on risks their bot protection blocking the GitHub Actions runner and killing the monitor silently. Flip 'enabled' to true at your own discretion.",
+    "enabled": false,
+    "delay_seconds": 4,
+    "max_products_per_run": 8,
+    "probe_quantity": 99999
+  },
+
+  "http": {
+    "request_delay_seconds": 1.5,
+    "timeout_seconds": 25,
+    "max_retries": 3,
+    "max_collection_pages": 5,
+    "user_agent": "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Mobile Safari/537.36"
+  }
+}

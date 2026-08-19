@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0d0d0d">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Hot Wheels Stock Monitor</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#127950;</text></svg>">
+<style>
+  :root {
+    color-scheme: dark;
+    --surface-1: #1a1a19;
+    --plane: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --muted: #898781;
+    --hairline: #2c2c2a;
+    --border: rgba(255,255,255,0.10);
+    --good: #0ca30c;
+    --warning: #fab219;
+    --critical: #d03b3b;
+    --accent: #3987e5;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      color-scheme: light;
+      --surface-1: #fcfcfb;
+      --plane: #f9f9f7;
+      --text-primary: #0b0b0b;
+      --text-secondary: #52514e;
+      --muted: #898781;
+      --hairline: #e1e0d9;
+      --border: rgba(11,11,11,0.10);
+      --accent: #2a78d6;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0 0 env(safe-area-inset-bottom);
+    background: var(--plane);
+    color: var(--text-primary);
+    font: 15px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 16px 14px 48px; }
+
+  header { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+  h1 { font-size: 20px; margin: 0; letter-spacing: -0.01em; }
+  .updated { color: var(--muted); font-size: 12.5px; }
+  .updated strong { color: var(--text-secondary); font-weight: 500; }
+
+  .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 16px 0; }
+  .tile {
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 12px; padding: 12px 10px; text-align: center;
+  }
+  .tile .v { font-size: 26px; font-weight: 600; line-height: 1.1; letter-spacing: -0.02em; }
+  .tile .k { font-size: 11px; color: var(--muted); margin-top: 3px; text-transform: uppercase; letter-spacing: .04em; }
+  .tile.good .v { color: var(--good); }
+  .tile.warn .v { color: var(--warning); }
+  .tile.crit .v { color: var(--critical); }
+  @media (max-width: 460px) { .tiles { grid-template-columns: repeat(2, 1fr); } }
+
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 14px; }
+  .seg { display: flex; background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .seg button {
+    border: 0; background: transparent; color: var(--text-secondary);
+    font: inherit; font-size: 13px; padding: 7px 12px; cursor: pointer; min-height: 36px;
+  }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  input[type="search"] {
+    flex: 1 1 150px; min-width: 130px; min-height: 36px;
+    background: var(--surface-1); border: 1px solid var(--border);
+    border-radius: 10px; color: var(--text-primary); font: inherit; font-size: 13px; padding: 7px 11px;
+  }
+
+  .banner {
+    background: color-mix(in srgb, var(--warning) 14%, var(--surface-1));
+    border: 1px solid var(--warning); border-radius: 10px;
+    padding: 10px 12px; font-size: 13px; margin-bottom: 14px; color: var(--text-primary);
+  }
+  .banner b { display: block; margin-bottom: 3px; }
+
+  .card {
+    display: flex; gap: 12px; background: var(--surface-1);
+    border: 1px solid var(--border); border-radius: 12px;
+    padding: 11px; margin-bottom: 9px; text-decoration: none; color: inherit;
+  }
+  .card:hover { border-color: var(--accent); }
+  .thumb {
+    width: 62px; height: 62px; flex: 0 0 62px; border-radius: 9px;
+    background: var(--hairline); object-fit: cover;
+  }
+  .body { flex: 1; min-width: 0; }
+  .title { font-size: 14.5px; font-weight: 550; line-height: 1.3; margin-bottom: 5px; }
+  .meta { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; font-size: 12px; color: var(--text-secondary); }
+
+  .pill {
+    display: inline-flex; align-items: center; gap: 4px;
+    border-radius: 999px; padding: 2px 8px; font-size: 11.5px; font-weight: 550;
+    border: 1px solid currentColor;
+  }
+  .pill .dot { font-size: 10px; line-height: 1; }
+  .s-in_stock { color: var(--good); }
+  .s-sold_out { color: var(--critical); }
+  .s-preorder, .s-coming_soon { color: var(--warning); }
+  .s-unknown { color: var(--muted); }
+
+  .chip {
+    border-radius: 6px; padding: 2px 6px; font-size: 11px;
+    background: var(--hairline); color: var(--text-secondary);
+  }
+  .price { font-variant-numeric: tabular-nums; color: var(--text-primary); font-weight: 550; }
+  .note { font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+
+  h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); margin: 26px 0 10px; font-weight: 600; }
+
+  .event { display: flex; gap: 9px; padding: 8px 0; border-bottom: 1px solid var(--hairline); font-size: 13px; }
+  .event:last-child { border-bottom: 0; }
+  .event .when { color: var(--muted); font-size: 11.5px; white-space: nowrap; }
+  .event a { color: inherit; text-decoration: none; }
+  .event a:hover { text-decoration: underline; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 7px 8px; border-bottom: 1px solid var(--hairline); }
+  th { color: var(--muted); font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; }
+  td.num { font-variant-numeric: tabular-nums; }
+
+  .empty { color: var(--muted); text-align: center; padding: 34px 12px; font-size: 14px; }
+  footer { margin-top: 30px; color: var(--muted); font-size: 11.5px; text-align: center; line-height: 1.7; }
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Hot Wheels Stock Monitor</h1>
+    <div class="updated" id="updated">Loading…</div>
+  </header>
+
+  <div id="warnings"></div>
+
+  <div class="tiles">
+    <div class="tile good"><div class="v" id="t-stock">–</div><div class="k">In stock</div></div>
+    <div class="tile warn"><div class="v" id="t-soon">–</div><div class="k">Upcoming</div></div>
+    <div class="tile crit"><div class="v" id="t-out">–</div><div class="k">Sold out</div></div>
+    <div class="tile"><div class="v" id="t-all">–</div><div class="k">Tracked</div></div>
+  </div>
+
+  <div class="filters">
+    <div class="seg" role="group" aria-label="Region">
+      <button data-region="all" aria-pressed="true">All</button>
+      <button data-region="US" aria-pressed="false">US</button>
+      <button data-region="AU" aria-pressed="false">AU</button>
+    </div>
+    <div class="seg" role="group" aria-label="Status">
+      <button data-status="all" aria-pressed="true">Any</button>
+      <button data-status="in_stock" aria-pressed="false">In stock</button>
+      <button data-status="upcoming" aria-pressed="false">Upcoming</button>
+    </div>
+    <input type="search" id="q" placeholder="Search cars…" aria-label="Search cars">
+    <div class="seg" role="group" aria-label="View">
+      <button data-view="cards" aria-pressed="true">Cards</button>
+      <button data-view="table" aria-pressed="false">Table</button>
+    </div>
+  </div>
+
+  <div id="cards"></div>
+  <div id="table" class="hidden"></div>
+
+  <h2>Recent activity</h2>
+  <div id="events"></div>
+
+  <footer>
+    Checks Mattel Creations US &amp; AU hourly · notifications via ntfy<br>
+    Stock counts show only where the store exposes them.
+  </footer>
+</div>
+
+<script>
+const STATUS_LABEL = {
+  in_stock: "In Stock", sold_out: "Sold Out",
+  preorder: "Pre-Order", coming_soon: "Coming Soon", unknown: "Unknown"
+};
+// Icon + label pairing so status is never carried by colour alone.
+const STATUS_ICON = {
+  in_stock: "●", sold_out: "✕",
+  preorder: "◐", coming_soon: "◐", unknown: "○"
+};
+const EVENT_ICON = {
+  new: "✦", restock: "▲", drop: "◐", price: "↕", sold_out: "✕"
+};
+
+let DATA = null;
+const filters = { region: "all", status: "all", view: "cards", q: "" };
+
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
+  ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+function timeAgo(iso) {
+  if (!iso) return "";
+  const mins = Math.floor((Date.now() - new Date(iso)) / 60000);
+  if (isNaN(mins)) return "";
+  if (mins < 1) return "just now";
+  if (mins < 60) return mins + "m ago";
+  if (mins < 48 * 60) return Math.round(mins / 60) + "h ago";
+  return Math.round(mins / 1440) + "d ago";
+}
+
+// Event details are composed server-side and can carry a raw ISO drop time;
+// rewrite any into the reader's own timezone.
+const ISO_RE = /\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}(?::\d{2})?(?:Z|[+-]\d{2}:?\d{2})?/g;
+function localiseDetail(text) {
+  return String(text ?? "").replace(ISO_RE, m => localTime(m) || m);
+}
+
+function localTime(iso) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return isNaN(d) ? iso : d.toLocaleString([], {
+    day: "numeric", month: "short", hour: "numeric", minute: "2-digit"
+  });
+}
+
+function visible() {
+  if (!DATA) return [];
+  return DATA.items.filter(it => {
+    if (filters.region !== "all" && it.region !== filters.region) return false;
+    if (filters.status === "in_stock" && it.status !== "in_stock") return false;
+    if (filters.status === "upcoming" && !["preorder", "coming_soon"].includes(it.status)) return false;
+    if (filters.q && !(it.title || "").toLowerCase().includes(filters.q)) return false;
+    return true;
+  });
+}
+
+function pill(it) {
+  const s = it.status || "unknown";
+  return `<span class="pill s-${s}"><span class="dot">${STATUS_ICON[s]}</span>${STATUS_LABEL[s] || s}</span>`;
+}
+
+function renderCards(items) {
+  const el = document.getElementById("cards");
+  if (!items.length) {
+    el.innerHTML = `<div class="empty">Nothing matches these filters.</div>`;
+    return;
+  }
+  el.innerHTML = items.map(it => {
+    const bits = [];
+    if (it.stock != null) bits.push(`<span class="chip">${it.stock} left</span>`);
+    if (it.drop_time) bits.push(`<span class="chip">Drops ${esc(localTime(it.drop_time))}</span>`);
+    const notes = [];
+    if (it.last_sellout_duration) notes.push(`Last time it sold out after ${esc(it.last_sellout_duration)}`);
+    if (it.last_seen) notes.push(`checked ${timeAgo(it.last_seen)}`);
+    return `<a class="card" href="${esc(it.url)}" target="_blank" rel="noopener">
+      ${it.image ? `<img class="thumb" src="${esc(it.image)}" alt="" loading="lazy">` : ``}
+      <div class="body">
+        <div class="title">${esc(it.title)}</div>
+        <div class="meta">
+          ${pill(it)}
+          <span class="chip">${esc(it.region)}</span>
+          ${it.price ? `<span class="price">${esc(it.price)}</span>` : ""}
+          ${bits.join("")}
+        </div>
+        ${notes.length ? `<div class="note">${notes.join(" · ")}</div>` : ""}
+      </div>
+    </a>`;
+  }).join("");
+}
+
+function renderTable(items) {
+  const el = document.getElementById("table");
+  el.innerHTML = `<table>
+    <thead><tr><th>Car</th><th>Region</th><th>Status</th><th>Price</th><th>Stock</th></tr></thead>
+    <tbody>${items.map(it => `<tr>
+      <td><a href="${esc(it.url)}" target="_blank" rel="noopener" style="color:inherit">${esc(it.title)}</a></td>
+      <td>${esc(it.region)}</td>
+      <td>${STATUS_LABEL[it.status] || esc(it.status)}</td>
+      <td class="num">${esc(it.price || "—")}</td>
+      <td class="num">${it.stock ?? "—"}</td>
+    </tr>`).join("")}</tbody></table>`;
+}
+
+function renderEvents() {
+  const el = document.getElementById("events");
+  const events = (DATA.recent_events || []).slice(0, 25);
+  if (!events.length) {
+    el.innerHTML = `<div class="empty">No changes recorded yet. The first run just sets a baseline.</div>`;
+    return;
+  }
+  el.innerHTML = events.map(e => `<div class="event">
+    <span aria-hidden="true">${EVENT_ICON[e.type] || "•"}</span>
+    <div style="flex:1;min-width:0">
+      <a href="${esc(e.url)}" target="_blank" rel="noopener"><b>${esc(e.title)}</b></a>
+      <div style="color:var(--text-secondary);font-size:12.5px">${esc(e.region)} · ${esc(localiseDetail(e.detail))}</div>
+    </div>
+    <span class="when">${timeAgo(e.at)}</span>
+  </div>`).join("");
+}
+
+function render() {
+  if (!DATA) return;
+  const c = DATA.counts || {};
+  document.getElementById("t-stock").textContent = c.in_stock ?? 0;
+  document.getElementById("t-soon").textContent = c.upcoming ?? 0;
+  document.getElementById("t-out").textContent = c.sold_out ?? 0;
+  document.getElementById("t-all").textContent = c.total ?? 0;
+  document.getElementById("updated").innerHTML =
+    `Last checked <strong>${esc(timeAgo(DATA.generated_at))}</strong>`;
+
+  const warn = document.getElementById("warnings");
+  warn.innerHTML = (DATA.warnings || []).length
+    ? `<div class="banner"><b>Heads up — the checker had trouble</b>${
+        DATA.warnings.map(w => esc(w)).join("<br>")}</div>`
+    : "";
+
+  const items = visible();
+  document.getElementById("cards").classList.toggle("hidden", filters.view !== "cards");
+  document.getElementById("table").classList.toggle("hidden", filters.view !== "table");
+  if (filters.view === "cards") renderCards(items); else renderTable(items);
+  renderEvents();
+}
+
+document.querySelectorAll(".seg button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const key = btn.dataset.region ? "region" : btn.dataset.status ? "status" : "view";
+    filters[key] = btn.dataset[key];
+    btn.parentElement.querySelectorAll("button").forEach(b =>
+      b.setAttribute("aria-pressed", String(b === btn)));
+    render();
+  });
+});
+document.getElementById("q").addEventListener("input", e => {
+  filters.q = e.target.value.trim().toLowerCase();
+  render();
+});
+
+async function load() {
+  try {
+    const resp = await fetch("data.json?t=" + Date.now());
+    if (!resp.ok) throw new Error("HTTP " + resp.status);
+    DATA = await resp.json();
+    render();
+  } catch (err) {
+    document.getElementById("updated").textContent = "No data yet";
+    document.getElementById("cards").innerHTML =
+      `<div class="empty">No <code>data.json</code> yet.<br>
+       It appears after the checker's first successful run.</div>`;
+  }
+}
+
+load();
+setInterval(load, 5 * 60 * 1000);
+</script>
+</body>
+</html>
