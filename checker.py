@@ -554,11 +554,11 @@ def diff(state: dict, items: list[dict], notify_cfg: dict) -> list[dict]:
 # --------------------------------------------------------------------------
 
 EVENT_META = {
-    "new":      ("\U0001F195 New Hot Wheels", "rotating_light", 5),
-    "restock":  ("\U0001F525 Back in stock",  "fire",           5),
-    "drop":     ("\U0001F4C5 Upcoming drop",  "calendar",       4),
-    "price":    ("\U0001F4B0 Price change",   "moneybag",       3),
-    "sold_out": ("❌ Sold out",           "x",              2),
+    "new":      ("New Hot Wheels", "rotating_light", 5),
+    "restock":  ("Back in stock",  "fire",           5),
+    "drop":     ("Upcoming drop",  "calendar",       4),
+    "price":    ("Price change",   "moneybag",       3),
+    "sold_out": ("Sold out",       "x",              2),
 }
 
 
