@@ -1,8 +1,12 @@
 """A tiny stand-in for Mattel's Shopify storefront, for offline testing.
 
-Serves the two shapes checker.py depends on:
+Serves the three shapes checker.py depends on:
   /{prefix}/collections/hot-wheels     -> HTML with product cards + badges
   /{prefix}/products/{handle}.js       -> Shopify product JSON
+  /cart/add.js                         -> the cart-ceiling stock probe (422 body)
+
+A catalog entry may set "stock": N to have the cart probe report N remaining;
+without it, the probe endpoint 404s, same as a variant Mattel won't sell.
 """
 
 from __future__ import annotations
@@ -96,6 +100,31 @@ class Handler(BaseHTTPRequestHandler):
             return self._send(404, "{}", "application/json")
 
         self._send(404, "not found", "text/plain")
+
+    def do_POST(self):  # noqa: N802
+        parsed = urllib.parse.urlparse(self.path)
+        if parsed.path != "/cart/add.js":
+            return self._send(404, "not found", "text/plain")
+
+        length = int(self.headers.get("Content-Length", 0))
+        try:
+            payload = json.loads(self.rfile.read(length) or b"{}")
+        except json.JSONDecodeError:
+            payload = {}
+        variant_id = payload.get("id")
+
+        handle = next(
+            (h for h in CATALOG if abs(hash(h + "v")) % 10**10 == variant_id), None
+        )
+        stock = CATALOG.get(handle, {}).get("stock") if handle else None
+        if stock is None:
+            return self._send(404, "{}", "application/json")
+
+        body = json.dumps({
+            "description": f"Only {stock} available for Default Title",
+            "message": "Cart error",
+        })
+        return self._send(422, body, "application/json")
 
 
 def start(port: int = 0) -> tuple[HTTPServer, str]:

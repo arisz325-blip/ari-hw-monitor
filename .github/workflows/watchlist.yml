@@ -1,0 +1,109 @@
+name: Watchlist request
+
+# Triggered by the dashboard's "Watch stock" / "Watching" buttons, which open
+# a pre-filled GitHub issue (see docs/index.html: watchIssueUrl). This turns
+# that issue into a config.json edit, with no server and no exposed token.
+
+on:
+  issues:
+    types: [opened]
+
+permissions:
+  contents: write
+  issues: write
+
+concurrency:
+  group: watchlist-request
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    if: startsWith(github.event.issue.title, '[watchlist]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Parse issue and edit config.json
+        id: apply
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          python3 - <<'PYEOF'
+          import json
+          import os
+          import re
+
+          body = os.environ.get("ISSUE_BODY", "")
+
+          def field(name):
+              m = re.search(rf"^{name}:\s*(.+)$", body, re.M)
+              return m.group(1).strip() if m else None
+
+          action = field("action")
+          key = field("key")
+          title = field("title") or key
+
+          result_path = os.environ["GITHUB_OUTPUT"]
+          with open(result_path, "a") as out:
+              if action not in ("add", "remove") or not key or ":" not in key:
+                  out.write("status=invalid\n")
+                  raise SystemExit(0)
+
+              with open("config.json") as f:
+                  cfg = json.load(f)
+
+              watchlist = cfg.setdefault("stock_probe", {}).setdefault("watchlist", [])
+
+              if action == "add":
+                  if key in watchlist:
+                      out.write("status=noop\n")
+                      out.write(f"message=`{key}` was already on the watchlist.\n")
+                      raise SystemExit(0)
+                  watchlist.append(key)
+                  message = f"Added `{key}` ({title}) to the stock-probe watchlist."
+              else:
+                  if key not in watchlist:
+                      out.write("status=noop\n")
+                      out.write(f"message=`{key}` was not on the watchlist.\n")
+                      raise SystemExit(0)
+                  watchlist.remove(key)
+                  message = f"Removed `{key}` ({title}) from the stock-probe watchlist."
+
+              watchlist.sort()
+              with open("config.json", "w") as f:
+                  json.dump(cfg, f, indent=2)
+                  f.write("\n")
+
+              out.write("status=changed\n")
+              out.write(f"message={message}\n")
+          PYEOF
+
+      - name: Commit and push
+        if: steps.apply.outputs.status == 'changed'
+        run: |
+          git config user.name  "hot-wheels-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add config.json
+          git commit -m "watchlist: ${{ steps.apply.outputs.message }} (#${{ github.event.issue.number }})"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+          git push
+
+      - name: Comment and close
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const status = "${{ steps.apply.outputs.status }}";
+            const message = `${{ steps.apply.outputs.message }}` ||
+              "Could not read a valid `action:`/`key:` pair from this issue — " +
+              "please use the dashboard's Watch button rather than filing this by hand.";
+            await github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: status === "invalid" ? message : `✅ ${message}`,
+            });
+            if (status !== "invalid") {
+              await github.rest.issues.update({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: context.issue.number, state: "closed",
+              });
+            }

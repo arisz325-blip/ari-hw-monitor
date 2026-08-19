@@ -357,6 +357,7 @@ def scan_region(fetcher: Fetcher, name: str, region_cfg: dict,
     items: list[dict] = []
     filters = cfg["filters"]
     probe_cfg = cfg.get("stock_probe", {})
+    watchlist = set(probe_cfg.get("watchlist", []))
     max_pages = int(cfg["http"].get("max_collection_pages", 5))
     probes_done = 0
 
@@ -413,16 +414,18 @@ def scan_region(fetcher: Fetcher, name: str, region_cfg: dict,
                 (v for v in variants if v.get("available")), variants[0] if variants else {}
             )
 
+            key = f"{name}:{handle}"
             stock = None
             if (probe_cfg.get("enabled")
                     and status == "in_stock"
+                    and key in watchlist
                     and probes_done < int(probe_cfg.get("max_products_per_run", 8))):
                 probes_done += 1
                 time.sleep(float(probe_cfg.get("delay_seconds", 4)))
                 stock = probe_stock(fetcher, region_cfg, first_available.get("id"), probe_cfg)
 
             items.append({
-                "key": f"{name}:{handle}",
+                "key": key,
                 "region": name,
                 "handle": handle,
                 "title": product.get("title", handle),
@@ -616,7 +619,7 @@ def send_ntfy(events: list[dict], dry_run: bool) -> int:
 # --------------------------------------------------------------------------
 
 def write_dashboard_data(state: dict, items: list[dict], events: list[dict],
-                         warnings: list[str], started: str) -> None:
+                         warnings: list[str], started: str, cfg: dict) -> None:
     live_keys = {i["key"] for i in items}
     rows = []
     for key, record in state["items"].items():
@@ -639,6 +642,8 @@ def write_dashboard_data(state: dict, items: list[dict], events: list[dict],
             "upcoming": sum(1 for r in rows if r.get("status") in ("preorder", "coming_soon")),
         },
         "warnings": warnings,
+        "probe_enabled": bool(cfg.get("stock_probe", {}).get("enabled")),
+        "watchlist": sorted(cfg.get("stock_probe", {}).get("watchlist", [])),
         "recent_events": [
             {
                 "type": e["type"],
@@ -705,7 +710,7 @@ def run(args: argparse.Namespace) -> int:
     state["runs"] = ([{"at": started, "items": len(all_items), "events": len(events),
                        "warnings": all_warnings}] + state.get("runs", []))[:50]
 
-    write_dashboard_data(state, all_items, events, all_warnings, started)
+    write_dashboard_data(state, all_items, events, all_warnings, started, cfg)
     if not args.dry_run:
         save_state(state)
 

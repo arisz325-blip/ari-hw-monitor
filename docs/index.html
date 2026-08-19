@@ -87,8 +87,9 @@
     display: flex; gap: 12px; background: var(--surface-1);
     border: 1px solid var(--border); border-radius: 12px;
     padding: 11px; margin-bottom: 9px; text-decoration: none; color: inherit;
+    cursor: pointer;
   }
-  .card:hover { border-color: var(--accent); }
+  .card:hover, .card:focus-visible { border-color: var(--accent); }
   .thumb {
     width: 62px; height: 62px; flex: 0 0 62px; border-radius: 9px;
     background: var(--hairline); object-fit: cover;
@@ -131,6 +132,13 @@
   .empty { color: var(--muted); text-align: center; padding: 34px 12px; font-size: 14px; }
   footer { margin-top: 30px; color: var(--muted); font-size: 11.5px; text-align: center; line-height: 1.7; }
   .hidden { display: none !important; }
+
+  .watch-btn {
+    border-radius: 999px; padding: 2px 9px; font-size: 11.5px; font-weight: 550;
+    border: 1px solid var(--border); background: transparent; color: var(--text-secondary);
+    cursor: pointer; font: inherit;
+  }
+  .watch-btn.on { border-color: var(--accent); color: var(--accent); }
 </style>
 </head>
 <body>
@@ -176,7 +184,8 @@
 
   <footer>
     Checks Mattel Creations US &amp; AU hourly · notifications via ntfy<br>
-    Stock counts show only where the store exposes them.
+    Stock counts show only for cars on the watchlist. "Watch stock" opens a
+    GitHub issue (needs a GitHub login) that adds the car automatically.
   </footer>
 </div>
 
@@ -196,6 +205,28 @@ const EVENT_ICON = {
 
 let DATA = null;
 const filters = { region: "all", status: "all", view: "cards", q: "" };
+const REPO = "arisz325-blip/ari-hw-monitor";
+
+function watchIssueUrl(it, action) {
+  const title = `[watchlist] ${action} ${it.title}`;
+  const body = [
+    `action: ${action}`,
+    `key: ${it.key}`,
+    `title: ${it.title}`,
+    `region: ${it.region}`,
+    `url: ${it.url}`,
+  ].join("\n");
+  const params = new URLSearchParams({ title, body, labels: "watchlist" });
+  return `https://github.com/${REPO}/issues/new?${params.toString()}`;
+}
+
+function watchButton(it) {
+  const watching = (DATA.watchlist || []).includes(it.key);
+  const action = watching ? "remove" : "add";
+  const label = watching ? "✓ Watching" : "+ Watch stock";
+  return `<a class="watch-btn${watching ? " on" : ""}" href="${esc(watchIssueUrl(it, action))}"
+    target="_blank" rel="noopener">${label}</a>`;
+}
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
   ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -254,7 +285,7 @@ function renderCards(items) {
     const notes = [];
     if (it.last_sellout_duration) notes.push(`Last time it sold out after ${esc(it.last_sellout_duration)}`);
     if (it.last_seen) notes.push(`checked ${timeAgo(it.last_seen)}`);
-    return `<a class="card" href="${esc(it.url)}" target="_blank" rel="noopener">
+    return `<div class="card" data-url="${esc(it.url)}" role="link" tabindex="0">
       ${it.image ? `<img class="thumb" src="${esc(it.image)}" alt="" loading="lazy">` : ``}
       <div class="body">
         <div class="title">${esc(it.title)}</div>
@@ -263,10 +294,11 @@ function renderCards(items) {
           <span class="chip">${esc(it.region)}</span>
           ${it.price ? `<span class="price">${esc(it.price)}</span>` : ""}
           ${bits.join("")}
+          ${watchButton(it)}
         </div>
         ${notes.length ? `<div class="note">${notes.join(" · ")}</div>` : ""}
       </div>
-    </a>`;
+    </div>`;
   }).join("");
 }
 
@@ -335,6 +367,21 @@ document.querySelectorAll(".seg button").forEach(btn => {
 document.getElementById("q").addEventListener("input", e => {
   filters.q = e.target.value.trim().toLowerCase();
   render();
+});
+
+// Cards are plain divs (not <a>) so the "Watch stock" link inside them stays
+// valid HTML (an <a> can't nest another <a>); open the product page on click
+// unless the click came from that inner link.
+function openCard(target) {
+  const card = target.closest(".card");
+  if (card && !target.closest("a")) window.open(card.dataset.url, "_blank", "noopener");
+}
+document.getElementById("cards").addEventListener("click", e => openCard(e.target));
+document.getElementById("cards").addEventListener("keydown", e => {
+  if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("card")) {
+    e.preventDefault();
+    openCard(e.target);
+  }
 });
 
 async function load() {

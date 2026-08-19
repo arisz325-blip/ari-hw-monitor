@@ -176,6 +176,34 @@ def main() -> int:
         check("empty catalogue produces a warning, not a crash",
               len(broken_data["warnings"]) > 0, f"{broken_data['warnings']}")
 
+        print("\nRun 7 — stock probe only touches watchlisted cars")
+        catalog = json.loads(json.dumps(BASE_CATALOG))
+        catalog["hot-wheels-rlc-1985-audi-quattro"]["stock"] = 3
+        mock_store.set_catalog(catalog)
+
+        cfg_path = workdir / "config.json"
+        cfg = json.loads(cfg_path.read_text())
+        cfg["stock_probe"].update(enabled=True, delay_seconds=0,
+                                   watchlist=["US:hot-wheels-rlc-1985-audi-quattro"])
+        cfg_path.write_text(json.dumps(cfg))
+
+        persist_state(workdir, base_url)
+        data = json.loads((workdir / "docs" / "data.json").read_text())
+        by_key = {r["key"]: r for r in data["items"]}
+
+        check("watchlisted car gets a real stock number",
+              by_key.get("US:hot-wheels-rlc-1985-audi-quattro", {}).get("stock") == 3,
+              f"{by_key.get('US:hot-wheels-rlc-1985-audi-quattro', {}).get('stock')}")
+        check("same car in a non-watchlisted region is left alone",
+              by_key.get("AU:hot-wheels-rlc-1985-audi-quattro", {}).get("stock") is None,
+              f"{by_key.get('AU:hot-wheels-rlc-1985-audi-quattro', {}).get('stock')}")
+        check("dashboard data exposes the configured watchlist",
+              data.get("watchlist") == ["US:hot-wheels-rlc-1985-audi-quattro"],
+              f"{data.get('watchlist')}")
+
+        cfg["stock_probe"].update(enabled=False, watchlist=[])
+        cfg_path.write_text(json.dumps(cfg))
+
     server.shutdown()
     print(f"\n{'='*60}")
     if FAILURES:

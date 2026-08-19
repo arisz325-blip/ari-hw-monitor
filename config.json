@@ -39,7 +39,8 @@
     "enabled": false,
     "delay_seconds": 4,
     "max_products_per_run": 8,
-    "probe_quantity": 99999
+    "probe_quantity": 99999,
+    "watchlist": []
   },
 
   "http": {

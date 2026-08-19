@@ -18,13 +18,14 @@ Live and working since 2026-08-19.
   `state.json` + `docs/data.json` back to the repo.
 
 ```
-checker.py                    scraper + differ + notifier
-config.json                   all tuning: regions, filters, notify toggles, probe flag
-state.json                    generated — last seen state, the diff baseline
-docs/index.html               dashboard
-docs/data.json                generated — what the dashboard reads
-.github/workflows/check.yml   hourly cron; writes diagnostics to the run Summary
-tests/                        offline suite, 29 checks, mock storefront + mock ntfy
+checker.py                        scraper + differ + notifier
+config.json                       all tuning: regions, filters, notify toggles, probe flag/watchlist
+state.json                        generated — last seen state, the diff baseline
+docs/index.html                   dashboard, incl. the "Watch stock" button
+docs/data.json                    generated — what the dashboard reads
+.github/workflows/check.yml       hourly cron; writes diagnostics to the run Summary
+.github/workflows/watchlist.yml   turns a "[watchlist] ..." issue into a config.json edit
+tests/                            offline suite, 32 checks, mock storefront + mock ntfy + mock cart
 ```
 
 ## Facts that cost real debugging time
@@ -47,7 +48,18 @@ agent endpoint at `creations.mattel.com/api/ucp/mcp` (POST/SSE — 404s on GET).
 That endpoint is unexplored and is the sanctioned way to get catalogue data.
 
 **Mattel publishes no inventory numbers.** Status, price and drop time are all
-the storefront exposes. Never invent a count.
+the storefront exposes. Never invent a count. This includes total edition
+size for RLC exclusives — Mattel never states how many were made, even for
+unreleased items; "sold until it's sold out" is the model, not a numbered run.
+
+**`creations.mattel.com` shows AUD to browsers Shopify thinks are in
+Australia.** Opening the plain US URL from an AU IP renders AU-localized
+prices and rewrites links to `/en-au/...` (Shopify Markets, client-side).
+Verified this does *not* reach the raw `/products/{handle}.js` API we
+actually scrape: a direct request from an AU-geolocated IP still got back
+`cart_currency=USD` and the true USD cents figure. So the US price data is
+correct even though a human opening the same link from Australia sees
+different numbers — that's expected, not a bug.
 
 **HTTP headers are latin-1.** An emoji in ntfy's `Title` header makes `requests`
 raise `UnicodeEncodeError`, which `send_ntfy` swallows — every notification dies
@@ -98,7 +110,19 @@ everything and deliberately sends no alerts.
    (POST `/cart/add.js` with quantity 99999, read the number out of the 422).
    It is `enabled: false` on purpose — that path is robots-disallowed, and if
    Mattel's bot protection blocks the runner the *whole monitor* dies, not just
-   the probe. Never enable it without Ari explicitly asking. Untested live.
+   the probe. Never enable it without Ari explicitly asking.
+   **Tried live on 2026-08-19: AU got 429-rate-limited a few minutes in**, while
+   scanning the same 78 AU products without probing had just worked fine.
+   Turned back off. Not fully confirmed the probe itself was the cause (could
+   have been the local machine's IP), but treat that as the working theory.
+   As of 2026-08-20 probing is also gated by `stock_probe.watchlist` (a list of
+   `"REGION:handle"` keys) — even when `enabled: true`, only listed items get
+   probed, not every in-stock item the scan happens to find. The dashboard's
+   "Watch stock" button adds/removes entries by opening a pre-filled GitHub
+   issue titled `[watchlist] ...`; `.github/workflows/watchlist.yml` parses it,
+   edits `config.json`, commits, and closes the issue — no server, no token in
+   the page. If probing gets re-enabled, re-test cautiously (small watchlist,
+   long delay) rather than trusting last time's failure was a fluke.
 3. **`drop_time` is never populated** in real runs — `DROP_TIME_RE` has not
    matched Mattel's actual countdown markup. Needs a look at live product HTML.
 4. **The UCP/MCP endpoint** is the interesting unexplored lead for real stock
