@@ -139,6 +139,17 @@
     cursor: pointer; font: inherit;
   }
   .watch-btn.on { border-color: var(--accent); color: var(--accent); }
+  .watch-btn:disabled { opacity: 0.5; cursor: default; }
+
+  .status-msg {
+    border-radius: 10px; padding: 8px 12px; font-size: 13px; margin-bottom: 14px;
+    background: color-mix(in srgb, var(--good) 14%, var(--surface-1));
+    border: 1px solid var(--good); color: var(--text-primary);
+  }
+  .status-msg.err {
+    background: color-mix(in srgb, var(--critical) 14%, var(--surface-1));
+    border-color: var(--critical);
+  }
 </style>
 </head>
 <body>
@@ -150,6 +161,7 @@
   </header>
 
   <div id="warnings"></div>
+  <div id="status-msg" class="status-msg hidden"></div>
 
   <div class="tiles">
     <div class="tile good"><div class="v" id="t-stock">–</div><div class="k">In stock</div></div>
@@ -184,8 +196,9 @@
 
   <footer>
     Checks Mattel Creations US &amp; AU hourly · notifications via ntfy<br>
-    Stock counts show only for cars on the watchlist. "Watch stock" opens a
-    GitHub issue (needs a GitHub login) that adds the car automatically.
+    Stock counts show only for cars on the watchlist, added instantly with
+    the button above. Numbers update on the next scheduled check, not
+    immediately. A car drops off the watchlist automatically once sold out.
   </footer>
 </div>
 
@@ -205,27 +218,48 @@ const EVENT_ICON = {
 
 let DATA = null;
 const filters = { region: "all", status: "all", view: "cards", q: "" };
-const REPO = "arisz325-blip/ari-hw-monitor";
-
-function watchIssueUrl(it, action) {
-  const title = `[watchlist] ${action} ${it.title}`;
-  const body = [
-    `action: ${action}`,
-    `key: ${it.key}`,
-    `title: ${it.title}`,
-    `region: ${it.region}`,
-    `url: ${it.url}`,
-  ].join("\n");
-  const params = new URLSearchParams({ title, body, labels: "watchlist" });
-  return `https://github.com/${REPO}/issues/new?${params.toString()}`;
-}
+const WORKER_URL = "https://hw-watchlist-worker.arisz325.workers.dev";
+const watchBusy = new Set(); // keys currently mid-toggle, so double-clicks no-op
 
 function watchButton(it) {
   const watching = (DATA.watchlist || []).includes(it.key);
+  const busy = watchBusy.has(it.key);
   const action = watching ? "remove" : "add";
-  const label = watching ? "✓ Watching" : "+ Watch stock";
-  return `<a class="watch-btn${watching ? " on" : ""}" href="${esc(watchIssueUrl(it, action))}"
-    target="_blank" rel="noopener">${label}</a>`;
+  const label = busy ? "…" : watching ? "✓ Watching" : "+ Watch stock";
+  return `<button type="button" class="watch-btn${watching ? " on" : ""}"
+    data-key="${esc(it.key)}" data-action="${action}" ${busy ? "disabled" : ""}>${label}</button>`;
+}
+
+async function toggleWatch(key, action) {
+  watchBusy.add(key);
+  render();
+  try {
+    const resp = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action, key }),
+    });
+    const body = await resp.json();
+    if (!resp.ok || !body.ok) throw new Error(body.error || `HTTP ${resp.status}`);
+    DATA.watchlist = body.watchlist;
+    setStatus(action === "add"
+      ? "Added to the watchlist — probing starts on the next check."
+      : "Removed from the watchlist.");
+  } catch (err) {
+    setStatus("Couldn't update the watchlist: " + err.message, true);
+  } finally {
+    watchBusy.delete(key);
+    render();
+  }
+}
+
+function setStatus(text, isError) {
+  const el = document.getElementById("status-msg");
+  el.textContent = text;
+  el.classList.toggle("err", !!isError);
+  el.classList.remove("hidden");
+  clearTimeout(setStatus._t);
+  setStatus._t = setTimeout(() => el.classList.add("hidden"), 5000);
 }
 
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c =>
@@ -369,14 +403,18 @@ document.getElementById("q").addEventListener("input", e => {
   render();
 });
 
-// Cards are plain divs (not <a>) so the "Watch stock" link inside them stays
-// valid HTML (an <a> can't nest another <a>); open the product page on click
-// unless the click came from that inner link.
+// Cards are plain divs (not <a>) so the "Watch stock" button inside them
+// stays valid HTML; open the product page on click unless the click came
+// from that inner button.
 function openCard(target) {
   const card = target.closest(".card");
-  if (card && !target.closest("a")) window.open(card.dataset.url, "_blank", "noopener");
+  if (card && !target.closest("button")) window.open(card.dataset.url, "_blank", "noopener");
 }
-document.getElementById("cards").addEventListener("click", e => openCard(e.target));
+document.getElementById("cards").addEventListener("click", e => {
+  const btn = e.target.closest(".watch-btn");
+  if (btn) { toggleWatch(btn.dataset.key, btn.dataset.action); return; }
+  openCard(e.target);
+});
 document.getElementById("cards").addEventListener("keydown", e => {
   if ((e.key === "Enter" || e.key === " ") && e.target.classList.contains("card")) {
     e.preventDefault();

@@ -18,11 +18,19 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 
 # handle -> product definition. Tests mutate this between runs.
 CATALOG: dict[str, dict] = {}
+# collection name -> handles it lists. A collection not listed here (e.g. the
+# default "hot-wheels") falls back to showing the whole CATALOG.
+COLLECTIONS: dict[str, list[str]] = {}
 
 
 def set_catalog(products: dict[str, dict]) -> None:
     CATALOG.clear()
     CATALOG.update(products)
+
+
+def set_collections(mapping: dict[str, list[str]]) -> None:
+    COLLECTIONS.clear()
+    COLLECTIONS.update(mapping)
 
 
 def _product_js(handle: str, region_price: int) -> dict:
@@ -46,9 +54,11 @@ def _product_js(handle: str, region_price: int) -> dict:
     }
 
 
-def _collection_html(region_price_note: str) -> str:
+def _collection_html(region_price_note: str, collection: str = "hot-wheels") -> str:
+    handles = COLLECTIONS.get(collection, list(CATALOG.keys()))
     cards = []
-    for handle, product in CATALOG.items():
+    for handle in handles:
+        product = CATALOG[handle]
         badge = product["badge"]
         drop = product.get("drop_time")
         drop_html = f'<span class="drop">Drops {drop}</span>' if drop else ""
@@ -87,11 +97,12 @@ class Handler(BaseHTTPRequestHandler):
         price = 4999 if is_au else 2999
         note = "AUD $49.99" if is_au else "USD $29.99"
 
-        if path.rstrip("/") == "/collections/hot-wheels":
+        if path.startswith("/collections/"):
+            collection = path[len("/collections/"):].rstrip("/")
             # Only page 1 has products; page 2+ is empty, as on a real store.
             if int(query.get("page", ["1"])[0]) > 1:
                 return self._send(200, "<html><body></body></html>", "text/html")
-            return self._send(200, _collection_html(note), "text/html")
+            return self._send(200, _collection_html(note, collection), "text/html")
 
         if path.startswith("/products/") and path.endswith(".js"):
             handle = path[len("/products/"):-len(".js")]

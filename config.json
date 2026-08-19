@@ -14,12 +14,11 @@
       "query": {
         "country": "AU"
       },
-      "currency": "AUD"
+      "currency": "AUD",
+      "collections": ["hot-wheels"]
     }
   },
-  "collections": [
-    "hot-wheels"
-  ],
+  "collections": ["hot-wheels", "cars-vehicles"],
   "filters": {
     "mode": "collector",
     "include_keywords": [

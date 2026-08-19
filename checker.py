@@ -89,6 +89,10 @@ def load_config() -> dict:
         return json.load(fh)
 
 
+def save_config(cfg: dict) -> None:
+    CONFIG_PATH.write_text(json.dumps(cfg, indent=2) + "\n")
+
+
 def load_state() -> dict:
     if not STATE_PATH.exists():
         return {"version": 2, "items": {}, "runs": []}
@@ -360,8 +364,9 @@ def scan_region(fetcher: Fetcher, name: str, region_cfg: dict,
     watchlist = set(probe_cfg.get("watchlist", []))
     max_pages = int(cfg["http"].get("max_collection_pages", 5))
     probes_done = 0
+    seen_handles: set[str] = set()
 
-    for collection in cfg["collections"]:
+    for collection in region_cfg.get("collections", cfg["collections"]):
         prefix = resolve_region_prefix(fetcher, name, region_cfg, collection)
         if prefix is None:
             warnings.append(
@@ -396,6 +401,9 @@ def scan_region(fetcher: Fetcher, name: str, region_cfg: dict,
         log(f"  {name}/{collection}: {len(handles)} products linked")
 
         for handle in handles:
+            if handle in seen_handles:
+                continue
+            seen_handles.add(handle)
             product = fetcher.get(
                 region_url(region_cfg, f"/products/{handle}.js", prefix=prefix),
                 as_json=True,
@@ -701,6 +709,16 @@ def run(args: argparse.Namespace) -> int:
         return 0 if all_items and not all_warnings else 1
 
     send_ntfy(events, args.dry_run)
+
+    probe_cfg = cfg.get("stock_probe", {})
+    watchlist = probe_cfg.get("watchlist", [])
+    dropped = [k for k in watchlist if state["items"].get(k, {}).get("status") == "sold_out"]
+    if dropped:
+        probe_cfg["watchlist"] = [k for k in watchlist if k not in dropped]
+        for k in dropped:
+            log(f"  watchlist: auto-removed {k} (sold out)")
+        if not args.dry_run:
+            save_config(cfg)
 
     state["recent_events"] = ([
         {"type": e["type"], "detail": e["detail"], "title": e["item"]["title"],

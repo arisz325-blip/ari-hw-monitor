@@ -61,6 +61,27 @@ actually scrape: a direct request from an AU-geolocated IP still got back
 correct even though a human opening the same link from Australia sees
 different numbers — that's expected, not a bug.
 
+**`creations.mattel.com/en-au/collections/cars-vehicles` is a third, separate
+thing — not the AU store, not our US collection.** It's the US store's own
+"all vehicles" collection, AUD-priced for an AU visitor by the same Markets
+mechanism above. Confirmed with real requests (2026-08-20): a design can
+exist as *two independent listings* — one on the real AU store
+(`au.creations.mattel.com`, what we track) and a separate one on the US
+store, with different handles, different prices, and independently
+different stock status (e.g. the AU Nissan Stagea listing was sold out while
+the US store's own Stagea listing was still available). If Ari says "I can
+see it in stock on the site" but the dashboard disagrees, check which of the
+three he's actually looking at before assuming the data is wrong.
+
+**Collections are per-region since 2026-08-20** (`region_cfg.get("collections",
+cfg["collections"])`). Top-level `collections` is `["hot-wheels",
+"cars-vehicles"]`; AU overrides to `["hot-wheels"]` only because
+`au.creations.mattel.com/collections/cars-vehicles` 404s — that collection
+only exists on the US store. `scan_region` also tracks `seen_handles` across
+a region's collections so a product listed in more than one collection only
+gets fetched/counted once — get this wrong and restock/new-listing events
+double-fire for anything in both lists.
+
 **HTTP headers are latin-1.** An emoji in ntfy's `Title` header makes `requests`
 raise `UnicodeEncodeError`, which `send_ntfy` swallows — every notification dies
 silently while the scraper tests stay green. Emoji belong in the `Tags` header
@@ -123,6 +144,24 @@ everything and deliberately sends no alerts.
    edits `config.json`, commits, and closes the issue — no server, no token in
    the page. If probing gets re-enabled, re-test cautiously (small watchlist,
    long delay) rather than trusting last time's failure was a fluke.
+   `checker.py` also self-cleans: any watchlist entry whose status reads
+   `sold_out` after a run gets removed from `config.json` and committed by
+   `check.yml`'s normal commit step (via `save_config()` in `run()`) — no
+   separate mechanism needed for "turn probing off once it's gone".
+   As of 2026-08-20 the dashboard's "Watch stock" is a real toggle, not a
+   GitHub-issue redirect: `docs/index.html` POSTs `{action, key}` straight to
+   a Cloudflare Worker (`worker/watchlist-worker.js`, deployed at
+   `hw-watchlist-worker.arisz325.workers.dev` via the CF dashboard's code
+   editor, not wrangler — no Node install on Ari's machine). The Worker holds
+   a fine-grained GitHub PAT (repo-scoped, Contents: Read and write, stored as
+   a Cloudflare secret, never in the page) and edits `config.json` directly
+   through the Contents API. `.github/workflows/watchlist.yml` (the older
+   issue-based path) is left in place as a fallback but is no longer the
+   primary flow. If the Worker's secret ever needs replacing: GitHub → Bad
+   credentials (401) after adding a secret usually means the Worker needs an
+   actual redeploy (Edit code → Save and deploy) before a newly-added secret
+   is bound — adding the variable alone did not do it live, twice, until we
+   redeployed.
 3. **`drop_time` is never populated** in real runs — `DROP_TIME_RE` has not
    matched Mattel's actual countdown markup. Needs a look at live product HTML.
 4. **The UCP/MCP endpoint** is the interesting unexplored lead for real stock

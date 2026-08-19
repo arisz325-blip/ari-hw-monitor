@@ -204,6 +204,83 @@ def main() -> int:
         cfg["stock_probe"].update(enabled=False, watchlist=[])
         cfg_path.write_text(json.dumps(cfg))
 
+        print("\nRun 8 — per-region collections + cross-collection de-dup")
+        overlap_catalog = {
+            "hot-wheels-rlc-car-a": {
+                "title": "Hot Wheels RLC Car A", "available": True,
+                "badge": "Add to Cart", "tags": ["RLC"],
+            },
+            "hot-wheels-rlc-car-b": {
+                "title": "Hot Wheels RLC Car B", "available": True,
+                "badge": "Add to Cart", "tags": ["RLC"],
+            },
+            "hot-wheels-rlc-car-c": {
+                "title": "Hot Wheels RLC Car C", "available": True,
+                "badge": "Add to Cart", "tags": ["RLC"],
+            },
+        }
+        mock_store.set_catalog(overlap_catalog)
+        # car-b is listed on both collections — this is what used to get
+        # double-fetched and double-counted before scan_region tracked
+        # seen_handles across collections.
+        mock_store.set_collections({
+            "hot-wheels": ["hot-wheels-rlc-car-a", "hot-wheels-rlc-car-b"],
+            "cars-vehicles": ["hot-wheels-rlc-car-b", "hot-wheels-rlc-car-c"],
+        })
+
+        overlap_dir = Path(tmp) / "overlap"
+        overlap_dir.mkdir()
+        (overlap_dir / "checker.py").write_bytes((ROOT / "checker.py").read_bytes())
+        (overlap_dir / "docs").mkdir()
+        overlap_cfg = json.loads((ROOT / "config.json").read_text())
+        overlap_cfg["stock_probe"].update(enabled=False, watchlist=[])
+        (overlap_dir / "config.json").write_text(json.dumps(overlap_cfg))
+
+        out = run_checker(overlap_dir, base_url, ["--self-test"])
+        report = json.loads(out[out.index("{"):])
+
+        # US scans hot-wheels + cars-vehicles (3 unique cars); AU is
+        # configured to only scan hot-wheels (2 cars) — 5 total, not 6.
+        check("car seen in two collections is only counted once per region",
+              report["products_found"] == 5, f"{report['products_found']}")
+        check("AU's collections override kept it off cars-vehicles",
+              report["warnings"] == [], f"{report['warnings']}")
+
+        print("\nRun 9 — sold-out watchlist entries are auto-removed")
+        mock_store.set_collections({})  # back to the Run 8 overrides' default
+        autoclean_catalog = json.loads(json.dumps(BASE_CATALOG))
+        autoclean_catalog["hot-wheels-rlc-1985-audi-quattro"]["stock"] = 5
+        mock_store.set_catalog(autoclean_catalog)
+
+        autoclean_dir = Path(tmp) / "autoclean"
+        autoclean_dir.mkdir()
+        (autoclean_dir / "checker.py").write_bytes((ROOT / "checker.py").read_bytes())
+        (autoclean_dir / "docs").mkdir()
+        ac_cfg = json.loads((ROOT / "config.json").read_text())
+        ac_cfg["stock_probe"].update(enabled=True, delay_seconds=0,
+                                      watchlist=["US:hot-wheels-rlc-1985-audi-quattro"])
+        ac_cfg_path = autoclean_dir / "config.json"
+        ac_cfg_path.write_text(json.dumps(ac_cfg))
+
+        persist_state(autoclean_dir, base_url)
+        data = json.loads((autoclean_dir / "docs" / "data.json").read_text())
+        check("watchlist survives while the car is still in stock",
+              data.get("watchlist") == ["US:hot-wheels-rlc-1985-audi-quattro"],
+              f"{data.get('watchlist')}")
+
+        autoclean_catalog["hot-wheels-rlc-1985-audi-quattro"].update(
+            available=False, badge="Sold Out")
+        mock_store.set_catalog(autoclean_catalog)
+        persist_state(autoclean_dir, base_url)
+        data = json.loads((autoclean_dir / "docs" / "data.json").read_text())
+        saved_cfg = json.loads(ac_cfg_path.read_text())
+
+        check("sold-out entry drops off the dashboard's watchlist",
+              data.get("watchlist") == [], f"{data.get('watchlist')}")
+        check("sold-out entry is actually removed from config.json on disk",
+              saved_cfg["stock_probe"]["watchlist"] == [],
+              f"{saved_cfg['stock_probe']['watchlist']}")
+
     server.shutdown()
     print(f"\n{'='*60}")
     if FAILURES:
