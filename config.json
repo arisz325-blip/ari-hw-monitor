@@ -11,22 +11,42 @@
       "base": "https://au.creations.mattel.com",
       "path_prefix": "",
       "path_prefix_fallbacks": [],
-      "query": {"country": "AU"},
+      "query": {
+        "country": "AU"
+      },
       "currency": "AUD"
     }
   },
-
-  "collections": ["hot-wheels"],
-
+  "collections": [
+    "hot-wheels"
+  ],
   "filters": {
     "mode": "collector",
-    "include_keywords": ["rlc", "red line club", "elite 64", "elite64"],
+    "include_keywords": [
+      "rlc",
+      "red line club",
+      "elite 64",
+      "elite64"
+    ],
     "exclude_keywords": [
-      "apparel", "hoodie", "jacket", "hat", "cap", "tee", "t-shirt", "shirt",
-      "socks", "pin", "poster", "print", "mug", "sticker", "bag", "beanie"
+      "apparel",
+      "hoodie",
+      "jacket",
+      "hat",
+      "cap",
+      "tee",
+      "t-shirt",
+      "shirt",
+      "socks",
+      "pin",
+      "poster",
+      "print",
+      "mug",
+      "sticker",
+      "bag",
+      "beanie"
     ]
   },
-
   "notify": {
     "new": true,
     "restock": true,
@@ -34,15 +54,16 @@
     "price_change": true,
     "sold_out": false
   },
-
   "stock_probe": {
     "enabled": true,
     "delay_seconds": 4,
     "max_products_per_run": 8,
     "probe_quantity": 99999,
-    "watchlist": ["US:hot-wheels-rlc-exclusive-1989-nissan-skyline-r32-jjy54"]
+    "watchlist": [
+      "US:hot-wheels-rlc-exclusive-1989-nissan-skyline-r32-jjy54",
+      "US:test-worker-probe"
+    ]
   },
-
   "http": {
     "request_delay_seconds": 1.5,
     "timeout_seconds": 25,
