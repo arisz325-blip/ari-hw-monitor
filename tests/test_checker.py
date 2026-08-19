@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from tests import mock_store  # noqa: E402
-from checker import parse_human_drop_time  # noqa: E402
+from checker import melbourne_time, parse_human_drop_time  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 FAILURES: list[str] = []
@@ -290,6 +290,12 @@ def main() -> int:
         check("parses the AU store's wording (ordinal day, no minutes, AEST)",
               parse_human_drop_time('Launches 20th August 2026 9am AEST')
               == "2026-08-19T23:00:00+00:00")
+        check("notification times render in Melbourne time, winter (AEST, UTC+10)",
+              melbourne_time("2026-08-20T16:00:00+00:00") == "21 Aug 2026, 02:00 AM AEST",
+              melbourne_time("2026-08-20T16:00:00+00:00"))
+        check("notification times render in Melbourne time, summer (AEDT, UTC+11)",
+              melbourne_time("2026-01-05T03:00:00+00:00") == "05 Jan 2026, 02:00 PM AEDT",
+              melbourne_time("2026-01-05T03:00:00+00:00"))
 
         future = (datetime.now() + timedelta(days=200)).strftime("%B %d, %Y %I:%M %p") + " PT"
         past = "January 1, 2020 9:00 am PT"

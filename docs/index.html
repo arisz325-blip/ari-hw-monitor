@@ -198,7 +198,8 @@
     Checks Mattel Creations US &amp; AU hourly · notifications via ntfy<br>
     Stock counts show only for cars on the watchlist, added instantly with
     the button above. Numbers update on the next scheduled check, not
-    immediately. A car drops off the watchlist automatically once sold out.
+    immediately. A car drops off the watchlist automatically once sold out.<br>
+    All times shown are Melbourne time (AEST/AEDT).
   </footer>
 </div>
 
@@ -286,7 +287,8 @@ function localTime(iso) {
   if (!iso) return "";
   const d = new Date(iso);
   return isNaN(d) ? iso : d.toLocaleString([], {
-    day: "numeric", month: "short", hour: "numeric", minute: "2-digit"
+    day: "numeric", month: "short", hour: "numeric", minute: "2-digit",
+    timeZone: "Australia/Melbourne"
   });
 }
 

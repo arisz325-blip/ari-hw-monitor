@@ -129,7 +129,14 @@ everything and deliberately sends no alerts.
   Do not raise the frequency without a reason.
 - `config.json` is the knob panel. Prefer adding a config option over hardcoding.
 - Any change to `send_ntfy` or the scraper needs a test in `tests/`.
-- Ari is in **Australia/Sydney (UTC+10)**; the workflow cron is UTC.
+- Ari is in **Melbourne (`Australia/Melbourne`, AEST/AEDT)**; the workflow
+  cron is UTC. As of 2026-08-20, all times shown to him are pinned to this
+  zone rather than left to whatever renders them: the dashboard's
+  `localTime()` passes `timeZone: "Australia/Melbourne"` to `toLocaleString`,
+  and `checker.py`'s `melbourne_time()` converts drop times before they go
+  into an ntfy notification body (`zoneinfo`, DST-aware — verified against
+  both a winter/AEST and a summer/AEDT timestamp). Don't reintroduce a raw
+  UTC ISO string into anything Ari actually reads.
 - **Ari communicates in Chinese — reply in Chinese.** He is not a developer:
   give exact click paths, not just concepts, and one instruction at a time.
 

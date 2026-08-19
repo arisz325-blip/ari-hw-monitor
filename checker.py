@@ -133,6 +133,22 @@ def now_iso() -> str:
     return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
 
 
+MELBOURNE = ZoneInfo("Australia/Melbourne")
+
+
+def melbourne_time(iso: str | None) -> str | None:
+    """Render a UTC ISO timestamp in Ari's local time (AEST/AEDT, DST-aware)
+    for notification text. The dashboard does its own client-side
+    conversion; this is only for the ntfy push, which is plain text."""
+    if not iso:
+        return None
+    try:
+        dt = datetime.fromisoformat(iso.replace("Z", "+00:00"))
+    except (ValueError, AttributeError):
+        return iso
+    return dt.astimezone(MELBOURNE).strftime("%d %b %Y, %I:%M %p %Z")
+
+
 def log(msg: str) -> None:
     print(f"[{datetime.now(timezone.utc).strftime('%H:%M:%S')}] {msg}", flush=True)
 
@@ -620,14 +636,15 @@ def diff(state: dict, items: list[dict], notify_cfg: dict) -> list[dict]:
                     events.append({
                         "type": "drop", "item": item,
                         "detail": f"{STATUS_LABEL[is_now]}"
-                                  + (f" — drops {item['drop_time']}" if item.get("drop_time") else ""),
+                                  + (f" — drops {melbourne_time(item['drop_time'])}"
+                                     if item.get("drop_time") else ""),
                     })
 
             if (item.get("drop_time") and prev.get("drop_time") != item["drop_time"]
                     and notify_cfg.get("drop", True)):
                 events.append({
                     "type": "drop", "item": item,
-                    "detail": f"Drop time set: {item['drop_time']}",
+                    "detail": f"Drop time set: {melbourne_time(item['drop_time'])}",
                 })
 
             old_price, new_price = prev.get("price_cents"), item.get("price_cents")
