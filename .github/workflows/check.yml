@@ -1,0 +1,63 @@
+name: Hot Wheels stock check
+
+on:
+  schedule:
+    - cron: "30 * * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "What to run"
+        required: false
+        default: normal
+        type: choice
+        options: [normal, dry-run, self-test, notify-test]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: hot-wheels-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run checker
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          NTFY_SERVER: ${{ secrets.NTFY_SERVER }}
+          NTFY_TOKEN: ${{ secrets.NTFY_TOKEN }}
+        run: |
+          case "${{ inputs.mode || 'normal' }}" in
+            dry-run)     python checker.py --dry-run ;;
+            self-test)   python checker.py --self-test ;;
+            notify-test) python checker.py --notify-test ;;
+            *)           python checker.py ;;
+          esac
+
+      - name: Commit results
+        if: ${{ inputs.mode != 'dry-run' && inputs.mode != 'self-test' }}
+        run: |
+          git config user.name  "hot-wheels-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add state.json docs/data.json
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "stock check $(date -u '+%Y-%m-%d %H:%M UTC')"
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git push
+          fi
