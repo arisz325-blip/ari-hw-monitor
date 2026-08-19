@@ -42,7 +42,7 @@ def _product_js(handle: str, region_price: int) -> dict:
         "available": product["available"],
         "tags": product.get("tags", []),
         "product_type": product.get("product_type", "Vehicle"),
-        "published_at": "2026-08-01T00:00:00Z",
+        "published_at": product.get("published_at", "2026-08-01T00:00:00Z"),
         "images": [f"https://cdn.example/{handle}.jpg"],
         "variants": [{
             "id": abs(hash(handle + "v")) % 10**10,
@@ -117,6 +117,23 @@ class Handler(BaseHTTPRequestHandler):
             if int(query.get("page", ["1"])[0]) > 1:
                 return self._send(200, "<html><body></body></html>", "text/html")
             return self._send(200, _collection_html(note, collection), "text/html")
+
+        if path == "/sitemap.xml":
+            host = self.headers.get("Host", "localhost")
+            body = (
+                '<?xml version="1.0" encoding="UTF-8"?><sitemapindex>'
+                f'<sitemap><loc>http://{host}/sitemap_products_1.xml</loc></sitemap>'
+                '</sitemapindex>'
+            )
+            return self._send(200, body, "application/xml")
+
+        if path == "/sitemap_products_1.xml":
+            host = self.headers.get("Host", "localhost")
+            urls = "".join(
+                f'<url><loc>http://{host}/products/{h}</loc></url>' for h in CATALOG
+            )
+            return self._send(200, f'<?xml version="1.0" encoding="UTF-8"?><urlset>{urls}</urlset>',
+                               "application/xml")
 
         if path.startswith("/products/") and path.endswith(".js"):
             handle = path[len("/products/"):-len(".js")]

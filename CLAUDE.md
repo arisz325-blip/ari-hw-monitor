@@ -191,15 +191,21 @@ everything and deliberately sends no alerts.
    `parse_human_drop_time()` parses both wordings via `zoneinfo` — needs the
    `tzdata` package on Windows (see requirements.txt), ubuntu-latest already
    has system tzdata so this is a no-op there.
-   **Still unfixed**: an item can exist and be directly linkable before
-   Mattel ever adds it to a collection page — confirmed live on 2026-08-20
-   with the Mercedes-Benz G 63 AMG 6x6 (dropping that same day): its product
-   page had a live countdown on both stores, but it was in neither
-   `/collections/hot-wheels` nor `/collections/cars-vehicles`, so the scanner
-   never saw it at all. No discovery mechanism for this yet — the site's
-   `/pages/launch-calendar` doesn't list it via a plain HTTP GET either
-   (likely client-rendered from an API we haven't found). Whatever isn't in
-   a scanned collection is invisible regardless of how good the parsing is.
+   ~~**Still unfixed**: an item can exist and be directly linkable before
+   Mattel ever adds it to a collection page~~ — fixed 2026-08-20, same day,
+   after Ari pushed back on "can't be solved": Mattel's XML sitemap
+   (`/sitemap.xml` → per-region `sitemap_products_N.xml` files) lists every
+   published product in real time, regardless of collection membership —
+   confirmed the Mercedes-Benz G 63 AMG 6x6 was in it hours before it hit
+   any collection page. `sitemap_product_handles()` fetches it once per
+   region per run (US: 3 files; AU: 1 — small, not paginated collection
+   pages) and `looks_relevant()` pre-filters by handle text before paying
+   for a `.js` fetch, since the sitemap covers the *entire* store (Barbie,
+   apparel, everything), not just what we track. Anything it finds that a
+   collection didn't goes through the exact same `handle_item()` path,
+   `html=""`, so `upcoming_drop_from_product_page()` (item 3 above) still
+   catches the coming-soon case. `/pages/launch-calendar` was a dead end
+   (client-rendered, nothing in a plain GET) — don't re-try that one.
 4. **The UCP/MCP endpoint** is the interesting unexplored lead for real stock
    data, legitimately. Needs a POST/SSE client.
 5. **The ntfy topic is guessable** — `hw-ari-7f3k9qz2x` is the example name from

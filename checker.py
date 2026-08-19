@@ -275,6 +275,89 @@ def resolve_region_prefix(fetcher: Fetcher, name: str, region_cfg: dict,
     return None
 
 
+def iter_collection_handles(fetcher: Fetcher, region_cfg: dict, collection: str,
+                            prefix: str, cfg: dict) -> list[tuple[str, str]]:
+    """Paginate a collection listing, returning (handle, page_html) pairs in
+    first-seen order. page_html is the card markup badge_for_handle reads."""
+    max_pages = int(cfg["http"].get("max_collection_pages", 5))
+    seen: set[str] = set()
+    out: list[tuple[str, str]] = []
+    for page in range(1, max_pages + 1):
+        path = f"/collections/{collection}"
+        if page > 1:
+            path += f"?page={page}"
+        html = fetcher.get(region_url(region_cfg, path, prefix=prefix))
+        if not html:
+            break
+        page_handles = extract_handles(html)
+        fresh = [h for h in page_handles if h not in seen]
+        if not fresh:
+            break
+        for handle in fresh:
+            seen.add(handle)
+            out.append((handle, html))
+        if len(page_handles) < 4:
+            break
+    return out
+
+
+SITEMAP_INDEX_RE = re.compile(r"<loc>(https?://[^<]*sitemap_products[^<]*)</loc>", re.I)
+SITEMAP_PRODUCT_URL_RE = re.compile(
+    r"<loc>https?://[^/]+/products/([a-z0-9][a-z0-9\-_%]{2,120})</loc>", re.I
+)
+
+
+def sitemap_product_handles(fetcher: Fetcher, region_cfg: dict) -> set[str]:
+    """Shopify's XML sitemap lists every published product regardless of
+    collection membership, and Mattel keeps it live-updated — unlike
+    collection pages, which a product may not be added to until launch.
+    Confirmed 2026-08-20: a drop was in the sitemap hours before it appeared
+    in any collection. Best-effort — any failure here just falls back to
+    collection-only discovery, same as before this existed."""
+    base = (os.environ.get("BASE_OVERRIDE") or region_cfg["base"]).rstrip("/")
+    index = fetcher.get(f"{base}/sitemap.xml", quiet=True)
+    if not index:
+        return set()
+    handles: set[str] = set()
+    for sitemap_url in SITEMAP_INDEX_RE.findall(index):
+        xml = fetcher.get(sitemap_url.replace("&amp;", "&"), quiet=True)
+        if xml:
+            handles.update(SITEMAP_PRODUCT_URL_RE.findall(xml))
+    return handles
+
+
+def looks_relevant(handle: str, filters: dict) -> bool:
+    """Cheap pre-filter on handle text alone, before paying for a fetch —
+    the sitemap covers the whole store (apparel, other brands, everything),
+    not just what we track."""
+    if filters.get("mode") == "all":
+        return True
+    norm = handle.replace("-", "").replace("_", "").lower()
+    return any(kw.replace(" ", "").replace("-", "").lower() in norm
+               for kw in filters.get("include_keywords", []))
+
+
+def is_recent(product: dict, days: int = 60) -> bool:
+    """The sitemap's own <lastmod> turned out useless for this — Mattel
+    touches every product's entry on some shared cadence, so a car from
+    2023 and one from this week can carry the same lastmod. published_at /
+    created_at (from the product's own .js, already fetched either way) is
+    the real signal: without it, sitemap discovery would drag in every
+    RLC/Elite64 car ever made that still resolves, sold out or not, forever."""
+    for field in ("published_at", "created_at"):
+        raw = product.get(field)
+        if not raw:
+            continue
+        try:
+            dt = datetime.fromisoformat(raw)
+        except ValueError:
+            continue
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return (datetime.now(timezone.utc) - dt).days <= days
+    return False
+
+
 # --------------------------------------------------------------------------
 # parsing
 # --------------------------------------------------------------------------
@@ -455,9 +538,85 @@ def scan_region(fetcher: Fetcher, name: str, region_cfg: dict,
     filters = cfg["filters"]
     probe_cfg = cfg.get("stock_probe", {})
     watchlist = set(probe_cfg.get("watchlist", []))
-    max_pages = int(cfg["http"].get("max_collection_pages", 5))
     probes_done = 0
     seen_handles: set[str] = set()
+
+    def handle_item(handle: str, prefix: str, html: str,
+                    only_if_recent: bool = False) -> dict | None:
+        """Fetch and classify one product. html is its collection-card
+        markup if we found it via a collection listing, else "" (e.g. a
+        sitemap-only find) — badge_for_handle degrades to 'unknown' either
+        way, and upcoming_drop_from_product_page picks up the slack.
+
+        only_if_recent (sitemap discoveries only): the sitemap covers every
+        product Mattel has ever published, so without this an old,
+        permanently sold-out car would get pulled in and re-checked forever,
+        never having been relevant to begin with. Skip it before paying for
+        the extra countdown-page fetch if it's unavailable and not new."""
+        nonlocal probes_done
+        product = fetcher.get(
+            region_url(region_cfg, f"/products/{handle}.js", prefix=prefix),
+            as_json=True,
+            quiet=True,
+        )
+        if not isinstance(product, dict) or not product.get("title"):
+            return None
+        if not matches_filters(product, filters):
+            return None
+        if only_if_recent and not product.get("available") and not is_recent(product):
+            return None
+
+        badge = badge_for_handle(html, handle) if html else "unknown"
+        status = classify(product, badge)
+
+        # Collection cards never carry Mattel's countdown, so an item that
+        # hasn't launched yet looks identical to one that's dead — both are
+        # just "available: false" with no clear badge. Check the product
+        # page itself before assuming it's sold out for good.
+        human_drop_time = None
+        if status in ("sold_out", "unknown") and not product.get("available"):
+            is_upcoming, human_drop_time = upcoming_drop_from_product_page(
+                fetcher, region_cfg, handle, prefix)
+            if is_upcoming:
+                status = "coming_soon"
+
+        variants = product.get("variants") or []
+        first_available = next(
+            (v for v in variants if v.get("available")), variants[0] if variants else {}
+        )
+
+        key = f"{name}:{handle}"
+        stock = None
+        if (probe_cfg.get("enabled")
+                and status == "in_stock"
+                and key in watchlist
+                and probes_done < int(probe_cfg.get("max_products_per_run", 8))):
+            probes_done += 1
+            time.sleep(float(probe_cfg.get("delay_seconds", 4)))
+            stock = probe_stock(fetcher, region_cfg, first_available.get("id"), probe_cfg)
+
+        return {
+            "key": key,
+            "region": name,
+            "handle": handle,
+            "title": product.get("title", handle),
+            "url": region_url(region_cfg, f"/products/{handle}", prefix=prefix),
+            "price": money(first_available.get("price"), region_cfg.get("currency", "")),
+            "price_cents": first_available.get("price"),
+            "currency": region_cfg.get("currency", ""),
+            "status": status,
+            "status_label": STATUS_LABEL.get(status, status),
+            "badge": badge,
+            "stock": stock,
+            "variant_id": first_available.get("id"),
+            "variant_count": len(variants),
+            "image": (product.get("images") or [None])[0],
+            "tags": product.get("tags") or [],
+            "drop_time": human_drop_time or (extract_drop_time(html, handle) if html else None),
+            "published_at": product.get("published_at"),
+        }
+
+    default_prefix = region_cfg.get("path_prefix", "")
 
     for collection in region_cfg.get("collections", cfg["collections"]):
         prefix = resolve_region_prefix(fetcher, name, region_cfg, collection)
@@ -468,95 +627,34 @@ def scan_region(fetcher: Fetcher, name: str, region_cfg: dict,
             )
             continue
 
-        handles: list[str] = []
-        page_html: dict[str, str] = {}
-        for page in range(1, max_pages + 1):
-            path = f"/collections/{collection}"
-            if page > 1:
-                path += f"?page={page}"
-            html = fetcher.get(region_url(region_cfg, path, prefix=prefix))
-            if not html:
-                break
-            page_handles = extract_handles(html)
-            fresh = [h for h in page_handles if h not in handles]
-            if not fresh:
-                break
-            for handle in fresh:
-                handles.append(handle)
-                page_html[handle] = html
-            if len(page_handles) < 4:
-                break
-
+        handles = list(iter_collection_handles(fetcher, region_cfg, collection, prefix, cfg))
         if not handles:
             warnings.append(f"{name}/{collection}: no product links found on the collection page")
             continue
 
         log(f"  {name}/{collection}: {len(handles)} products linked")
 
-        for handle in handles:
+        for handle, html in handles:
             if handle in seen_handles:
                 continue
             seen_handles.add(handle)
-            product = fetcher.get(
-                region_url(region_cfg, f"/products/{handle}.js", prefix=prefix),
-                as_json=True,
-                quiet=True,
-            )
-            if not isinstance(product, dict) or not product.get("title"):
-                continue
-            if not matches_filters(product, filters):
-                continue
+            item = handle_item(handle, prefix, html)
+            if item:
+                items.append(item)
 
-            html = page_html.get(handle, "")
-            badge = badge_for_handle(html, handle) if html else "unknown"
-            status = classify(product, badge)
-
-            # Collection cards never carry Mattel's countdown, so an item
-            # that hasn't launched yet looks identical to one that's dead —
-            # both are just "available: false" with no clear badge. Check
-            # the product page itself before assuming it's sold out for good.
-            human_drop_time = None
-            if status in ("sold_out", "unknown") and not product.get("available"):
-                is_upcoming, human_drop_time = upcoming_drop_from_product_page(
-                    fetcher, region_cfg, handle, prefix)
-                if is_upcoming:
-                    status = "coming_soon"
-
-            variants = product.get("variants") or []
-            first_available = next(
-                (v for v in variants if v.get("available")), variants[0] if variants else {}
-            )
-
-            key = f"{name}:{handle}"
-            stock = None
-            if (probe_cfg.get("enabled")
-                    and status == "in_stock"
-                    and key in watchlist
-                    and probes_done < int(probe_cfg.get("max_products_per_run", 8))):
-                probes_done += 1
-                time.sleep(float(probe_cfg.get("delay_seconds", 4)))
-                stock = probe_stock(fetcher, region_cfg, first_available.get("id"), probe_cfg)
-
-            items.append({
-                "key": key,
-                "region": name,
-                "handle": handle,
-                "title": product.get("title", handle),
-                "url": region_url(region_cfg, f"/products/{handle}", prefix=prefix),
-                "price": money(first_available.get("price"), region_cfg.get("currency", "")),
-                "price_cents": first_available.get("price"),
-                "currency": region_cfg.get("currency", ""),
-                "status": status,
-                "status_label": STATUS_LABEL.get(status, status),
-                "badge": badge,
-                "stock": stock,
-                "variant_id": first_available.get("id"),
-                "variant_count": len(variants),
-                "image": (product.get("images") or [None])[0],
-                "tags": product.get("tags") or [],
-                "drop_time": human_drop_time or (extract_drop_time(html, handle) if html else None),
-                "published_at": product.get("published_at"),
-            })
+    # A product can have a live, linkable page — with real countdown data —
+    # before Mattel ever adds it to a browsable collection (confirmed
+    # 2026-08-20: the site's XML sitemap listed a drop hours before it
+    # appeared in any collection). The sitemap is real-time and covers the
+    # whole store, so pre-filter by handle text before paying for a fetch.
+    for handle in sitemap_product_handles(fetcher, region_cfg):
+        if handle in seen_handles or not looks_relevant(handle, filters):
+            continue
+        seen_handles.add(handle)
+        item = handle_item(handle, default_prefix, "", only_if_recent=True)
+        if item:
+            items.append(item)
+            log(f"  {name}: found via sitemap, not yet in a collection — {handle}")
 
     return items, warnings
 

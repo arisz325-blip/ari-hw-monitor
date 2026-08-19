@@ -206,7 +206,7 @@ def main() -> int:
         cfg["stock_probe"].update(enabled=False, watchlist=[])
         cfg_path.write_text(json.dumps(cfg))
 
-        print("\nRun 8 — per-region collections + cross-collection de-dup")
+        print("\nRun 8 — per-region collections + cross-collection de-dup + sitemap fallback")
         overlap_catalog = {
             "hot-wheels-rlc-car-a": {
                 "title": "Hot Wheels RLC Car A", "available": True,
@@ -238,15 +238,18 @@ def main() -> int:
         overlap_cfg["stock_probe"].update(enabled=False, watchlist=[])
         (overlap_dir / "config.json").write_text(json.dumps(overlap_cfg))
 
-        out = run_checker(overlap_dir, base_url, ["--self-test"])
-        report = json.loads(out[out.index("{"):])
+        persist_state(overlap_dir, base_url)
+        data = json.loads((overlap_dir / "docs" / "data.json").read_text())
+        us_handles = {r["handle"] for r in data["items"] if r["key"].startswith("US:")}
+        au_handles = {r["handle"] for r in data["items"] if r["key"].startswith("AU:")}
+        all_three = {"hot-wheels-rlc-car-a", "hot-wheels-rlc-car-b", "hot-wheels-rlc-car-c"}
 
-        # US scans hot-wheels + cars-vehicles (3 unique cars); AU is
-        # configured to only scan hot-wheels (2 cars) — 5 total, not 6.
-        check("car seen in two collections is only counted once per region",
-              report["products_found"] == 5, f"{report['products_found']}")
-        check("AU's collections override kept it off cars-vehicles",
-              report["warnings"] == [], f"{report['warnings']}")
+        check("US de-dupes a car listed in two collections (3 unique, not 4)",
+              us_handles == all_three, f"{us_handles}")
+        check("AU's collections override kept it off the (nonexistent) cars-vehicles collection",
+              data["warnings"] == [], f"{data['warnings']}")
+        check("AU still finds car-c via the sitemap despite no cars-vehicles collection there",
+              au_handles == all_three, f"{au_handles}")
 
         print("\nRun 9 — sold-out watchlist entries are auto-removed")
         mock_store.set_collections({})  # back to the Run 8 overrides' default
@@ -340,6 +343,54 @@ def main() -> int:
         check("no countdown block at all still reads as sold_out",
               by_handle.get("hot-wheels-rlc-no-countdown", {}).get("status") == "sold_out",
               f"{by_handle.get('hot-wheels-rlc-no-countdown')}")
+
+        print("\nRun 11 — sitemap discovers cars no collection lists yet")
+        sitemap_catalog = {
+            "hot-wheels-rlc-listed": {
+                "title": "Hot Wheels RLC Listed Car", "available": True,
+                "badge": "Add to Cart", "tags": ["RLC"],
+            },
+            "hot-wheels-rlc-unlisted": {
+                "title": "Hot Wheels RLC Unlisted Car", "available": True,
+                "badge": "Add to Cart", "tags": ["RLC"],
+            },
+            "mega-blocks-irrelevant": {
+                "title": "MEGA Blocks Something Irrelevant", "available": True,
+                "badge": "Add to Cart", "tags": [],
+            },
+            "hot-wheels-rlc-ancient": {
+                "title": "Hot Wheels RLC Ancient Discontinued Car", "available": False,
+                "badge": "Sold Out", "tags": ["RLC"], "published_at": "2020-01-01T00:00:00Z",
+            },
+        }
+        mock_store.set_catalog(sitemap_catalog)
+        # Only the "listed" car is on the collection card; "unlisted" and
+        # "irrelevant" exist (reachable by direct URL, in the sitemap) but
+        # aren't in any collection listing — exactly today's real bug.
+        mock_store.set_collections({"hot-wheels": ["hot-wheels-rlc-listed"]})
+
+        sitemap_dir = Path(tmp) / "sitemap"
+        sitemap_dir.mkdir()
+        (sitemap_dir / "checker.py").write_bytes((ROOT / "checker.py").read_bytes())
+        (sitemap_dir / "docs").mkdir()
+        sm_cfg = json.loads((ROOT / "config.json").read_text())
+        sm_cfg["collections"] = ["hot-wheels"]
+        sm_cfg["regions"]["AU"]["collections"] = ["hot-wheels"]
+        sm_cfg["stock_probe"].update(enabled=False, watchlist=[])
+        (sitemap_dir / "config.json").write_text(json.dumps(sm_cfg))
+
+        persist_state(sitemap_dir, base_url)
+        data = json.loads((sitemap_dir / "docs" / "data.json").read_text())
+        handles_found = {r["handle"] for r in data["items"]}
+
+        check("collection-listed car is tracked",
+              "hot-wheels-rlc-listed" in handles_found, f"{handles_found}")
+        check("an old, unavailable, sitemap-only car is not dragged in forever",
+              "hot-wheels-rlc-ancient" not in handles_found, f"{handles_found}")
+        check("sitemap-only car (in no collection) is discovered anyway",
+              "hot-wheels-rlc-unlisted" in handles_found, f"{handles_found}")
+        check("irrelevant sitemap product is pre-filtered out before a fetch",
+              "mega-blocks-irrelevant" not in handles_found, f"{handles_found}")
 
     server.shutdown()
     print(f"\n{'='*60}")
