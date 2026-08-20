@@ -25,7 +25,13 @@ jobs:
     timeout-minutes: 25
 
     steps:
+      # Fetch the branch fresh rather than pinning to the commit that existed
+      # when this run was triggered — this run can queue behind
+      # watchlist-check.yml (same concurrency group), so by the time it
+      # actually starts, origin may have moved.
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - uses: actions/setup-python@v5
         with:
@@ -93,6 +99,10 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "stock check $(date -u '+%Y-%m-%d %H:%M UTC')"
-            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
-            git push
+            if git pull --rebase --autostash origin "${GITHUB_REF_NAME}"; then
+              git push
+            else
+              git rebase --abort || true
+              echo "::warning::Skipped commit — origin moved under us; will retry next run."
+            fi
           fi

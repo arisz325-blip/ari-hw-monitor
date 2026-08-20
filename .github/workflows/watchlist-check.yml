@@ -27,7 +27,15 @@ jobs:
     timeout-minutes: 10
 
     steps:
+      # This run may sit queued behind check.yml (same concurrency group,
+      # and that one can take ~15-20 min) before it actually starts. A plain
+      # checkout pins to the commit that existed when this run was
+      # *triggered*, not when it *starts* — explicitly fetching the branch
+      # here instead gets whatever's current by the time we actually run,
+      # which is what avoids racing check.yml's own commit below.
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
 
       - uses: actions/setup-python@v5
         with:
@@ -56,6 +64,14 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "watchlist check $(date -u '+%Y-%m-%d %H:%M UTC')"
-            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
-            git push
+            # Belt and braces on top of the fresh checkout above: if this
+            # still collides with a concurrent push, don't fail the whole
+            # run over one skipped commit — the next 5-minute run (or the
+            # full hourly scan) will pick up the same data again shortly.
+            if git pull --rebase --autostash origin "${GITHUB_REF_NAME}"; then
+              git push
+            else
+              git rebase --abort || true
+              echo "::warning::Skipped commit — origin moved under us; will retry next run."
+            fi
           fi
