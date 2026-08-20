@@ -944,15 +944,29 @@ def run(args: argparse.Namespace) -> int:
 
 def watchlist_check() -> int:
     """Lightweight poll for the watchlist only: one .js fetch per item, no
-    collection scan, no sitemap, no countdown-page fetch. Meant to run every
-    few minutes so a restock isn't missed for up to an hour, without the
-    request volume of a full scan (which is what the hourly run is for).
+    collection scan, no sitemap. Meant to run every few minutes so a
+    restock isn't missed for up to an hour, without the request volume of a
+    full scan (which is what the hourly run is for).
 
-    Only detects a car *becoming* available. Going the other way (sells
-    out) is left to the full scan, which already tracks sell-out duration
-    correctly via became_available_at/sold_out_at in diff() — handling that
-    transition here too would race it and could double-count or clobber
-    that bookkeeping.
+    Detects a car *becoming* available immediately. Going the other way
+    (sells out after having been in_stock) is left to the full scan, which
+    already tracks sell-out duration correctly via
+    became_available_at/sold_out_at in diff() — handling that transition
+    here too would race it and could double-count or clobber that
+    bookkeeping.
+
+    For a still-unavailable item, this also re-checks whether its
+    countdown is still genuinely in the future (one more request, only
+    when needed) and downgrades coming_soon -> sold_out once it's lapsed.
+    Without this, a stale coming_soon just sits there getting its
+    last_seen refreshed every 5 minutes with nothing actually re-verified
+    — exactly the item this list exists to watch closely, showing the
+    least accurate status of anything tracked. Confirmed live 2026-08-20:
+    the AU Mercedes G63's countdown text read 20 Aug 9am AEST, that time
+    came and went with the car still not actually on sale, and it sat
+    reading coming_soon for hours until the next full scan happened to
+    catch it — this closes that gap on the same ~5-minute cadence as the
+    restock check.
     """
     cfg = load_config()
     watchlist = cfg.get("stock_probe", {}).get("watchlist", [])
@@ -981,17 +995,29 @@ def watchlist_check() -> int:
         record["last_seen"] = stamp
         checked.append({"key": key})
 
-        if product.get("available") and record.get("status") != "in_stock":
-            record["status"] = "in_stock"
-            record["status_label"] = STATUS_LABEL["in_stock"]
-            record["became_available_at"] = stamp
-            record.pop("sold_out_at", None)
-            log(f"  watchlist: {key} just became available")
-            if cfg.get("notify", {}).get("restock", True):
-                events.append({
-                    "type": "restock", "item": dict(record, key=key),
-                    "detail": "Now live",
-                })
+        if product.get("available"):
+            if record.get("status") != "in_stock":
+                record["status"] = "in_stock"
+                record["status_label"] = STATUS_LABEL["in_stock"]
+                record["became_available_at"] = stamp
+                record.pop("sold_out_at", None)
+                log(f"  watchlist: {key} just became available")
+                if cfg.get("notify", {}).get("restock", True):
+                    events.append({
+                        "type": "restock", "item": dict(record, key=key),
+                        "detail": "Now live",
+                    })
+        elif record.get("status") in ("sold_out", "coming_soon", "unknown"):
+            prefix = region_cfg.get("path_prefix", "")
+            is_upcoming, drop_iso = upcoming_drop_from_product_page(fetcher, region_cfg, handle, prefix)
+            new_status = "coming_soon" if is_upcoming else "sold_out"
+            if new_status != record.get("status"):
+                log(f"  watchlist: {key} status {record.get('status')} -> {new_status}"
+                    f" (countdown {'still future' if is_upcoming else 'has lapsed'})")
+                record["status"] = new_status
+                record["status_label"] = STATUS_LABEL[new_status]
+            if is_upcoming:
+                record["drop_time"] = drop_iso
 
     if not checked:
         log("  watchlist check: no items had a baseline to compare against yet")

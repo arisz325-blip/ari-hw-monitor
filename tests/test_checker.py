@@ -462,6 +462,45 @@ def main() -> int:
         check("watchlist-check leaves a non-watchlisted car alone, even though it also restocked",
               unwatched.get("status") == "sold_out", f"{unwatched}")
 
+        print("\nRun 13 — watchlist-check downgrades a lapsed countdown")
+        lapsed_catalog = {
+            "hot-wheels-rlc-lapsed": {
+                "title": "Hot Wheels RLC Lapsed Car", "available": False,
+                "badge": "Details", "tags": ["RLC"], "launches": future,
+            },
+        }
+        mock_store.set_catalog(lapsed_catalog)
+        mock_store.set_collections({})
+
+        lapsed_dir = Path(tmp) / "lapsed"
+        lapsed_dir.mkdir()
+        (lapsed_dir / "checker.py").write_bytes((ROOT / "checker.py").read_bytes())
+        (lapsed_dir / "docs").mkdir()
+        lapsed_cfg = json.loads((ROOT / "config.json").read_text())
+        lapsed_cfg["collections"] = ["hot-wheels"]
+        lapsed_cfg["regions"]["AU"]["collections"] = ["hot-wheels"]
+        lapsed_cfg["stock_probe"].update(enabled=False, watchlist=["US:hot-wheels-rlc-lapsed"])
+        (lapsed_dir / "config.json").write_text(json.dumps(lapsed_cfg))
+
+        persist_state(lapsed_dir, base_url)  # baseline: countdown genuinely in the future
+        seeded = json.loads((lapsed_dir / "state.json").read_text())
+        check("baseline run recorded the lapsed-to-be car as coming_soon",
+              seeded["items"].get("US:hot-wheels-rlc-lapsed", {}).get("status") == "coming_soon",
+              f"{seeded['items'].get('US:hot-wheels-rlc-lapsed')}")
+
+        # Same as reality: the car is still not available, but its own
+        # countdown time has now passed — Mattel didn't flip it live on
+        # schedule. watchlist-check should catch this on its own, without
+        # waiting for the next full scan.
+        lapsed_catalog["hot-wheels-rlc-lapsed"]["launches"] = "January 1, 2020 9:00 am PT"
+        mock_store.set_catalog(lapsed_catalog)
+        run_watchlist_check(lapsed_dir, base_url)
+
+        downgraded = json.loads((lapsed_dir / "state.json").read_text())["items"].get(
+            "US:hot-wheels-rlc-lapsed", {})
+        check("watchlist-check downgrades it to sold_out once the countdown lapses",
+              downgraded.get("status") == "sold_out", f"{downgraded}")
+
     server.shutdown()
     print(f"\n{'='*60}")
     if FAILURES:

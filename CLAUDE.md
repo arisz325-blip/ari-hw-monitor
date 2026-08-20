@@ -184,12 +184,24 @@ everything and deliberately sends no alerts.
    As of 2026-08-20 there's also `checker.py --watchlist-check`
    (`watchlist_check()`), run by `.github/workflows/watchlist-check.yml`
    every ~5 minutes (shares `check.yml`'s concurrency group on purpose, so
-   they queue instead of racing on state.json) — one `.js` fetch per
-   watchlisted item, no collection scan, no sitemap, no countdown fetch.
-   It only detects a car *becoming* available; going the other way is left
-   to the full hourly scan, which already tracks sell-out duration
-   correctly and would conflict with this path if both touched it. A
-   watchlist entry needs a baseline in `state.json` before this does
+   they queue instead of racing on state.json — see the checkout `ref:`
+   fix in both workflows, needed because a queued run's checkout otherwise
+   pins to the stale commit from when it was *triggered*, not when it
+   *starts*, which caused one real "Commit results" failure). One `.js`
+   fetch per watchlisted item, no collection scan, no sitemap.
+   It detects a car *becoming* available immediately. Going the other way
+   after actually being in_stock is left to the full hourly scan, which
+   already tracks sell-out duration correctly and would conflict with this
+   path if both touched it. But for a still-unavailable item, it *does*
+   re-run the countdown check (`upcoming_drop_from_product_page`) and
+   downgrades `coming_soon` -> `sold_out` once the drop time has passed —
+   added 2026-08-20 after the AU Mercedes G63's countdown lapsed (said 20
+   Aug 9am AEST, still not on sale hours later) and sat reading
+   `coming_soon` for hours, only getting `last_seen` refreshed every 5 min
+   with nothing actually re-verified, until the next full scan happened to
+   catch it. Without that re-check, the watchlist — the thing meant to be
+   the *most* current — was silently the most stale.
+   A watchlist entry needs a baseline in `state.json` before this does
    anything with it — the full scan has to see it at least once first. And
    it interacts with the sold_out auto-clean-up above: a watchlisted car
    that reads `sold_out` gets removed from the watchlist, which is right
