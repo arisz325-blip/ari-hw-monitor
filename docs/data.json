@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-20T14:48:30+00:00",
-  "started_at": "2026-08-20T14:31:33+00:00",
+  "generated_at": "2026-08-20T14:57:34+00:00",
+  "started_at": "2026-08-20T14:57:34+00:00",
   "counts": {
     "total": 63,
     "in_stock": 32,
@@ -280,7 +280,7 @@
       "url": "https://au.creations.mattel.com/products/1-year-rlc-digital-membership?country=AU",
       "variant_id": 47045025562847,
       "key": "AU:1-year-rlc-digital-membership",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-20T01:16:33+00:00",
@@ -313,7 +313,7 @@
       "url": "https://creations.mattel.com/products/elite-64-premium-cars",
       "variant_id": 48605828841677,
       "key": "US:elite-64-premium-cars",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -352,7 +352,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-collectors-rlc-exclusive-71-amc-javelin-amx?country=AU",
       "variant_id": 48403118883039,
       "key": "AU:hot-wheels-collectors-rlc-exclusive-71-amc-javelin-amx",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -392,7 +392,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-1975-bmw-30-csl-race-jcp42",
       "variant_id": 48474152468685,
       "key": "US:hot-wheels-elite-64-1975-bmw-30-csl-race-jcp42",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -432,7 +432,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-elite-64-bmw-m3-touring?country=AU",
       "variant_id": 47189892530399,
       "key": "AU:hot-wheels-elite-64-bmw-m3-touring",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -476,7 +476,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite64-bmw-m3-touring-hwr93",
       "variant_id": 48348030042317,
       "key": "US:hot-wheels-elite64-bmw-m3-touring-hwr93",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -511,7 +511,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-mazda-rx-7-liberty-walk-jcp43",
       "variant_id": 48605828841677,
       "key": "US:hot-wheels-elite-64-mazda-rx-7-liberty-walk-jcp43",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -553,7 +553,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-mclaren-m6gt-hwg05",
       "variant_id": 48072603828429,
       "key": "US:hot-wheels-elite-64-mclaren-m6gt-hwg05",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -590,7 +590,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-mercedes-benz-300-sl-jnf05",
       "variant_id": 48548066787533,
       "key": "US:hot-wheels-elite-64-mercedes-benz-300-sl-jnf05",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T23:27:29+00:00",
@@ -629,7 +629,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-elite-64-mercedes-benz-g-63-amg-6x6-262626?country=AU",
       "variant_id": 51211181490399,
       "key": "AU:hot-wheels-elite-64-mercedes-benz-g-63-amg-6x6-262626",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -670,7 +670,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-elite-64-mod-shop-1982-custom-toyota-land-cruiser-fj45-troopy?country=AU",
       "variant_id": 47232425132255,
       "key": "AU:hot-wheels-elite-64-mod-shop-1982-custom-toyota-land-cruiser-fj45-troopy",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -706,7 +706,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-mod-shop-nissan-stagea-hwr92",
       "variant_id": 48583919730893,
       "key": "US:hot-wheels-elite-64-mod-shop-nissan-stagea-hwr92",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -745,7 +745,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-elite-64-mod-shop-24-jeep-gladiator?country=AU",
       "variant_id": 48403118817503,
       "key": "AU:hot-wheels-elite-64-mod-shop-24-jeep-gladiator",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -781,7 +781,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite64-mod-shop-24-jeep-gladiator-hwr96",
       "variant_id": 48528385474765,
       "key": "US:hot-wheels-elite64-mod-shop-24-jeep-gladiator-hwr96",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -824,7 +824,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-porsche-963-jcp46",
       "variant_id": 48435164610765,
       "key": "US:hot-wheels-elite-64-porsche-963-jcp46",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -863,7 +863,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-rlc-exclusive-1962-ford-f-100-541423?country=AU",
       "variant_id": 49610025205983,
       "key": "AU:hot-wheels-rlc-exclusive-1962-ford-f-100-541423",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -902,7 +902,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-rlc-exclusive-1985-audi-sport-quattro-s1-87492678954?country=AU",
       "variant_id": 50512676487391,
       "key": "AU:hot-wheels-rlc-exclusive-1985-audi-sport-quattro-s1-87492678954",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -940,7 +940,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-exclusive-1985-audi-sport-quattro-s1-jjy70",
       "variant_id": 48586602283213,
       "key": "US:hot-wheels-rlc-exclusive-1985-audi-sport-quattro-s1-jjy70",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -980,7 +980,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-rlc-exclusive-1986-nissan-720-king-cab-978456879476?country=AU",
       "variant_id": 50512542957791,
       "key": "AU:hot-wheels-rlc-exclusive-1986-nissan-720-king-cab-978456879476",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1017,7 +1017,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-exclusive-1986-c-nissan-720-king-cab-jjy64",
       "variant_id": 48578497216717,
       "key": "US:hot-wheels-rlc-exclusive-1986-c-nissan-720-king-cab-jjy64",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1055,7 +1055,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-1991-bmw-m3-jjy68",
       "variant_id": 48554572218573,
       "key": "US:rlc-exclusive-1991-bmw-m3-jjy68",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1097,7 +1097,7 @@
       "url": "https://creations.mattel.com/products/red-line-club-exclusive-2025-hot-wheels-super-treasure-hunt-set-jcp51",
       "variant_id": 48518760071373,
       "key": "US:red-line-club-exclusive-2025-hot-wheels-super-treasure-hunt-set-jcp51",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1136,7 +1136,7 @@
       "url": "https://creations.mattel.com/products/rlc-1965-shelby-cobra-427-sc-jjy67",
       "variant_id": 48534819864781,
       "key": "US:rlc-1965-shelby-cobra-427-sc-jjy67",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1176,7 +1176,7 @@
       "url": "https://creations.mattel.com/products/red-line-club-exclusive-21-pagani-huayra-r-jcp22",
       "variant_id": 48519348682957,
       "key": "US:red-line-club-exclusive-21-pagani-huayra-r-jcp22",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1213,7 +1213,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-71-amc-javelin-amx-jjy58",
       "variant_id": 48536757764301,
       "key": "US:rlc-exclusive-71-amc-javelin-amx-jjy58",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1253,7 +1253,7 @@
       "url": "https://creations.mattel.com/products/red-line-club-exclusive-71-datsun-510-jjy57",
       "variant_id": 48519349436621,
       "key": "US:red-line-club-exclusive-71-datsun-510-jjy57",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1295,7 +1295,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-81-toyota-sr5-4wd-jcp20",
       "variant_id": 48428019581133,
       "key": "US:rlc-exclusive-81-toyota-sr5-4wd-jcp20",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1333,7 +1333,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-98-subaru-impreza-wrx-sti-jjy62",
       "variant_id": 48550986186957,
       "key": "US:rlc-exclusive-98-subaru-impreza-wrx-sti-jjy62",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-20T01:16:33+00:00",
@@ -1374,7 +1374,7 @@
       "url": "https://creations.mattel.com/products/1-year-rlc-digital-membership-hnb06",
       "variant_id": 40653613531341,
       "key": "US:1-year-rlc-digital-membership-hnb06",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -1417,7 +1417,7 @@
       "url": "https://au.creations.mattel.com/products/rlc-exclusive-1964-jaguar-e-type-r?country=AU",
       "variant_id": 50570179346655,
       "key": "AU:rlc-exclusive-1964-jaguar-e-type-r",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -1457,7 +1457,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-rlc-exclusive-1990-chevy-454-ss?country=AU",
       "variant_id": 47098942685407,
       "key": "AU:hot-wheels-rlc-exclusive-1990-chevy-454-ss",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -1498,7 +1498,7 @@
       "url": "https://au.creations.mattel.com/products/rlc-exclusive-1992-gmc-typhoon?country=AU",
       "variant_id": 47189892694239,
       "key": "AU:rlc-exclusive-1992-gmc-typhoon",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -1532,7 +1532,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-mercedes-benz-g-63-amg-6x6-jcp45",
       "variant_id": 48614267781325,
       "key": "US:hot-wheels-elite-64-mercedes-benz-g-63-amg-6x6-jcp45",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -1547,7 +1547,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/r9lvvkzgqdvv8fu0s6sj.jpg?v=1786126968",
-      "last_seen": "2026-08-20T14:48:30+00:00",
+      "last_seen": "2026-08-20T14:57:31+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-08-14T14:45:25-05:00",
@@ -1607,7 +1607,7 @@
       "url": "https://creations.mattel.com/products/hwc-special-edition-32-ford-glh85",
       "variant_id": 39850868506829,
       "key": "US:hwc-special-edition-32-ford-glh85",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -1642,7 +1642,7 @@
       "url": "https://creations.mattel.com/products/hwc-special-edition-64-impala-glh86",
       "variant_id": 39850869653709,
       "key": "US:hwc-special-edition-64-impala-glh86",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -1678,7 +1678,7 @@
       "url": "https://creations.mattel.com/products/hwc-special-editions-55-mercedes-benz-300-sl-gxj24",
       "variant_id": 39850868900045,
       "key": "US:hwc-special-editions-55-mercedes-benz-300-sl-gxj24",
-      "present": true
+      "present": false
     },
     {
       "currency": "AUD",
@@ -1715,7 +1715,7 @@
       "url": "https://au.creations.mattel.com/products/mc-hot-wheels-collectors-elite-64-lbwk-lamborghini-aventador-lp-700-4?country=AU",
       "variant_id": 49635538698463,
       "key": "AU:mc-hot-wheels-collectors-elite-64-lbwk-lamborghini-aventador-lp-700-4",
-      "present": true
+      "present": false
     },
     {
       "currency": "AUD",
@@ -1753,7 +1753,7 @@
       "url": "https://au.creations.mattel.com/products/mattel-creations-hot-wheels-collectors-elite-64-mazda-rx-7-liberty-walk?country=AU",
       "variant_id": 50588270297311,
       "key": "AU:mattel-creations-hot-wheels-collectors-elite-64-mazda-rx-7-liberty-walk",
-      "present": true
+      "present": false
     },
     {
       "currency": "AUD",
@@ -1877,7 +1877,7 @@
       "url": "https://au.creations.mattel.com/products/mattel-creations-hot-wheels-elite-64-mod-shop-nissan-stagea?country=AU",
       "variant_id": 50383921938655,
       "key": "AU:mattel-creations-hot-wheels-elite-64-mod-shop-nissan-stagea",
-      "present": true
+      "present": false
     },
     {
       "currency": "AUD",
@@ -1915,7 +1915,7 @@
       "url": "https://au.creations.mattel.com/products/mattel-creations-hot-wheels-elite-64-porsche-911-gt2-evo-993?country=AU",
       "variant_id": 49109756182751,
       "key": "AU:mattel-creations-hot-wheels-elite-64-porsche-911-gt2-evo-993",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -1955,7 +1955,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59",
       "variant_id": 48612349673677,
       "key": "US:hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -1993,7 +1993,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-1944-willys-mb-gxj27",
       "variant_id": 40331458969805,
       "key": "US:rlc-exclusive-1944-willys-mb-gxj27",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2030,7 +2030,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-volkswagen-golf-jjy63",
       "variant_id": 48575676383437,
       "key": "US:rlc-exclusive-volkswagen-golf-jjy63",
-      "present": true
+      "present": false
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -2123,7 +2123,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-2006-bmw-m3-glh84",
       "variant_id": 39850869063885,
       "key": "US:rlc-exclusive-2006-bmw-m3-glh84",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2161,7 +2161,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-2020-super-treasure-hunt-set-glh99",
       "variant_id": 39850869227725,
       "key": "US:rlc-exclusive-2020-super-treasure-hunt-set-glh99",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2197,7 +2197,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-custom-mustang",
       "variant_id": 39850868146381,
       "key": "US:rlc-exclusive-custom-mustang",
-      "present": true
+      "present": false
     },
     {
       "currency": "AUD",
@@ -2237,7 +2237,7 @@
       "url": "https://au.creations.mattel.com/products/mattel-creations-hot-wheels-rlc-exclusive-ferrari-f40?country=AU",
       "variant_id": 51154648989919,
       "key": "AU:mattel-creations-hot-wheels-rlc-exclusive-ferrari-f40",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2276,7 +2276,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-exclusive-ferrari-f40-jjy72",
       "variant_id": 48605828907213,
       "key": "US:hot-wheels-rlc-exclusive-ferrari-f40-jjy72",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2314,7 +2314,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-holiday-64-impala",
       "variant_id": 40378095337677,
       "key": "US:rlc-exclusive-holiday-64-impala",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2360,7 +2360,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-real-riders-wheels-pack-set-3-hgk89",
       "variant_id": 40922089554125,
       "key": "US:rlc-exclusive-real-riders-wheels-pack-set-3-hgk89",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2404,7 +2404,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-real-riders-wheels-pack-set-4-hgk90",
       "variant_id": 41030438224077,
       "key": "US:rlc-exclusive-real-riders-wheels-pack-set-4-hgk90",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2442,7 +2442,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-tv-series-batmobile-hck30",
       "variant_id": 40277800845517,
       "key": "US:rlc-exclusive-tv-series-batmobile-hck30",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2480,7 +2480,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-volkswagen-drag-bus-glh95",
       "variant_id": 39850869129421,
       "key": "US:rlc-exclusive-volkswagen-drag-bus-glh95",
-      "present": true
+      "present": false
     },
     {
       "currency": "AUD",
@@ -2522,7 +2522,7 @@
       "url": "https://au.creations.mattel.com/products/mattel-creations-hot-wheels-rlc-exclusive-21-ford-bronco-with-chase-version?country=AU",
       "variant_id": 50588318335199,
       "key": "AU:mattel-creations-hot-wheels-rlc-exclusive-21-ford-bronco-with-chase-version",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2559,7 +2559,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-exclusive-21-ford-bronco-with-chase-version-jjy74",
       "variant_id": 48600636948685,
       "key": "US:hot-wheels-rlc-exclusive-21-ford-bronco-with-chase-version-jjy74",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2596,7 +2596,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-66-super-nova-gxj07",
       "variant_id": 39850868605133,
       "key": "US:rlc-exclusive-66-super-nova-gxj07",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2634,7 +2634,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-69-chevrolet-camaro-ss-gxj16",
       "variant_id": 40195342827725,
       "key": "US:rlc-exclusive-69-chevrolet-camaro-ss-gxj16",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2671,7 +2671,7 @@
       "url": "https://creations.mattel.com/products/rlc-selections-41-willys-gasser-glh88",
       "variant_id": 39850869293261,
       "key": "US:rlc-selections-41-willys-gasser-glh88",
-      "present": true
+      "present": false
     },
     {
       "currency": "USD",
@@ -2707,7 +2707,7 @@
       "url": "https://creations.mattel.com/products/rlc-selections-82-lamborghini-countach-lp500-s-hgw25",
       "variant_id": 40889119965389,
       "key": "US:rlc-selections-82-lamborghini-countach-lp500-s-hgw25",
-      "present": true
+      "present": false
     }
   ]
 }
