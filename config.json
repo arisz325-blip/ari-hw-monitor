@@ -15,10 +15,15 @@
         "country": "AU"
       },
       "currency": "AUD",
-      "collections": ["hot-wheels"]
+      "collections": [
+        "hot-wheels"
+      ]
     }
   },
-  "collections": ["hot-wheels", "cars-vehicles"],
+  "collections": [
+    "hot-wheels",
+    "cars-vehicles"
+  ],
   "filters": {
     "mode": "collector",
     "include_keywords": [
@@ -59,6 +64,7 @@
     "max_products_per_run": 8,
     "probe_quantity": 99999,
     "watchlist": [
+      "AU:mattel-creations-hot-wheels-elite-64-mercedes-benz-g-63-amg-6x6",
       "US:hot-wheels-rlc-exclusive-1989-nissan-skyline-r32-jjy54"
     ]
   },
