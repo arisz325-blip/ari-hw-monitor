@@ -70,6 +70,13 @@
     font: inherit; font-size: 13px; padding: 7px 12px; cursor: pointer; min-height: 36px;
   }
   .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+
+  .toggle-btn {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px;
+    color: var(--text-secondary); font: inherit; font-size: 13px; padding: 7px 12px;
+    min-height: 36px; cursor: pointer;
+  }
+  .toggle-btn[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
   input[type="search"] {
     flex: 1 1 150px; min-width: 130px; min-height: 36px;
     background: var(--surface-1); border: 1px solid var(--border);
@@ -182,6 +189,7 @@
       <button data-status="upcoming" aria-pressed="false">Upcoming</button>
     </div>
     <input type="search" id="q" placeholder="Search cars…" aria-label="Search cars">
+    <button id="watching-filter" class="toggle-btn" aria-pressed="false">★ Watching only</button>
     <div class="seg" role="group" aria-label="View">
       <button data-view="cards" aria-pressed="true">Cards</button>
       <button data-view="table" aria-pressed="false">Table</button>
@@ -218,7 +226,7 @@ const EVENT_ICON = {
 };
 
 let DATA = null;
-const filters = { region: "all", status: "all", view: "cards", q: "" };
+const filters = { region: "all", status: "all", view: "cards", q: "", watching: false };
 const WORKER_URL = "https://hw-watchlist-worker.arisz325.workers.dev";
 const watchBusy = new Set(); // keys currently mid-toggle, so double-clicks no-op
 
@@ -299,6 +307,7 @@ function visible() {
     if (filters.status === "in_stock" && it.status !== "in_stock") return false;
     if (filters.status === "upcoming" && !["preorder", "coming_soon"].includes(it.status)) return false;
     if (filters.q && !(it.title || "").toLowerCase().includes(filters.q)) return false;
+    if (filters.watching && !(DATA.watchlist || []).includes(it.key)) return false;
     return true;
   });
 }
@@ -402,6 +411,11 @@ document.querySelectorAll(".seg button").forEach(btn => {
 });
 document.getElementById("q").addEventListener("input", e => {
   filters.q = e.target.value.trim().toLowerCase();
+  render();
+});
+document.getElementById("watching-filter").addEventListener("click", e => {
+  filters.watching = !filters.watching;
+  e.target.setAttribute("aria-pressed", String(filters.watching));
   render();
 });
 
