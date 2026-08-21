@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-21T17:21:36+00:00",
-  "started_at": "2026-08-21T17:21:36+00:00",
+  "generated_at": "2026-08-21T17:41:39+00:00",
+  "started_at": "2026-08-21T17:24:22+00:00",
   "counts": {
     "total": 64,
     "in_stock": 34,
@@ -287,7 +287,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HW_RLC_MembershipCard.webp?v=1750380596",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "16.00 AUD",
       "price_cents": 1600,
       "published_at": "2025-06-11T06:29:49+10:00",
@@ -314,7 +314,7 @@
       "url": "https://au.creations.mattel.com/products/1-year-rlc-digital-membership?country=AU",
       "variant_id": 47045025562847,
       "key": "AU:1-year-rlc-digital-membership",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-20T01:16:33+00:00",
@@ -330,7 +330,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HWC_PDP_JCP43_PS_26_0090.jpg?v=1787007374",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "22.00 USD",
       "price_cents": 2200,
       "published_at": "2025-08-06T13:32:19-05:00",
@@ -347,7 +347,7 @@
       "url": "https://creations.mattel.com/products/elite-64-premium-cars",
       "variant_id": 48605828841677,
       "key": "US:elite-64-premium-cars",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -363,7 +363,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JJY58_PS_25_084.jpg?v=1774225976",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "39.99 AUD",
       "price_cents": 3999,
       "published_at": "2026-03-28T09:50:59+11:00",
@@ -386,7 +386,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-collectors-rlc-exclusive-71-amc-javelin-amx?country=AU",
       "variant_id": 48403118883039,
       "key": "AU:hot-wheels-collectors-rlc-exclusive-71-amc-javelin-amx",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -402,7 +402,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ec8jgkvbkvq9z3il0hos.jpg?v=1763511684",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "22.00 USD",
       "price_cents": 2200,
       "published_at": "2025-11-05T12:24:56-06:00",
@@ -426,7 +426,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-1975-bmw-30-csl-race-jcp42",
       "variant_id": 48474152468685,
       "key": "US:hot-wheels-elite-64-1975-bmw-30-csl-race-jcp42",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -442,7 +442,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_HWR93_PS_25_0051.jpg?v=1754280441",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "29.99 AUD",
       "price_cents": 2999,
       "published_at": "2026-08-18T08:57:21+10:00",
@@ -466,7 +466,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-elite-64-bmw-m3-touring?country=AU",
       "variant_id": 47189892530399,
       "key": "AU:hot-wheels-elite-64-bmw-m3-touring",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -482,7 +482,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/fkxa4jbjomzzacmw8l6e_66bb1374-0510-458f-8fe8-13e4a87a0bcc.jpg?v=1763508438",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "11.00 USD",
       "price_cents": 1100,
       "published_at": "2025-08-06T15:21:03-05:00",
@@ -510,7 +510,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite64-bmw-m3-touring-hwr93",
       "variant_id": 48348030042317,
       "key": "US:hot-wheels-elite64-bmw-m3-touring-hwr93",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -526,7 +526,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HWC_PDP_JCP43_PS_26_0090.jpg?v=1787007374",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "22.00 USD",
       "price_cents": 2200,
       "published_at": "2026-07-29T16:26:37-05:00",
@@ -546,7 +546,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-mazda-rx-7-liberty-walk-jcp43",
       "variant_id": 48605828841677,
       "key": "US:hot-wheels-elite-64-mazda-rx-7-liberty-walk-jcp43",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -562,7 +562,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ng2jq8wf4eczmzduowpo_ccff4a96-79be-4791-94d7-c5c4b433f090.jpg?v=1763509314",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "20.00 USD",
       "price_cents": 2000,
       "published_at": "2025-01-17T13:36:23-06:00",
@@ -588,7 +588,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-mclaren-m6gt-hwg05",
       "variant_id": 48072603828429,
       "key": "US:hot-wheels-elite-64-mclaren-m6gt-hwg05",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -604,7 +604,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/tquxb3gl1jeh1fbmbroo.jpg?v=1775080852",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "22.00 USD",
       "price_cents": 2200,
       "published_at": "2026-04-08T13:45:08-05:00",
@@ -625,7 +625,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-mercedes-benz-300-sl-jnf05",
       "variant_id": 48548066787533,
       "key": "US:hot-wheels-elite-64-mercedes-benz-300-sl-jnf05",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T23:27:29+00:00",
@@ -641,7 +641,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JCP45_PS_26_102.jpg?v=1786935521",
-      "last_seen": "2026-08-21T17:21:28+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "34.99 AUD",
       "price_cents": 3499,
       "published_at": "2026-08-20T08:59:04+10:00",
@@ -686,7 +686,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/cptqjdybisfmxtcmxozc.jpg?v=1787174991",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "22.00 USD",
       "price_cents": 2200,
       "published_at": "2026-08-19T15:15:22-05:00",
@@ -705,7 +705,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-mercedes-benz-g-63-amg-6x6-jcp45",
       "variant_id": 48614267781325,
       "key": "US:hot-wheels-elite-64-mercedes-benz-g-63-amg-6x6-jcp45",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -721,7 +721,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_HWR97_PS_25_2343.jpg?v=1756851299",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "52.99 AUD",
       "price_cents": 5299,
       "published_at": "2026-08-18T08:57:05+10:00",
@@ -746,7 +746,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-elite-64-mod-shop-1982-custom-toyota-land-cruiser-fj45-troopy?country=AU",
       "variant_id": 47232425132255,
       "key": "AU:hot-wheels-elite-64-mod-shop-1982-custom-toyota-land-cruiser-fj45-troopy",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -762,7 +762,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ap6i86a3pnrrhsdomtr9.jpg?v=1781730771",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "32.00 USD",
       "price_cents": 3200,
       "published_at": "2026-06-24T14:09:01-05:00",
@@ -782,7 +782,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-mod-shop-nissan-stagea-hwr92",
       "variant_id": 48583919730893,
       "key": "US:hot-wheels-elite-64-mod-shop-nissan-stagea-hwr92",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -798,7 +798,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP__Banner_HWR96_M.jpg?v=1769649079",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "37.09 AUD",
       "price_cents": 3709,
       "published_at": "2026-02-03T08:58:35+11:00",
@@ -821,7 +821,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-elite-64-mod-shop-24-jeep-gladiator?country=AU",
       "variant_id": 48403118817503,
       "key": "AU:hot-wheels-elite-64-mod-shop-24-jeep-gladiator",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -837,7 +837,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/mufmjdn170rgonpbgzum.jpg?v=1772210642",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "37.00 USD",
       "price_cents": 3700,
       "published_at": "2026-02-04T12:39:38-06:00",
@@ -857,7 +857,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite64-mod-shop-24-jeep-gladiator-hwr96",
       "variant_id": 48528385474765,
       "key": "US:hot-wheels-elite64-mod-shop-24-jeep-gladiator-hwr96",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -873,7 +873,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/gc8ghkkyrtfqsghcjskf_826c0f65-1459-4403-8662-ba6576a1f467.jpg?v=1763511693",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "22.00 USD",
       "price_cents": 2200,
       "published_at": "2025-10-15T13:36:13-05:00",
@@ -900,7 +900,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-elite-64-porsche-963-jcp46",
       "variant_id": 48435164610765,
       "key": "US:hot-wheels-elite-64-porsche-963-jcp46",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -916,7 +916,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_A-Spot_Announce_JJY60_M.jpg?v=1780538145",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "39.99 AUD",
       "price_cents": 3999,
       "published_at": "2026-06-16T08:58:01+10:00",
@@ -939,7 +939,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-rlc-exclusive-1962-ford-f-100-541423?country=AU",
       "variant_id": 49610025205983,
       "key": "AU:hot-wheels-rlc-exclusive-1962-ford-f-100-541423",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -955,7 +955,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JJY70_PS_26_0298.jpg?v=1783989389",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "46.99 AUD",
       "price_cents": 4699,
       "published_at": "2026-07-28T08:59:02+10:00",
@@ -978,7 +978,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-rlc-exclusive-1985-audi-sport-quattro-s1-87492678954?country=AU",
       "variant_id": 50512676487391,
       "key": "AU:hot-wheels-rlc-exclusive-1985-audi-sport-quattro-s1-87492678954",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -994,7 +994,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/fe7qarzail3dglrhvpgi.jpg?v=1784564563",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-07-24T11:58:44-05:00",
@@ -1017,7 +1017,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-exclusive-1985-audi-sport-quattro-s1-jjy70",
       "variant_id": 48586602283213,
       "key": "US:hot-wheels-rlc-exclusive-1985-audi-sport-quattro-s1-jjy70",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -1033,7 +1033,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JJY64_PS_26_0096.jpg?v=1783303869",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "57.99 AUD",
       "price_cents": 5799,
       "published_at": "2026-07-14T08:59:04+10:00",
@@ -1057,7 +1057,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-rlc-exclusive-1986-nissan-720-king-cab-978456879476?country=AU",
       "variant_id": 50512542957791,
       "key": "AU:hot-wheels-rlc-exclusive-1986-nissan-720-king-cab-978456879476",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1073,7 +1073,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/f5gwfmnr1z007veulypv.jpg?v=1783014404",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "38.00 USD",
       "price_cents": 3800,
       "published_at": "2026-07-10T12:34:24-05:00",
@@ -1096,7 +1096,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-exclusive-1986-c-nissan-720-king-cab-jjy64",
       "variant_id": 48578497216717,
       "key": "US:hot-wheels-rlc-exclusive-1986-c-nissan-720-king-cab-jjy64",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1112,7 +1112,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/q58xvt62gnpvm0fqpwao.jpg?v=1778178699",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "33.00 USD",
       "price_cents": 3300,
       "published_at": "2026-05-15T11:41:24-05:00",
@@ -1134,7 +1134,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-1991-bmw-m3-jjy68",
       "variant_id": 48554572218573,
       "key": "US:rlc-exclusive-1991-bmw-m3-jjy68",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1150,7 +1150,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/hbbwkwpqfnh9c752oha2.jpg?v=1767977974",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "275.00 USD",
       "price_cents": 27500,
       "published_at": "2026-01-27T11:10:59-06:00",
@@ -1176,7 +1176,7 @@
       "url": "https://creations.mattel.com/products/red-line-club-exclusive-2025-hot-wheels-super-treasure-hunt-set-jcp51",
       "variant_id": 48518760071373,
       "key": "US:red-line-club-exclusive-2025-hot-wheels-super-treasure-hunt-set-jcp51",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1192,7 +1192,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/nhvs7nnswee0hdn51chm.jpg?v=1772127418",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-03-06T13:24:20-06:00",
@@ -1216,7 +1216,7 @@
       "url": "https://creations.mattel.com/products/rlc-1965-shelby-cobra-427-sc-jjy67",
       "variant_id": 48534819864781,
       "key": "US:rlc-1965-shelby-cobra-427-sc-jjy67",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1232,7 +1232,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/tl5xyaaylkpceuy3b91s.jpg?v=1770413535",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "33.00 USD",
       "price_cents": 3300,
       "published_at": "2026-02-13T13:22:07-06:00",
@@ -1257,7 +1257,7 @@
       "url": "https://creations.mattel.com/products/red-line-club-exclusive-21-pagani-huayra-r-jcp22",
       "variant_id": 48519348682957,
       "key": "US:red-line-club-exclusive-21-pagani-huayra-r-jcp22",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1273,7 +1273,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/pc4gcl56tmwcjdgpefbn.jpg?v=1774042867",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-03-27T13:31:44-05:00",
@@ -1296,7 +1296,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-71-amc-javelin-amx-jjy58",
       "variant_id": 48536757764301,
       "key": "US:rlc-exclusive-71-amc-javelin-amx-jjy58",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1312,7 +1312,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/er27tzta2kt0cqo4xkld.jpg?v=1771442275",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-02-20T12:39:44-06:00",
@@ -1338,7 +1338,7 @@
       "url": "https://creations.mattel.com/products/red-line-club-exclusive-71-datsun-510-jjy57",
       "variant_id": 48519349436621,
       "key": "US:red-line-club-exclusive-71-datsun-510-jjy57",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1354,7 +1354,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/teql3mdplgpbolvak65q.jpg?v=1763511677",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "33.00 USD",
       "price_cents": 3300,
       "published_at": "2025-09-25T13:12:17-05:00",
@@ -1380,7 +1380,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-81-toyota-sr5-4wd-jcp20",
       "variant_id": 48428019581133,
       "key": "US:rlc-exclusive-81-toyota-sr5-4wd-jcp20",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T17:30:08+00:00",
@@ -1396,7 +1396,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HWC_PDP_JJY62_C_26_0442.jpg?v=1787007437",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-04-24T14:34:46-05:00",
@@ -1419,7 +1419,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-98-subaru-impreza-wrx-sti-jjy62",
       "variant_id": 48550986186957,
       "key": "US:rlc-exclusive-98-subaru-impreza-wrx-sti-jjy62",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-20T01:16:33+00:00",
@@ -1435,7 +1435,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/eucnby6qkcsdoq79pc3i.jpg?v=1771459513",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "9.99 USD",
       "price_cents": 999,
       "published_at": "2022-02-10T17:28:45-06:00",
@@ -1460,7 +1460,7 @@
       "url": "https://creations.mattel.com/products/1-year-rlc-digital-membership-hnb06",
       "variant_id": 40653613531341,
       "key": "US:1-year-rlc-digital-membership-hnb06",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -1476,7 +1476,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JCP68_PS_25_0649.jpg?v=1754038857",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "46.99 AUD",
       "price_cents": 4699,
       "published_at": "2026-07-21T08:52:25+10:00",
@@ -1503,7 +1503,7 @@
       "url": "https://au.creations.mattel.com/products/rlc-exclusive-1964-jaguar-e-type-r?country=AU",
       "variant_id": 50570179346655,
       "key": "AU:rlc-exclusive-1964-jaguar-e-type-r",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -1519,7 +1519,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JCP12_PS_25_3305.jpg?v=1751521072",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "39.99 AUD",
       "price_cents": 3999,
       "published_at": "2026-08-18T08:57:40+10:00",
@@ -1543,7 +1543,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-rlc-exclusive-1990-chevy-454-ss?country=AU",
       "variant_id": 47098942685407,
       "key": "AU:hot-wheels-rlc-exclusive-1990-chevy-454-ss",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -1559,7 +1559,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JCP13_PS_25_0056.jpg?v=1754621936",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "39.99 AUD",
       "price_cents": 3999,
       "published_at": "2025-08-09T07:34:03+10:00",
@@ -1584,7 +1584,7 @@
       "url": "https://au.creations.mattel.com/products/rlc-exclusive-1992-gmc-typhoon?country=AU",
       "variant_id": 47189892694239,
       "key": "AU:rlc-exclusive-1992-gmc-typhoon",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-20T19:44:45+00:00",
@@ -1648,7 +1648,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ygcytu2ju4elapvhbwy5.jpg?v=1786126968",
-      "last_seen": "2026-08-21T17:21:30+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-08-14T14:45:49-05:00",
@@ -1688,7 +1688,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/r9lvvkzgqdvv8fu0s6sj.jpg?v=1786126968",
-      "last_seen": "2026-08-21T17:21:34+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-08-14T14:45:25-05:00",
@@ -1727,7 +1727,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/zxmsi9tbs92ibmlhxrub.png?v=1684950387",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "24.99 USD",
       "price_cents": 2499,
       "published_at": "2021-11-18T10:59:15-06:00",
@@ -1748,7 +1748,7 @@
       "url": "https://creations.mattel.com/products/hwc-special-edition-32-ford-glh85",
       "variant_id": 39850868506829,
       "key": "US:hwc-special-edition-32-ford-glh85",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -1763,7 +1763,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/q8brhmjzuwr7tdduybhb.png?v=1763509250",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "29.99 USD",
       "price_cents": 2999,
       "published_at": "2021-11-18T10:59:07-06:00",
@@ -1783,7 +1783,7 @@
       "url": "https://creations.mattel.com/products/hwc-special-edition-64-impala-glh86",
       "variant_id": 39850869653709,
       "key": "US:hwc-special-edition-64-impala-glh86",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -1798,7 +1798,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/wazsll1tisw3gkduj8yr.jpg?v=1763509100",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "29.99 USD",
       "price_cents": 2999,
       "published_at": "2021-11-18T11:12:50-06:00",
@@ -1819,7 +1819,7 @@
       "url": "https://creations.mattel.com/products/hwc-special-editions-55-mercedes-benz-300-sl-gxj24",
       "variant_id": 39850868900045,
       "key": "US:hwc-special-editions-55-mercedes-benz-300-sl-gxj24",
-      "present": false
+      "present": true
     },
     {
       "currency": "AUD",
@@ -1834,7 +1834,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JNF04_PS_26_165.jpg?v=1774225466",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "29.99 AUD",
       "price_cents": 2999,
       "published_at": "2026-05-28T12:04:37+10:00",
@@ -1856,7 +1856,7 @@
       "url": "https://au.creations.mattel.com/products/mc-hot-wheels-collectors-elite-64-lbwk-lamborghini-aventador-lp-700-4?country=AU",
       "variant_id": 49635538698463,
       "key": "AU:mc-hot-wheels-collectors-elite-64-lbwk-lamborghini-aventador-lp-700-4",
-      "present": false
+      "present": true
     },
     {
       "currency": "AUD",
@@ -1871,7 +1871,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JCP43_PS_26_0005.jpg?v=1784596465",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "29.99 AUD",
       "price_cents": 2999,
       "published_at": "2026-08-10T10:15:17+10:00",
@@ -1894,7 +1894,7 @@
       "url": "https://au.creations.mattel.com/products/mattel-creations-hot-wheels-collectors-elite-64-mazda-rx-7-liberty-walk?country=AU",
       "variant_id": 50588270297311,
       "key": "AU:mattel-creations-hot-wheels-collectors-elite-64-mazda-rx-7-liberty-walk",
-      "present": false
+      "present": true
     },
     {
       "currency": "AUD",
@@ -1993,7 +1993,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_HWR92_PS_26_3872.jpg?v=1782088212",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "44.99 AUD",
       "price_cents": 4499,
       "published_at": "2026-06-25T10:14:08+10:00",
@@ -2018,7 +2018,7 @@
       "url": "https://au.creations.mattel.com/products/mattel-creations-hot-wheels-elite-64-mod-shop-nissan-stagea?country=AU",
       "variant_id": 50383921938655,
       "key": "AU:mattel-creations-hot-wheels-elite-64-mod-shop-nissan-stagea",
-      "present": false
+      "present": true
     },
     {
       "currency": "AUD",
@@ -2033,7 +2033,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JNF07_PS_26_2920_a0d66fbb-d484-4e33-babe-4df7e10fa34b.jpg?v=1778111549",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "29.99 AUD",
       "price_cents": 2999,
       "published_at": "2026-05-12T08:56:08+10:00",
@@ -2056,7 +2056,7 @@
       "url": "https://au.creations.mattel.com/products/mattel-creations-hot-wheels-elite-64-porsche-911-gt2-evo-993?country=AU",
       "variant_id": 49109756182751,
       "key": "AU:mattel-creations-hot-wheels-elite-64-porsche-911-gt2-evo-993",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2071,7 +2071,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/t6yxq7huw4jwbecqwvpg.jpg?v=1708503211",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "35.00 USD",
       "price_cents": 3500,
       "published_at": "2023-11-20T10:55:39-06:00",
@@ -2094,7 +2094,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-1944-willys-mb-gxj27",
       "variant_id": 40331458969805,
       "key": "US:rlc-exclusive-1944-willys-mb-gxj27",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2109,7 +2109,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/trqd5elxyrosodetcsdu.jpg?v=1782325231",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-06-25T12:13:38-05:00",
@@ -2132,7 +2132,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-volkswagen-golf-jjy63",
       "variant_id": 48575676383437,
       "key": "US:rlc-exclusive-volkswagen-golf-jjy63",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -2201,7 +2201,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/pqwbmxzzzzq65yulzrje_8b81ca41-9805-4bf4-ac61-b0ba69a258e7.jpg?v=1708501494",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "24.99 USD",
       "price_cents": 2499,
       "published_at": "2024-09-26T15:24:08-05:00",
@@ -2225,7 +2225,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-2006-bmw-m3-glh84",
       "variant_id": 39850869063885,
       "key": "US:rlc-exclusive-2006-bmw-m3-glh84",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2240,7 +2240,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/vfnb67iaelge6i1onbzi.png?v=1684948471",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "249.99 USD",
       "price_cents": 24999,
       "published_at": "2021-06-23T15:35:07-05:00",
@@ -2263,7 +2263,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-2020-super-treasure-hunt-set-glh99",
       "variant_id": 39850869227725,
       "key": "US:rlc-exclusive-2020-super-treasure-hunt-set-glh99",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2278,7 +2278,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/l7xpb5k96h1cszqwadx2.jpg?v=1708503197",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "24.99 USD",
       "price_cents": 2499,
       "published_at": "2021-11-18T10:58:22-06:00",
@@ -2299,7 +2299,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-custom-mustang",
       "variant_id": 39850868146381,
       "key": "US:rlc-exclusive-custom-mustang",
-      "present": false
+      "present": true
     },
     {
       "currency": "AUD",
@@ -2314,7 +2314,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JJY72_PS_26_245.jpg?v=1786331899",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "82.99 AUD",
       "price_cents": 8299,
       "published_at": "2026-08-18T09:20:01+10:00",
@@ -2339,7 +2339,7 @@
       "url": "https://au.creations.mattel.com/products/mattel-creations-hot-wheels-rlc-exclusive-ferrari-f40?country=AU",
       "variant_id": 51154648989919,
       "key": "AU:mattel-creations-hot-wheels-rlc-exclusive-ferrari-f40",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2354,7 +2354,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/njcyx51l6ortsrilo1ev.jpg?v=1786470616",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "50.00 USD",
       "price_cents": 5000,
       "published_at": "2026-07-31T15:11:37-05:00",
@@ -2379,7 +2379,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-exclusive-ferrari-f40-jjy72",
       "variant_id": 48605828907213,
       "key": "US:hot-wheels-rlc-exclusive-ferrari-f40-jjy72",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2394,7 +2394,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/zgakdtfxcrprtifcdufm.jpg?v=1708503221",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2022-11-21T16:11:08-06:00",
@@ -2417,7 +2417,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-holiday-64-impala",
       "variant_id": 40378095337677,
       "key": "US:rlc-exclusive-holiday-64-impala",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2432,7 +2432,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/nxlihuarwfmduzyghtyd.jpg?v=1684953854",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "17.50 USD",
       "price_cents": 1750,
       "published_at": "2023-11-08T15:33:41-06:00",
@@ -2463,7 +2463,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-real-riders-wheels-pack-set-3-hgk89",
       "variant_id": 40922089554125,
       "key": "US:rlc-exclusive-real-riders-wheels-pack-set-3-hgk89",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2478,7 +2478,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/yfjvabrsgoxabhakkunm.jpg?v=1708503224",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "14.00 USD",
       "price_cents": 1400,
       "published_at": "2022-09-09T11:01:53-05:00",
@@ -2507,7 +2507,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-real-riders-wheels-pack-set-4-hgk90",
       "variant_id": 41030438224077,
       "key": "US:rlc-exclusive-real-riders-wheels-pack-set-4-hgk90",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2522,7 +2522,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/rm7lkmjynu00ugj5ms1u.jpg?v=1763508992",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2023-11-20T11:54:44-06:00",
@@ -2545,7 +2545,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-tv-series-batmobile-hck30",
       "variant_id": 40277800845517,
       "key": "US:rlc-exclusive-tv-series-batmobile-hck30",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2560,7 +2560,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/bx3koqefduot4pzurwy9_9142e118-2e7e-44ab-832e-762d2c167d2a.png?v=1708501482",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "24.99 USD",
       "price_cents": 2499,
       "published_at": "2021-06-23T16:17:24-05:00",
@@ -2583,7 +2583,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-volkswagen-drag-bus-glh95",
       "variant_id": 39850869129421,
       "key": "US:rlc-exclusive-volkswagen-drag-bus-glh95",
-      "present": false
+      "present": true
     },
     {
       "currency": "AUD",
@@ -2598,7 +2598,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JJY74_PS_26_0686.jpg?v=1784596398",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "62.99 AUD",
       "price_cents": 6299,
       "published_at": "2026-08-11T10:11:44+10:00",
@@ -2625,7 +2625,7 @@
       "url": "https://au.creations.mattel.com/products/mattel-creations-hot-wheels-rlc-exclusive-21-ford-bronco-with-chase-version?country=AU",
       "variant_id": 50588318335199,
       "key": "AU:mattel-creations-hot-wheels-rlc-exclusive-21-ford-bronco-with-chase-version",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2640,7 +2640,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/tr7i1ghlxyx8xdcj7ian.jpg?v=1785881237",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "38.00 USD",
       "price_cents": 3800,
       "published_at": "2026-07-31T15:07:38-05:00",
@@ -2663,7 +2663,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-exclusive-21-ford-bronco-with-chase-version-jjy74",
       "variant_id": 48600636948685,
       "key": "US:hot-wheels-rlc-exclusive-21-ford-bronco-with-chase-version-jjy74",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2678,7 +2678,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/cxp4cfbrxi4wrxk9wa4s.jpg?v=1684950211",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "24.99 USD",
       "price_cents": 2499,
       "published_at": "2021-11-18T11:17:50-06:00",
@@ -2700,7 +2700,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-66-super-nova-gxj07",
       "variant_id": 39850868605133,
       "key": "US:rlc-exclusive-66-super-nova-gxj07",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2715,7 +2715,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/bzghozuiabdkji5uoh4q.jpg?v=1684951479",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2023-11-20T11:54:44-06:00",
@@ -2738,7 +2738,7 @@
       "url": "https://creations.mattel.com/products/rlc-exclusive-69-chevrolet-camaro-ss-gxj16",
       "variant_id": 40195342827725,
       "key": "US:rlc-exclusive-69-chevrolet-camaro-ss-gxj16",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2753,7 +2753,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/rgqppio79qmlrfu7s0f0.jpg?v=1724433069",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2022-11-22T10:05:16-06:00",
@@ -2775,7 +2775,7 @@
       "url": "https://creations.mattel.com/products/rlc-selections-41-willys-gasser-glh88",
       "variant_id": 39850869293261,
       "key": "US:rlc-selections-41-willys-gasser-glh88",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -2790,7 +2790,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/lcwlsbk7flqlki4yj2ma_397dd162-31cc-41b7-b792-f006e856e349.jpg?v=1708501520",
-      "last_seen": "2026-08-21T16:44:53+00:00",
+      "last_seen": "2026-08-21T17:41:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2023-11-20T11:54:47-06:00",
@@ -2811,7 +2811,7 @@
       "url": "https://creations.mattel.com/products/rlc-selections-82-lamborghini-countach-lp500-s-hgw25",
       "variant_id": 40889119965389,
       "key": "US:rlc-selections-82-lamborghini-countach-lp500-s-hgw25",
-      "present": false
+      "present": true
     }
   ]
 }
