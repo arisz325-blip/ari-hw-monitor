@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-20T23:46:22+00:00",
-  "started_at": "2026-08-20T23:46:22+00:00",
+  "generated_at": "2026-08-21T00:26:53+00:00",
+  "started_at": "2026-08-21T00:26:53+00:00",
   "counts": {
     "total": 64,
     "in_stock": 34,
@@ -10,6 +10,8 @@
   "warnings": [],
   "probe_enabled": true,
   "watchlist": [
+    "AU:hot-wheels-elite-64-mercedes-benz-g-63-amg-6x6-262626",
+    "US:hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59",
     "US:hot-wheels-rlc-exclusive-1989-nissan-skyline-r32-jjy54"
   ],
   "recent_events": [
@@ -639,7 +641,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JCP45_PS_26_102.jpg?v=1786935521",
-      "last_seen": "2026-08-20T23:38:47+00:00",
+      "last_seen": "2026-08-21T00:26:45+00:00",
       "price": "34.99 AUD",
       "price_cents": 3499,
       "published_at": "2026-08-20T08:59:04+10:00",
@@ -662,7 +664,7 @@
       "url": "https://au.creations.mattel.com/products/hot-wheels-elite-64-mercedes-benz-g-63-amg-6x6-262626?country=AU",
       "variant_id": 51211181490399,
       "key": "AU:hot-wheels-elite-64-mercedes-benz-g-63-amg-6x6-262626",
-      "present": false
+      "present": true
     },
     {
       "became_available_at": "2026-08-20T16:46:24+00:00",
@@ -1642,7 +1644,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ygcytu2ju4elapvhbwy5.jpg?v=1786126968",
-      "last_seen": "2026-08-20T23:38:47+00:00",
+      "last_seen": "2026-08-21T00:26:47+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-08-14T14:45:49-05:00",
@@ -1669,7 +1671,7 @@
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59",
       "variant_id": 48612349673677,
       "key": "US:hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59",
-      "present": false
+      "present": true
     },
     {
       "currency": "USD",
@@ -1684,7 +1686,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/r9lvvkzgqdvv8fu0s6sj.jpg?v=1786126968",
-      "last_seen": "2026-08-20T23:46:20+00:00",
+      "last_seen": "2026-08-21T00:26:51+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-08-14T14:45:25-05:00",
