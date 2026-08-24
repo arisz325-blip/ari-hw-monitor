@@ -85,14 +85,14 @@ async function dispatchWatchlistCheck(token) {
     },
     body: JSON.stringify({ event_type: DISPATCH_EVENT }),
   });
-  if (!resp.ok) {
-    // Logged to the Worker's own log (wrangler tail / dashboard Logs).
-    // Nothing here retries: the next tick is only 5 minutes away, and the
-    // GitHub schedule in watchlist-check.yml is still there underneath.
-    console.log(`dispatch failed ${resp.status}: ${await resp.text()}`);
-    return false;
-  }
-  return true;
+  // Logged either way, on purpose. Logging only failures made "no log
+  // line" ambiguous between "it worked", "it never ran", and "the log
+  // just isn't captured here" — which cost a diagnosis cycle. Nothing
+  // retries: the next tick is 5 minutes away and watchlist-check.yml's
+  // own schedule is still underneath.
+  const detail = resp.ok ? "" : `: ${await resp.text()}`;
+  console.log(`dispatch ${DISPATCH_EVENT} -> HTTP ${resp.status}${detail}`);
+  return resp.ok;
 }
 
 // Workers' atob/btoa are byte-oriented; this keeps UTF-8 (e.g. car titles
@@ -109,7 +109,12 @@ export default {
   // purpose: this is the one privileged action here, and it must not be
   // reachable from the public, unauthenticated HTTP endpoint.
   async scheduled(event, env, ctx) {
-    ctx.waitUntil(dispatchWatchlistCheck(env.GITHUB_TOKEN));
+    // Heartbeat first, before anything that can fail, so the log
+    // distinguishes "the cron never reached this code" from "it ran and
+    // the dispatch failed". Awaited rather than handed to ctx.waitUntil()
+    // so both lines are attributed to this invocation.
+    console.log(`cron fired: ${event.cron || "(no expression)"}`);
+    await dispatchWatchlistCheck(env.GITHUB_TOKEN);
   },
 
   async fetch(request, env) {
