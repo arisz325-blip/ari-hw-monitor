@@ -15,7 +15,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from tests import mock_store  # noqa: E402
-from checker import melbourne_time, parse_human_drop_time  # noqa: E402
+from checker import Fetcher, melbourne_time, parse_human_drop_time  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 FAILURES: list[str] = []
@@ -312,6 +312,25 @@ def main() -> int:
         check("notification times render in Melbourne time, summer (AEDT, UTC+11)",
               melbourne_time("2026-01-05T03:00:00+00:00") == "05 Jan 2026, 02:00 PM AEDT",
               melbourne_time("2026-01-05T03:00:00+00:00"))
+
+        fetcher_probe = Fetcher({"request_delay_seconds": 0})
+        fetcher_probe.pin_region({"base": "https://creations.mattel.com", "currency": "USD"})
+        us_lang = fetcher_probe.session.headers["Accept-Language"]
+        us_cookie = fetcher_probe.session.cookies.get("cart_currency", domain="creations.mattel.com")
+        fetcher_probe.pin_region({"base": "https://au.creations.mattel.com", "currency": "AUD"})
+        au_lang = fetcher_probe.session.headers["Accept-Language"]
+        au_cookie = fetcher_probe.session.cookies.get("cart_currency", domain="au.creations.mattel.com")
+        check("pin_region forces USD via cart_currency cookie, not left to Shopify's guess",
+              us_cookie == "USD", f"{us_cookie}")
+        check("pin_region sets US Accept-Language, not the old hardcoded en-AU",
+              us_lang.startswith("en-US"), f"{us_lang}")
+        check("pin_region forces AUD for the AU region on the same shared session",
+              au_cookie == "AUD", f"{au_cookie}")
+        check("pin_region switches Accept-Language when re-pinned for AU",
+              au_lang.startswith("en-AU"), f"{au_lang}")
+        check("the earlier US cart_currency cookie survives untouched (domain-scoped)",
+              fetcher_probe.session.cookies.get("cart_currency", domain="creations.mattel.com") == "USD",
+              f"{fetcher_probe.session.cookies.get('cart_currency', domain='creations.mattel.com')}")
 
         future = (datetime.now() + timedelta(days=200)).strftime("%B %d, %Y %I:%M %p") + " PT"
         past = "January 1, 2020 9:00 am PT"

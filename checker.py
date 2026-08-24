@@ -195,7 +195,6 @@ class Fetcher:
         self.session = requests.Session()
         self.session.headers.update({
             "User-Agent": http_cfg.get("user_agent", "Mozilla/5.0"),
-            "Accept-Language": "en-AU,en;q=0.9",
         })
         # DELAY_OVERRIDE exists so the offline test suite can run without waiting.
         self.delay = float(os.environ.get("DELAY_OVERRIDE")
@@ -204,6 +203,25 @@ class Fetcher:
         self.timeout = float(http_cfg.get("timeout_seconds", 25))
         self.retries = int(http_cfg.get("max_retries", 3))
         self.request_count = 0
+
+    def pin_region(self, region_cfg: dict) -> None:
+        """Shopify Markets can pick a currency for the .js endpoint per
+        session based on perceived visitor locale/geolocation — confirmed
+        in production 2026-08-24: whole runs' worth of US prices came back
+        AUD-converted (~1.5x) while we still labeled them USD, then
+        flipped back the next run, firing bogus price-change
+        notifications every time it happened. One Fetcher/session serves
+        both regions in sequence, so pin language and currency explicitly
+        before each region's requests rather than leaving either to
+        guesswork — cart_currency is a real Shopify override, not a hack.
+        """
+        base = os.environ.get("BASE_OVERRIDE") or region_cfg["base"]
+        domain = urllib.parse.urlparse(base).hostname
+        currency = region_cfg.get("currency", "")
+        lang = "en-AU" if currency == "AUD" else "en-US"
+        self.session.headers["Accept-Language"] = f"{lang},en;q=0.9"
+        if domain and currency:
+            self.session.cookies.set("cart_currency", currency, domain=domain)
 
     def get(self, url: str, as_json: bool = False, quiet: bool = False):
         """GET with retry + polite delay. Returns text/dict, or None on failure."""
@@ -534,6 +552,7 @@ def probe_stock(fetcher: Fetcher, region_cfg: dict, variant_id: Any,
 def scan_region(fetcher: Fetcher, name: str, region_cfg: dict,
                 cfg: dict) -> tuple[list[dict], list[str]]:
     """Return (items, warnings) for one region."""
+    fetcher.pin_region(region_cfg)
     warnings: list[str] = []
     items: list[dict] = []
     filters = cfg["filters"]
@@ -985,6 +1004,7 @@ def watchlist_check() -> int:
         record = state["items"].get(key)
         if not region_cfg or record is None:
             continue  # nothing to compare against yet — let the hourly scan seed it first
+        fetcher.pin_region(region_cfg)  # same session may have just served a different region
         product = fetcher.get(
             region_url(region_cfg, f"/products/{handle}.js"), as_json=True, quiet=True
         )

@@ -56,11 +56,23 @@ unreleased items; "sold until it's sold out" is the model, not a numbered run.
 **`creations.mattel.com` shows AUD to browsers Shopify thinks are in
 Australia.** Opening the plain US URL from an AU IP renders AU-localized
 prices and rewrites links to `/en-au/...` (Shopify Markets, client-side).
-Verified this does *not* reach the raw `/products/{handle}.js` API we
-actually scrape: a direct request from an AU-geolocated IP still got back
-`cart_currency=USD` and the true USD cents figure. So the US price data is
-correct even though a human opening the same link from Australia sees
-different numbers — that's expected, not a bug.
+Originally verified (2026-08-19) this does *not* reach the raw
+`/products/{handle}.js` API we scrape — one AU-geolocated request that day
+still got `cart_currency=USD` back. **That verification was incomplete**:
+production evidence from 2026-08-24 showed whole scan runs' worth of US
+prices coming back AUD-converted (~1.5x) via the same `.js` endpoint,
+still labeled USD by us, then flipping back the next run — a per-*session*
+Shopify Markets decision, not a per-request one, and evidently not
+purely IP-based since one clean test doesn't prove it never happens.
+Fixed by not trusting Shopify's guess at all: `Fetcher.pin_region()`
+explicitly sets the `cart_currency` cookie and a matching `Accept-Language`
+per region before each region's requests (previously the session sent a
+hardcoded `en-AU` header on *every* request, including to the US store —
+likely a real contributing signal, not just the flaky part). One shared
+`Fetcher`/session serves both regions in sequence in both `run()` and
+`watchlist_check()`, so `pin_region` gets called fresh at the start of
+each region's work in both places — don't reintroduce a shared session
+that isn't re-pinned per region.
 
 **`creations.mattel.com/en-au/collections/cars-vehicles` is a third, separate
 thing — not the AU store, not our US collection.** It's the US store's own
