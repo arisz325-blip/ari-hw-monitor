@@ -18,7 +18,12 @@ concurrency:
 
 jobs:
   apply:
-    if: startsWith(github.event.issue.title, '[watchlist]')
+    # Owner-only. This repo is public with Issues enabled, so without the
+    # author check any stranger could edit config.json (and burn Actions
+    # minutes) just by opening an issue titled "[watchlist] ...".
+    if: >-
+      startsWith(github.event.issue.title, '[watchlist]') &&
+      github.event.issue.user.login == github.repository_owner
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

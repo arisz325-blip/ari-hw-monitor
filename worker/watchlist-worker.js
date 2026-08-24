@@ -14,6 +14,14 @@ const REPO = "arisz325-blip/ari-hw-monitor";
 const BRANCH = "main";
 const KEY_RE = /^(US|AU):[a-z0-9-]+$/;
 
+// This endpoint is unauthenticated by design (the dashboard is a static
+// page — any token it held would be readable in its source) and its URL is
+// public. So assume a stranger can call it, and bound what that costs:
+// every watchlisted item is fetched on each fast check, so an unbounded
+// list is a way to push the scraper's request volume into territory that
+// got us rate-limited by Mattel before. Removals are always allowed.
+const MAX_WATCHLIST = 25;
+
 function cors(resp) {
   resp.headers.set("Access-Control-Allow-Origin", "*");
   resp.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -75,6 +83,11 @@ export default {
       const watchlist = probe.watchlist || (probe.watchlist = []);
 
       const has = watchlist.includes(key);
+      if (action === "add" && !has && watchlist.length >= MAX_WATCHLIST) {
+        return cors(new Response(JSON.stringify({
+          error: `Watchlist is full (${MAX_WATCHLIST} max) — remove one first.`,
+        }), { status: 409, headers: { "Content-Type": "application/json" } }));
+      }
       if (action === "add" && !has) watchlist.push(key);
       if (action === "remove" && has) watchlist.splice(watchlist.indexOf(key), 1);
       watchlist.sort();
