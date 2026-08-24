@@ -106,8 +106,13 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
         query = urllib.parse.parse_qs(parsed.query)
-        is_au = path.startswith("/en-au")
-        path = path[len("/en-au"):] if is_au else path
+        # Production tells the two regions apart by separate hostnames plus a
+        # ?country= param; under BASE_OVERRIDE both point at this one mock, so
+        # the param is the only signal left. Checking the path prefix alone
+        # (the original approach) meant AU requests were served as US here,
+        # and the "AU price uses AUD" assertion could never pass.
+        is_au = query.get("country") == ["AU"] or path.startswith("/en-au")
+        path = path[len("/en-au"):] if path.startswith("/en-au") else path
         price = 4999 if is_au else 2999
         note = "AUD $49.99" if is_au else "USD $29.99"
 

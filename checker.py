@@ -848,7 +848,23 @@ def send_ntfy(events: list[dict], dry_run: bool) -> int:
 # outputs
 # --------------------------------------------------------------------------
 
-def write_dashboard_data(state: dict, items: list[dict], events: list[dict],
+def record_events(state: dict, events: list[dict]) -> None:
+    """Prepend events to the state's rolling activity log.
+
+    Every path that produces events must call this *before*
+    write_dashboard_data, which reads the log rather than taking events
+    separately — that split is what previously made each event show up
+    twice on the dashboard (run() prepended them to state, then
+    write_dashboard_data prepended the same list again on top).
+    """
+    state["recent_events"] = ([
+        {"type": e["type"], "detail": e["detail"], "title": e["item"]["title"],
+         "region": e["item"]["region"], "url": e["item"]["url"], "at": now_iso()}
+        for e in events
+    ] + state.get("recent_events", []))[:60]
+
+
+def write_dashboard_data(state: dict, items: list[dict],
                          warnings: list[str], started: str, cfg: dict) -> None:
     live_keys = {i["key"] for i in items}
     rows = []
@@ -874,16 +890,7 @@ def write_dashboard_data(state: dict, items: list[dict], events: list[dict],
         "warnings": warnings,
         "probe_enabled": bool(cfg.get("stock_probe", {}).get("enabled")),
         "watchlist": sorted(cfg.get("stock_probe", {}).get("watchlist", [])),
-        "recent_events": [
-            {
-                "type": e["type"],
-                "detail": e["detail"],
-                "title": e["item"]["title"],
-                "region": e["item"]["region"],
-                "url": e["item"]["url"],
-                "at": now_iso(),
-            } for e in events
-        ] + state.get("recent_events", [])[:40],
+        "recent_events": state.get("recent_events", [])[:40],
         "items": rows,
     }, indent=2) + "\n")
 
@@ -942,15 +949,11 @@ def run(args: argparse.Namespace) -> int:
         if not args.dry_run:
             save_config(cfg)
 
-    state["recent_events"] = ([
-        {"type": e["type"], "detail": e["detail"], "title": e["item"]["title"],
-         "region": e["item"]["region"], "url": e["item"]["url"], "at": now_iso()}
-        for e in events
-    ] + state.get("recent_events", []))[:60]
+    record_events(state, events)
     state["runs"] = ([{"at": started, "items": len(all_items), "events": len(events),
                        "warnings": all_warnings}] + state.get("runs", []))[:50]
 
-    write_dashboard_data(state, all_items, events, all_warnings, started, cfg)
+    write_dashboard_data(state, all_items, all_warnings, started, cfg)
     if not args.dry_run:
         save_state(state)
 
@@ -1042,8 +1045,11 @@ def watchlist_check() -> int:
         return 0
 
     send_ntfy(events, dry_run=False)
+    # Same log the full scan writes to, so a restock caught here survives
+    # in the dashboard's activity list instead of vanishing at the next scan.
+    record_events(state, events)
     save_state(state)
-    write_dashboard_data(state, checked, events, [], now_iso(), cfg)
+    write_dashboard_data(state, checked, [], now_iso(), cfg)
     log(f"  watchlist check: {len(checked)} item(s), {len(events)} event(s)")
     return 0
 

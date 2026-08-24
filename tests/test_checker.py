@@ -144,6 +144,19 @@ def main() -> int:
         check("events raised for both regions",
               len({e["region"] for e in events}) == 2,
               f"{ {e['region'] for e in events} }")
+        # Regression: the dashboard used to list every new event twice,
+        # because run() prepended events to state and write_dashboard_data
+        # then prepended the same list again on top of it.
+        # region matters: the same car legitimately fires one event per store.
+        seen_events = [(e["at"], e["type"], e["region"], e["title"], e["detail"])
+                       for e in events]
+        check("each event appears once in the dashboard feed",
+              len(seen_events) == len(set(seen_events)),
+              f"{len(seen_events)} entries, {len(set(seen_events))} unique")
+        state_after = json.loads((workdir / "state.json").read_text())
+        check("the dashboard feed matches the persisted activity log",
+              data["recent_events"] == state_after.get("recent_events", [])[:40],
+              f"data={len(data['recent_events'])} state={len(state_after.get('recent_events', []))}")
         check("coming-soon status captured",
               any(r["status"] == "coming_soon" for r in data["items"]),
               f"{[(r['title'], r['status']) for r in data['items']]}")
@@ -484,6 +497,12 @@ def main() -> int:
               any(e.get("type") == "restock" and "Watched" in e.get("title", "")
                   for e in fast_data.get("recent_events", [])),
               f"{fast_data.get('recent_events')}")
+        # It must land in state too, or the next full scan's dashboard write
+        # silently drops it from the activity list.
+        check("the fast check's event persists in state, not just the dashboard",
+              any(e.get("type") == "restock" and "Watched" in e.get("title", "")
+                  for e in after.get("recent_events", [])),
+              f"{after.get('recent_events')}")
         check("watchlist-check leaves a non-watchlisted car alone, even though it also restocked",
               unwatched.get("status") == "sold_out", f"{unwatched}")
 
