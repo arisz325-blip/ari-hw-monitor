@@ -10,6 +10,13 @@ name: Watchlist fast check
 # on the free tier, so treat "every 5 minutes" as "roughly every 5 minutes".
 
 on:
+  # The Cloudflare Worker's cron trigger is the real driver — GitHub's own
+  # scheduler is best-effort and measured at a 32-minute median here (94
+  # runs, all successful, gaps 20–117 min), nowhere near the 5 it asks for.
+  repository_dispatch:
+    types: [watchlist-check]
+  # Kept as a fallback so the monitor degrades to GitHub's ~30 min rather
+  # than stopping entirely if the Worker or its token ever goes away.
   schedule:
     - cron: "*/5 * * * *"
   workflow_dispatch:

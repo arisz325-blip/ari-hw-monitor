@@ -1,13 +1,28 @@
 /**
- * Cloudflare Worker: lets the dashboard toggle a car on/off the stock-probe
- * watchlist with a plain fetch() — no redirect to GitHub, no token in the
- * page. The GitHub token lives only here, as a Worker secret (GITHUB_TOKEN).
+ * Cloudflare Worker for the Hot Wheels monitor. Two jobs:
+ *
+ * 1. fetch()     — lets the dashboard toggle a car on/off the stock-probe
+ *                  watchlist with a plain POST, no redirect to GitHub and
+ *                  no token in the page.
+ *                  Body: {"action": "add" | "remove", "key": "US:handle"}
+ *
+ * 2. scheduled() — fires the watchlist fast check on a cron trigger.
+ *                  GitHub's own scheduler is best-effort: measured here at a
+ *                  32-minute median (94 runs, all successful, gaps 20–117
+ *                  min) against a requested 5. Cloudflare's cron is punctual,
+ *                  so it drives the cadence and GitHub's schedule stays on
+ *                  only as a fallback.
+ *
+ * The GitHub token lives only here, as a Worker secret (GITHUB_TOKEN). It
+ * needs Contents: read and write on this one repo — the same permission the
+ * config.json edits already use; repository_dispatch rides on it too.
  *
  * Deploy: paste this file into the Cloudflare dashboard's Worker editor
  * ("Quick edit"), set the GITHUB_TOKEN secret under Settings > Variables,
- * and set REPO below to match this repo.
- *
- * POST body: {"action": "add" | "remove", "key": "US:some-handle"}
+ * and add an every-5-minutes Cron Trigger under Settings > Triggers.
+ * (The literal expression is on CRON_HINT below — a cron string starting
+ * with a star and a slash cannot be written inside a block comment,
+ * because the slash-star pair would close the comment early.)
  */
 
 const REPO = "arisz325-blip/ari-hw-monitor";
@@ -21,6 +36,16 @@ const KEY_RE = /^(US|AU):[a-z0-9-]+$/;
 // list is a way to push the scraper's request volume into territory that
 // got us rate-limited by Mattel before. Removals are always allowed.
 const MAX_WATCHLIST = 25;
+
+// The Cron Trigger to set in the Cloudflare dashboard (Settings > Triggers).
+// Cloudflare stores this itself; the constant is here so the intended
+// cadence is visible next to the code it drives.
+const CRON_HINT = "*/5 * * * *";  // every 5 minutes
+
+// repository_dispatch event_type — must match the `types:` list in
+// .github/workflows/watchlist-check.yml or the dispatch is accepted with a
+// 204 and then silently does nothing.
+const DISPATCH_EVENT = "watchlist-check";
 
 function cors(resp) {
   resp.headers.set("Access-Control-Allow-Origin", "*");
@@ -46,6 +71,30 @@ async function githubJson(path, token, init = {}) {
   return resp.json();
 }
 
+async function dispatchWatchlistCheck(token) {
+  // Note this deliberately does not go through githubJson(): /dispatches
+  // answers 204 with an empty body, so parsing it as JSON would throw on
+  // the success path.
+  const resp = await fetch(`https://api.github.com/repos/${REPO}/dispatches`, {
+    method: "POST",
+    headers: {
+      "Authorization": `Bearer ${token}`,
+      "Accept": "application/vnd.github+json",
+      "User-Agent": "ari-hw-monitor-watchlist-worker",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ event_type: DISPATCH_EVENT }),
+  });
+  if (!resp.ok) {
+    // Logged to the Worker's own log (wrangler tail / dashboard Logs).
+    // Nothing here retries: the next tick is only 5 minutes away, and the
+    // GitHub schedule in watchlist-check.yml is still there underneath.
+    console.log(`dispatch failed ${resp.status}: ${await resp.text()}`);
+    return false;
+  }
+  return true;
+}
+
 // Workers' atob/btoa are byte-oriented; this keeps UTF-8 (e.g. car titles
 // with curly quotes) intact across the round trip.
 function b64ToText(b64) {
@@ -56,6 +105,13 @@ function textToB64(text) {
 }
 
 export default {
+  // Cron Trigger entry point (see CRON_HINT). Kept separate from fetch() on
+  // purpose: this is the one privileged action here, and it must not be
+  // reachable from the public, unauthenticated HTTP endpoint.
+  async scheduled(event, env, ctx) {
+    ctx.waitUntil(dispatchWatchlistCheck(env.GITHUB_TOKEN));
+  },
+
   async fetch(request, env) {
     if (request.method === "OPTIONS") {
       return cors(new Response(null, { status: 204 }));
