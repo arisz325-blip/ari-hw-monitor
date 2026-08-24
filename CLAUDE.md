@@ -56,23 +56,37 @@ unreleased items; "sold until it's sold out" is the model, not a numbered run.
 **`creations.mattel.com` shows AUD to browsers Shopify thinks are in
 Australia.** Opening the plain US URL from an AU IP renders AU-localized
 prices and rewrites links to `/en-au/...` (Shopify Markets, client-side).
-Originally verified (2026-08-19) this does *not* reach the raw
-`/products/{handle}.js` API we scrape — one AU-geolocated request that day
-still got `cart_currency=USD` back. **That verification was incomplete**:
-production evidence from 2026-08-24 showed whole scan runs' worth of US
-prices coming back AUD-converted (~1.5x) via the same `.js` endpoint,
-still labeled USD by us, then flipping back the next run — a per-*session*
-Shopify Markets decision, not a per-request one, and evidently not
-purely IP-based since one clean test doesn't prove it never happens.
-Fixed by not trusting Shopify's guess at all: `Fetcher.pin_region()`
-explicitly sets the `cart_currency` cookie and a matching `Accept-Language`
-per region before each region's requests (previously the session sent a
-hardcoded `en-AU` header on *every* request, including to the US store —
-likely a real contributing signal, not just the flaky part). One shared
-`Fetcher`/session serves both regions in sequence in both `run()` and
-`watchlist_check()`, so `pin_region` gets called fresh at the start of
-each region's work in both places — don't reintroduce a shared session
-that isn't re-pinned per region.
+**Every region config MUST pin `query: {"country": XX}` — without it,
+`/products/{handle}.js` prices by the *caller's* geolocation.** This was
+the cause of a stream of bogus "price changed" notifications on
+2026-08-24: the same US items flipped back and forth every run or two,
+always by a clean ratio, and got renotified each time.
+
+Two wrong turns worth not repeating. First guess was that the flips were
+USD↔AUD, and the "fix" was to force a `cart_currency` cookie — **that
+cookie does nothing on the `.js` endpoint** (tested: sending
+`cart_currency=AUD` still returned the USD figure, and the server
+overwrote the cookie in its response). Second, the numbers weren't
+Australian at all. Same variant id, price 5000 locally vs 7500 recorded
+in production; probing `?country=` across every market Mattel serves
+showed **7500 = Canada** (AU is 7900). 4 of the 5 affected items matched
+CAD exactly. GitHub's runners geolocate wherever Azure puts them, so the
+US region — which, unlike AU, had no `country` param — got priced as
+whatever country the runner looked like that hour.
+
+`?country=US` overrides geolocation deterministically and is the same
+mechanism AU already used. Verified it changes nothing else: collection
+pages return the same 98 product links, product pages still carry the
+countdown block. `Fetcher.pin_region()` remains, but only to send a
+region-appropriate `Accept-Language` (the session used to hardcode
+`en-AU` on *every* request, including to the US store) — it is not the
+currency control, the `country` param is.
+
+Debugging note for next time: the price is `price_cents` straight from
+the response, but the *currency label* comes from our own `region_cfg`,
+so a wrong-market response is silently mislabeled rather than detected.
+If prices ever look off again, compare against
+`/products/{h}.js?country=XX` across markets before theorizing.
 
 **`creations.mattel.com/en-au/collections/cars-vehicles` is a third, separate
 thing — not the AU store, not our US collection.** It's the US store's own

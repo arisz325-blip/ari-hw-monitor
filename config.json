@@ -4,6 +4,9 @@
       "enabled": true,
       "base": "https://creations.mattel.com",
       "path_prefix": "",
+      "query": {
+        "country": "US"
+      },
       "currency": "USD"
     },
     "AU": {

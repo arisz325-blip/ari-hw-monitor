@@ -205,23 +205,21 @@ class Fetcher:
         self.request_count = 0
 
     def pin_region(self, region_cfg: dict) -> None:
-        """Shopify Markets can pick a currency for the .js endpoint per
-        session based on perceived visitor locale/geolocation — confirmed
-        in production 2026-08-24: whole runs' worth of US prices came back
-        AUD-converted (~1.5x) while we still labeled them USD, then
-        flipped back the next run, firing bogus price-change
-        notifications every time it happened. One Fetcher/session serves
-        both regions in sequence, so pin language and currency explicitly
-        before each region's requests rather than leaving either to
-        guesswork — cart_currency is a real Shopify override, not a hack.
+        """Send an Accept-Language matching the region being scanned.
+
+        Secondary to the real currency control, which is the `country`
+        query param in each region's config (see region_url) — that's what
+        actually decides which Shopify market prices a response. This just
+        stops us claiming en-AU while scanning the US store, which was the
+        old hardcoded session default.
+
+        Note: setting a `cart_currency` cookie does NOT work here — tested
+        2026-08-24, `/products/{handle}.js` ignores it and the server
+        overwrites it in the response. Don't reintroduce that.
         """
-        base = os.environ.get("BASE_OVERRIDE") or region_cfg["base"]
-        domain = urllib.parse.urlparse(base).hostname
         currency = region_cfg.get("currency", "")
         lang = "en-AU" if currency == "AUD" else "en-US"
         self.session.headers["Accept-Language"] = f"{lang},en;q=0.9"
-        if domain and currency:
-            self.session.cookies.set("cart_currency", currency, domain=domain)
 
     def get(self, url: str, as_json: bool = False, quiet: bool = False):
         """GET with retry + polite delay. Returns text/dict, or None on failure."""
