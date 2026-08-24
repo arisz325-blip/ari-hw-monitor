@@ -6,12 +6,24 @@
  *                  no token in the page.
  *                  Body: {"action": "add" | "remove", "key": "US:handle"}
  *
- * 2. scheduled() — fires the watchlist fast check on a cron trigger.
- *                  GitHub's own scheduler is best-effort: measured here at a
- *                  32-minute median (94 runs, all successful, gaps 20–117
- *                  min) against a requested 5. Cloudflare's cron is punctual,
- *                  so it drives the cadence and GitHub's schedule stays on
- *                  only as a fallback.
+ * 2. scheduled() — meant to fire the watchlist fast check on a cron
+ *                  trigger, because GitHub's own scheduler is best-effort:
+ *                  measured here at a 32-minute median (94 runs, all
+ *                  successful, gaps 20–117 min) against a requested 5.
+ *
+ *                  NOT WORKING as of 2026-08-24, and the reason is on
+ *                  Cloudflare's side, not here. The trigger reads "Every 5
+ *                  minutes" in Settings > Triggers, this exact code is the
+ *                  deployed version, and yet across ~50 minutes there was
+ *                  not one invocation: no `cron fired:` heartbeat in
+ *                  Observability, no errors, and no repository_dispatch run
+ *                  on GitHub. So the handler is simply never called.
+ *
+ *                  Left in place because it costs nothing while dormant and
+ *                  works the moment the trigger does. Until then the real
+ *                  cadence is GitHub's schedule in watchlist-check.yml —
+ *                  roughly every 30-40 minutes. Do not describe this Worker
+ *                  as driving the cadence; it currently doesn't.
  *
  * The GitHub token lives only here, as a Worker secret (GITHUB_TOKEN). It
  * needs Contents: read and write on this one repo — the same permission the

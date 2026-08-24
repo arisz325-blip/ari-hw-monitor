@@ -24,7 +24,7 @@ state.json                        generated — last seen state, the diff baseli
 docs/index.html                   dashboard, incl. the "Watch stock" button
 docs/data.json                    generated — what the dashboard reads
 .github/workflows/check.yml            hourly cron; writes diagnostics to the run Summary
-.github/workflows/watchlist-check.yml  every ~5min; watchlist-only fast poll, no full scan
+.github/workflows/watchlist-check.yml  watchlist-only fast poll (asks 5min, gets ~30 — see below)
 .github/workflows/watchlist.yml        turns a "[watchlist] ..." issue into a config.json edit
 tests/                                 offline suite, 62 checks, mock storefront + ntfy + cart + sitemap
 ```
@@ -244,8 +244,18 @@ everything and deliberately sends no alerts.
    is bound — adding the variable alone did not do it live, twice, until we
    redeployed.
    As of 2026-08-20 there's also `checker.py --watchlist-check`
-   (`watchlist_check()`), run by `.github/workflows/watchlist-check.yml`
-   every ~5 minutes (shares `check.yml`'s concurrency group on purpose, so
+   (`watchlist_check()`), run by `.github/workflows/watchlist-check.yml`.
+   It asks for every 5 minutes and does not get it: measured over 94 runs,
+   all successful, the gaps are 20–117 minutes with a **32-minute median**.
+   GitHub's `schedule:` is best-effort and that is simply what it delivers
+   here, so do not describe this as a 5-minute check. Driving it from a
+   Cloudflare Worker cron trigger was tried on 2026-08-24 and the trigger
+   never fired (details in `worker/watchlist-worker.js`); the
+   `repository_dispatch` plumbing is left wired up and dormant. The
+   remaining untried options are an external cron service or moving the
+   check into the Worker entirely — both bigger than they look, and worth
+   a deliberate decision rather than another round of poking.
+   It otherwise runs (shares `check.yml`'s concurrency group on purpose, so
    they queue instead of racing on state.json — see the checkout `ref:`
    fix in both workflows, needed because a queued run's checkout otherwise
    pins to the stale commit from when it was *triggered*, not when it
