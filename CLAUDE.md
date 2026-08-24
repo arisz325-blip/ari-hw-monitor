@@ -24,7 +24,7 @@ state.json                        generated — last seen state, the diff baseli
 docs/index.html                   dashboard, incl. the "Watch stock" button
 docs/data.json                    generated — what the dashboard reads
 .github/workflows/check.yml            hourly cron; writes diagnostics to the run Summary
-.github/workflows/watchlist-check.yml  watchlist-only fast poll (asks 5min, gets ~30 — see below)
+.github/workflows/watchlist-check.yml  watchlist-only fast poll, every 5min via Cloudflare cron
 .github/workflows/watchlist.yml        turns a "[watchlist] ..." issue into a config.json edit
 tests/                                 offline suite, 62 checks, mock storefront + ntfy + cart + sitemap
 ```
@@ -245,16 +245,32 @@ everything and deliberately sends no alerts.
    redeployed.
    As of 2026-08-20 there's also `checker.py --watchlist-check`
    (`watchlist_check()`), run by `.github/workflows/watchlist-check.yml`.
-   It asks for every 5 minutes and does not get it: measured over 94 runs,
-   all successful, the gaps are 20–117 minutes with a **32-minute median**.
-   GitHub's `schedule:` is best-effort and that is simply what it delivers
-   here, so do not describe this as a 5-minute check. Driving it from a
-   Cloudflare Worker cron trigger was tried on 2026-08-24 and the trigger
-   never fired (details in `worker/watchlist-worker.js`); the
-   `repository_dispatch` plumbing is left wired up and dormant. The
-   remaining untried options are an external cron service or moving the
-   check into the Worker entirely — both bigger than they look, and worth
-   a deliberate decision rather than another round of poking.
+   GitHub's `schedule:` cannot deliver the 5 minutes it asks for: measured
+   over 94 runs, all successful, the gaps were 20–117 minutes with a
+   **32-minute median**. Since 2026-08-24 the cadence is driven instead by
+   a cron trigger on the Cloudflare Worker, which fires
+   `repository_dispatch` and is punctual (verified landing at 17:40:05 and
+   17:45:05 UTC). The GitHub schedule stays on as a fallback — see below
+   for why that is not paranoia.
+
+   **The trap that cost hours: redeploying the Worker from the dashboard's
+   Quick Edit silently breaks the cron trigger's binding.** Settings >
+   Triggers still reads "Every 5 minutes" and the schedules API still lists
+   it, but `scheduled()` is never invoked again — no heartbeat log, no
+   errors, nothing. Every symptom points at the code, which is why the
+   first diagnosis here was wrong twice: first blaming the token's
+   permissions, then concluding Cloudflare cron just doesn't work on this
+   account. It does. The fix is to delete the cron trigger and re-add it
+   after any dashboard deploy, then verify with a `cron fired:` line in
+   Observability or a `repository_dispatch` run in Actions — never by
+   trusting the Settings page.
+
+   Two related gotchas found alongside it: Worker Observability had logging
+   effectively off, so "no log line" was not evidence of anything (it is on
+   now, 100% sampling, persisted); and because both workflows share one
+   concurrency group, a dispatch and a scheduled run arriving within the
+   same minute leaves one `cancelled`. That is correct poll semantics, not
+   a failure.
    It otherwise runs (shares `check.yml`'s concurrency group on purpose, so
    they queue instead of racing on state.json — see the checkout `ref:`
    fix in both workflows, needed because a queued run's checkout otherwise

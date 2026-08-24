@@ -6,24 +6,29 @@
  *                  no token in the page.
  *                  Body: {"action": "add" | "remove", "key": "US:handle"}
  *
- * 2. scheduled() — meant to fire the watchlist fast check on a cron
- *                  trigger, because GitHub's own scheduler is best-effort:
- *                  measured here at a 32-minute median (94 runs, all
- *                  successful, gaps 20–117 min) against a requested 5.
+ * 2. scheduled() — fires the watchlist fast check on a cron trigger,
+ *                  because GitHub's own scheduler is best-effort: measured
+ *                  here at a 32-minute median (94 runs, all successful,
+ *                  gaps 20–117 min) against a requested 5. Working since
+ *                  2026-08-24, verified punctual (dispatches landed at
+ *                  17:40:05 and 17:45:05 UTC, exactly 5 minutes apart).
  *
- *                  NOT WORKING as of 2026-08-24, and the reason is on
- *                  Cloudflare's side, not here. The trigger reads "Every 5
- *                  minutes" in Settings > Triggers, this exact code is the
- *                  deployed version, and yet across ~50 minutes there was
- *                  not one invocation: no `cron fired:` heartbeat in
- *                  Observability, no errors, and no repository_dispatch run
- *                  on GitHub. So the handler is simply never called.
+ * !! READ THIS BEFORE EDITING THIS FILE !!
  *
- *                  Left in place because it costs nothing while dormant and
- *                  works the moment the trigger does. Until then the real
- *                  cadence is GitHub's schedule in watchlist-check.yml —
- *                  roughly every 30-40 minutes. Do not describe this Worker
- *                  as driving the cadence; it currently doesn't.
+ * Redeploying from the dashboard's Quick Edit silently breaks the cron
+ * trigger's binding to the deployed version. Settings > Triggers keeps
+ * showing "Every 5 minutes" and the API keeps listing the schedule, but
+ * scheduled() is never called again — no heartbeat, no errors, nothing.
+ * It cost hours to find, because every symptom points at the code.
+ *
+ * So: after ANY deploy from the dashboard editor, delete the cron trigger
+ * and add it back. Then confirm with a `cron fired:` line in Observability
+ * (or a repository_dispatch run in the repo's Actions tab) rather than
+ * trusting the Settings page, which lies about this.
+ *
+ * That is also why watchlist-check.yml keeps its own GitHub schedule: this
+ * binding will break again on the next edit, and the fallback means the
+ * monitor degrades to ~30 minutes instead of stopping.
  *
  * The GitHub token lives only here, as a Worker secret (GITHUB_TOKEN). It
  * needs Contents: read and write on this one repo — the same permission the
