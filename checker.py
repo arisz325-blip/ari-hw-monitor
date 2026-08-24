@@ -795,6 +795,26 @@ EVENT_META = {
 }
 
 
+_HEADER_SUBS = {
+    "‘": "'", "’": "'", "“": '"', "”": '"',
+    "–": "-", "—": "-", "…": "...", " ": " ",
+}
+
+
+def header_safe(text: str) -> str:
+    """Make a string safe to put in an HTTP header.
+
+    Headers are latin-1. Mattel titles routinely contain ' and -, and an
+    emoji anywhere in one makes requests raise UnicodeEncodeError — which
+    send_ntfy catches and logs, so *every* notification dies silently
+    while the scraper tests stay green. Emoji belong in ntfy's Tags
+    header, which renders them into the title anyway.
+    """
+    for bad, good in _HEADER_SUBS.items():
+        text = text.replace(bad, good)
+    return text.encode("latin-1", "replace").decode("latin-1")
+
+
 def send_ntfy(events: list[dict], dry_run: bool) -> int:
     topic = os.environ.get("NTFY_TOPIC", "").strip()
     server = (os.environ.get("NTFY_SERVER") or "https://ntfy.sh").strip().rstrip("/")
@@ -820,26 +840,36 @@ def send_ntfy(events: list[dict], dry_run: bool) -> int:
             f"{item['region']} · {item['price'] or 'price n/a'} · {item['status_label']}\n"
             f"{event['detail']}{stock_line}"
         )
-        headers = {
+        headers = {k: header_safe(v) for k, v in {
             "Title": f"{title_prefix} ({item['region']})",
             "Priority": str(priority),
             "Tags": tag,
             "Click": item["url"],
             "Actions": f"view, Open on Mattel, {item['url']}",
-        }
+        }.items()}
         if token:
             headers["Authorization"] = f"Bearer {token}"
-        try:
-            resp = requests.post(
-                f"{server}/{topic}",
-                data=body.encode("utf-8"),
-                headers=headers,
-                timeout=20,
-            )
-            resp.raise_for_status()
-            sent += 1
-        except Exception as exc:  # noqa: BLE001
-            log(f"  notification failed: {exc}")
+
+        # A dropped notification is gone for good — the event is recorded as
+        # handled either way and never re-fires — so a blip at ntfy.sh means
+        # silently missing the restock this whole project exists to catch.
+        # Retry before giving up, and let the caller surface what didn't land.
+        for attempt in range(1, 4):
+            try:
+                resp = requests.post(
+                    f"{server}/{topic}",
+                    data=body.encode("utf-8"),
+                    headers=headers,
+                    timeout=20,
+                )
+                resp.raise_for_status()
+                sent += 1
+                break
+            except Exception as exc:  # noqa: BLE001
+                if attempt == 3:
+                    log(f"  notification FAILED after {attempt} attempts: {exc}")
+                else:
+                    time.sleep(2 * attempt)
     log(f"  sent {sent}/{len(events)} notifications")
     return sent
 
@@ -937,7 +967,16 @@ def run(args: argparse.Namespace) -> int:
         }, indent=2))
         return 0 if all_items and not all_warnings else 1
 
-    send_ntfy(events, args.dry_run)
+    sent = send_ntfy(events, args.dry_run)
+    # Only meaningful when notifications were actually meant to go out —
+    # an unset topic is a deliberate local/dry configuration, not a fault.
+    if events and not args.dry_run and os.environ.get("NTFY_TOPIC", "").strip():
+        undelivered = len(events) - sent
+        if undelivered:
+            all_warnings.append(
+                f"{undelivered} of {len(events)} notification(s) could not be delivered "
+                f"to ntfy — those alerts are lost, they do not re-fire."
+            )
 
     probe_cfg = cfg.get("stock_probe", {})
     watchlist = probe_cfg.get("watchlist", [])

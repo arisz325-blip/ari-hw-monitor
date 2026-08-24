@@ -16,7 +16,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from tests import mock_store  # noqa: E402
 import checker as checker_mod  # noqa: E402
-from checker import Fetcher, melbourne_time, parse_human_drop_time  # noqa: E402
+from checker import (  # noqa: E402
+    Fetcher, header_safe, melbourne_time, parse_human_drop_time,
+)
 
 ROOT = Path(__file__).resolve().parent.parent
 FAILURES: list[str] = []
@@ -350,6 +352,23 @@ def main() -> int:
               us_lang.startswith("en-US"), f"{us_lang}")
         check("pin_region switches Accept-Language when re-pinned for AU",
               au_lang.startswith("en-AU"), f"{au_lang}")
+
+        # Anything header_safe returns must survive latin-1 encoding, or
+        # requests raises and send_ntfy swallows it — killing every
+        # notification while the scraper tests stay green.
+        nasty = "Hot Wheels RLC ’81 Toyota – Set 4 \U0001f525…"
+        try:
+            header_safe(nasty).encode("latin-1")
+            encodable = True
+        except UnicodeEncodeError:
+            encodable = False
+        check("header_safe output is latin-1 encodable (emoji, curly quotes, en dash)",
+              encodable, f"{header_safe(nasty)!r}")
+        check("header_safe keeps the text readable rather than mangling it",
+              header_safe("RLC ’81 Toyota – Set 4").startswith("RLC '81 Toyota - Set 4"),
+              f"{header_safe(chr(39) + '81')!r}")
+        check("plain ASCII passes through header_safe untouched",
+              header_safe("Back in stock (US)") == "Back in stock (US)")
 
         future = (datetime.now() + timedelta(days=200)).strftime("%B %d, %Y %I:%M %p") + " PT"
         past = "January 1, 2020 9:00 am PT"
