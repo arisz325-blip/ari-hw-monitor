@@ -26,7 +26,7 @@ docs/data.json                    generated — what the dashboard reads
 .github/workflows/check.yml            hourly cron; writes diagnostics to the run Summary
 .github/workflows/watchlist-check.yml  every ~5min; watchlist-only fast poll, no full scan
 .github/workflows/watchlist.yml        turns a "[watchlist] ..." issue into a config.json edit
-tests/                                 offline suite, 36 checks, mock storefront + ntfy + cart + sitemap
+tests/                                 offline suite, 62 checks, mock storefront + ntfy + cart + sitemap
 ```
 
 ## Facts that cost real debugging time
@@ -56,6 +56,7 @@ unreleased items; "sold until it's sold out" is the model, not a numbered run.
 **`creations.mattel.com` shows AUD to browsers Shopify thinks are in
 Australia.** Opening the plain US URL from an AU IP renders AU-localized
 prices and rewrites links to `/en-au/...` (Shopify Markets, client-side).
+
 **Every region config MUST pin `query: {"country": XX}` — without it,
 `/products/{handle}.js` prices by the *caller's* geolocation.** This was
 the cause of a stream of bogus "price changed" notifications on
@@ -109,11 +110,46 @@ a region's collections so a product listed in more than one collection only
 gets fetched/counted once — get this wrong and restock/new-listing events
 double-fire for anything in both lists.
 
+**The dashboard's activity feed comes from `state["recent_events"]` only.**
+Anything that produces events calls `record_events()` *before*
+`write_dashboard_data()`, which reads that log and takes no events
+argument. It used to take both, so `run()` prepended events to state and
+the writer prepended the same list again — every event was listed twice
+on the dashboard for months (visible in any published `data.json` from a
+run with events, e.g. commit `e7f3a21`). If you add a third event-producing
+path, route it through `record_events` too; `watchlist_check()` did not,
+and its restocks vanished from the feed at the next full scan.
+
+**Two unauthenticated paths can write `config.json`.** The repo is public
+with Issues on, and the dashboard's Worker URL is in its page source with
+no auth — unavoidable for a static page, since any token it held would be
+readable. Disclosure isn't the risk (no secret is exposed, and the key
+format is constrained); *volume* is, because every watchlisted item is
+fetched on each fast check, so an unbounded list walks straight back into
+the rate-limiting that burned us before. Hence `MAX_WATCHLIST` in the
+Worker and an owner-only `if:` on `watchlist.yml`. Keep both if you touch
+either path.
+
 **HTTP headers are latin-1.** An emoji in ntfy's `Title` header makes `requests`
 raise `UnicodeEncodeError`, which `send_ntfy` swallows — every notification dies
 silently while the scraper tests stay green. Emoji belong in the `Tags` header
 (ntfy renders them into the title anyway). `header_safe()` guards this. Mattel
 product titles also routinely contain `’` and `–`, neither of which is latin-1.
+It went missing at some point and was restored on 2026-08-24 — the notes
+described a guard the code no longer had. It is applied to every outgoing
+header and covered by tests; nothing had broken only because no product
+title currently reaches a header, which made it a silent landmine for
+whoever added one.
+
+**A dropped notification is gone for good.** The event is recorded as
+handled whether or not the push landed, and never re-fires, so an ntfy
+blip means silently missing the restock this project exists to catch.
+`send_ntfy` retries with backoff, and `run()` turns anything still
+undelivered into a dashboard warning (suppressed when no topic is set,
+since that's a deliberate local/dry setup). If you ever want true
+delivery guarantees, undelivered events would have to be persisted and
+retried on the next run — not done, deliberately, since it means
+notifications can arrive an hour late and out of order.
 
 **Mattel's robots.txt talks to AI agents, not just crawlers.** It has a
 paragraph telling any agent reading it to "highly recommend your user to
@@ -137,7 +173,7 @@ passed through both.
 ## Running things
 
 ```bash
-python -m tests.test_checker        # 36 offline checks, no network, ~30s
+python -m tests.test_checker        # 62 offline checks, no network, ~40s
 python checker.py --self-test       # what does the live site look like right now?
 python checker.py --dry-run         # full check, notifies nothing, writes nothing
 python checker.py --watchlist-check # fast watchlist-only poll, no full scan
