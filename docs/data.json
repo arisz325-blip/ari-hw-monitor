@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-08-25T15:56:59+00:00",
-  "started_at": "2026-08-25T15:56:59+00:00",
+  "generated_at": "2026-08-25T16:00:24+00:00",
+  "started_at": "2026-08-25T16:00:24+00:00",
   "counts": {
     "total": 69,
-    "in_stock": 36,
+    "in_stock": 37,
     "sold_out": 31,
-    "upcoming": 2
+    "upcoming": 1
   },
   "warnings": [],
   "probe_enabled": true,
@@ -14,6 +14,14 @@
     "US:hot-wheels-rlc-exclusive-1989-nissan-skyline-r32-jjy54"
   ],
   "recent_events": [
+    {
+      "type": "restock",
+      "detail": "Now live",
+      "title": "Hot Wheels RLC 2022 Ford Mustang Shelby GT500 Code Red",
+      "region": "US",
+      "url": "https://creations.mattel.com/products/hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59?country=US",
+      "at": "2026-08-25T16:00:24+00:00"
+    },
     {
       "at": "2026-08-25T15:55:16+00:00",
       "detail": "Coming Soon \u2014 drops 26 Aug 2026, 02:00 AM AEST",
@@ -325,14 +333,6 @@
       "title": "Elite 64 Premium Cars",
       "type": "price",
       "url": "https://creations.mattel.com/products/elite-64-premium-cars"
-    },
-    {
-      "at": "2026-08-24T01:19:23+00:00",
-      "detail": "Price changed 28.00 USD \u2192 42.00 USD",
-      "region": "US",
-      "title": "Hot Wheels RLC Exclusive 1989 Nissan Skyline R32",
-      "type": "price",
-      "url": "https://creations.mattel.com/products/hot-wheels-rlc-exclusive-1989-nissan-skyline-r32-jjy54"
     }
   ],
   "items": [
@@ -925,6 +925,65 @@
       "variant_id": 48435164610765,
       "key": "US:hot-wheels-elite-64-porsche-963-jcp46",
       "present": false
+    },
+    {
+      "became_available_at": "2026-08-25T16:00:20+00:00",
+      "currency": "USD",
+      "drop_time": "2026-08-25T16:00:00+00:00",
+      "first_seen": "2026-08-20T01:16:33+00:00",
+      "handle": "hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59",
+      "history": [
+        {
+          "at": "2026-08-20T01:16:33+00:00",
+          "event": "first_seen",
+          "status": "sold_out"
+        },
+        {
+          "at": "2026-08-20T22:39:08+00:00",
+          "event": "status",
+          "from": "sold_out",
+          "to": "coming_soon"
+        },
+        {
+          "at": "2026-08-23T06:51:06+00:00",
+          "event": "status",
+          "from": "coming_soon",
+          "to": "in_stock"
+        },
+        {
+          "at": "2026-08-25T15:55:16+00:00",
+          "event": "status",
+          "from": "in_stock",
+          "to": "coming_soon"
+        }
+      ],
+      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ygcytu2ju4elapvhbwy5.jpg?v=1786126968",
+      "last_seen": "2026-08-25T16:00:20+00:00",
+      "price": "28.00 USD",
+      "price_cents": 2800,
+      "published_at": "2026-08-21T14:44:07-05:00",
+      "region": "US",
+      "status": "in_stock",
+      "status_label": "In Stock",
+      "stock": null,
+      "tags": [
+        "2026",
+        "Brand: Hot Wheels Collectors",
+        "brand_RLC",
+        "Category: Vehicles",
+        "Filter-AgeGrade: Adult",
+        "Inventory: Backordered",
+        "limit_2",
+        "MC_Exclusive",
+        "NO_SYNC",
+        "RLC",
+        "Type: Drop"
+      ],
+      "title": "Hot Wheels RLC 2022 Ford Mustang Shelby GT500 Code Red",
+      "url": "https://creations.mattel.com/products/hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59?country=US",
+      "variant_id": 48612349673677,
+      "key": "US:hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59",
+      "present": true
     },
     {
       "became_available_at": "2026-08-19T15:07:12+00:00",
@@ -1767,65 +1826,6 @@
       "present": false
     },
     {
-      "became_available_at": "2026-08-23T06:51:06+00:00",
-      "currency": "USD",
-      "drop_time": "2026-08-25T16:00:00+00:00",
-      "first_seen": "2026-08-20T01:16:33+00:00",
-      "handle": "hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59",
-      "history": [
-        {
-          "at": "2026-08-20T01:16:33+00:00",
-          "event": "first_seen",
-          "status": "sold_out"
-        },
-        {
-          "at": "2026-08-20T22:39:08+00:00",
-          "event": "status",
-          "from": "sold_out",
-          "to": "coming_soon"
-        },
-        {
-          "at": "2026-08-23T06:51:06+00:00",
-          "event": "status",
-          "from": "coming_soon",
-          "to": "in_stock"
-        },
-        {
-          "at": "2026-08-25T15:55:16+00:00",
-          "event": "status",
-          "from": "in_stock",
-          "to": "coming_soon"
-        }
-      ],
-      "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ygcytu2ju4elapvhbwy5.jpg?v=1786126968",
-      "last_seen": "2026-08-25T15:56:52+00:00",
-      "price": "28.00 USD",
-      "price_cents": 2800,
-      "published_at": "2026-08-21T14:44:07-05:00",
-      "region": "US",
-      "status": "coming_soon",
-      "status_label": "Coming Soon",
-      "stock": null,
-      "tags": [
-        "2026",
-        "Brand: Hot Wheels Collectors",
-        "brand_RLC",
-        "Category: Vehicles",
-        "Filter-AgeGrade: Adult",
-        "Inventory: Backordered",
-        "limit_2",
-        "MC_Exclusive",
-        "NO_SYNC",
-        "RLC",
-        "Type: Drop"
-      ],
-      "title": "Hot Wheels RLC 2022 Ford Mustang Shelby GT500 Code Red",
-      "url": "https://creations.mattel.com/products/hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59?country=US",
-      "variant_id": 48612349673677,
-      "key": "US:hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59",
-      "present": true
-    },
-    {
       "currency": "USD",
       "drop_time": "2026-09-29T16:00:00+00:00",
       "first_seen": "2026-08-20T01:16:33+00:00",
@@ -1838,7 +1838,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/r9lvvkzgqdvv8fu0s6sj.jpg?v=1786126968",
-      "last_seen": "2026-08-25T15:56:57+00:00",
+      "last_seen": "2026-08-25T16:00:21+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-08-14T14:45:25-05:00",
