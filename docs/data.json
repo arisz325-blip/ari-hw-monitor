@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-08-25T16:00:24+00:00",
-  "started_at": "2026-08-25T16:00:24+00:00",
+  "generated_at": "2026-08-25T16:05:23+00:00",
+  "started_at": "2026-08-25T16:05:23+00:00",
   "counts": {
     "total": 69,
     "in_stock": 37,
@@ -15,12 +15,12 @@
   ],
   "recent_events": [
     {
-      "type": "restock",
+      "at": "2026-08-25T16:00:24+00:00",
       "detail": "Now live",
-      "title": "Hot Wheels RLC 2022 Ford Mustang Shelby GT500 Code Red",
       "region": "US",
-      "url": "https://creations.mattel.com/products/hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59?country=US",
-      "at": "2026-08-25T16:00:24+00:00"
+      "title": "Hot Wheels RLC 2022 Ford Mustang Shelby GT500 Code Red",
+      "type": "restock",
+      "url": "https://creations.mattel.com/products/hot-wheels-rlc-2022-ford-mustang-shelby-gt500-code-red-jjy59?country=US"
     },
     {
       "at": "2026-08-25T15:55:16+00:00",
@@ -958,7 +958,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ygcytu2ju4elapvhbwy5.jpg?v=1786126968",
-      "last_seen": "2026-08-25T16:00:20+00:00",
+      "last_seen": "2026-08-25T16:05:16+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-08-21T14:44:07-05:00",
@@ -1838,7 +1838,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/r9lvvkzgqdvv8fu0s6sj.jpg?v=1786126968",
-      "last_seen": "2026-08-25T16:00:21+00:00",
+      "last_seen": "2026-08-25T16:05:20+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-08-14T14:45:25-05:00",
