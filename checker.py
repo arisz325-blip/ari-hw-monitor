@@ -1037,6 +1037,7 @@ def watchlist_check() -> int:
     fetcher = Fetcher(cfg["http"])
     events: list[dict] = []
     checked: list[dict] = []
+    changed = False
 
     for key in watchlist:
         region, _, handle = key.partition(":")
@@ -1057,6 +1058,7 @@ def watchlist_check() -> int:
 
         if product.get("available"):
             if record.get("status") != "in_stock":
+                changed = True
                 record["status"] = "in_stock"
                 record["status_label"] = STATUS_LABEL["in_stock"]
                 record["became_available_at"] = stamp
@@ -1072,15 +1074,30 @@ def watchlist_check() -> int:
             is_upcoming, drop_iso = upcoming_drop_from_product_page(fetcher, region_cfg, handle, prefix)
             new_status = "coming_soon" if is_upcoming else "sold_out"
             if new_status != record.get("status"):
+                changed = True
                 log(f"  watchlist: {key} status {record.get('status')} -> {new_status}"
                     f" (countdown {'still future' if is_upcoming else 'has lapsed'})")
                 record["status"] = new_status
                 record["status_label"] = STATUS_LABEL[new_status]
-            if is_upcoming:
+            if is_upcoming and record.get("drop_time") != drop_iso:
+                changed = True
                 record["drop_time"] = drop_iso
 
     if not checked:
         log("  watchlist check: no items had a baseline to compare against yet")
+        return 0
+
+    # Write nothing when nothing moved, so the workflow has nothing to commit.
+    # This used to save unconditionally, and because last_seen changes every
+    # time, that meant a commit every 5 minutes: 288 a day, each one also
+    # triggering a Pages rebuild. GitHub started starving the repo of runners
+    # for it (a job seen queued 31 hours; the hourly full scan degraded from
+    # hourly to 5-11 hourly, and its schedule: trigger stopped firing at all).
+    # The cost is only that "last checked" on the dashboard now tracks the
+    # last meaningful change rather than the last poll — cheap next to
+    # losing the scan cadence that finds new cars in the first place.
+    if not changed:
+        log(f"  watchlist check: {len(checked)} item(s), nothing changed — writing nothing")
         return 0
 
     send_ntfy(events, dry_run=False)

@@ -265,6 +265,21 @@ everything and deliberately sends no alerts.
    Observability or a `repository_dispatch` run in Actions — never by
    trusting the Settings page.
 
+   **Never let a per-5-minute job commit unconditionally.** The fast check
+   originally saved `state.json` + `docs/data.json` on every run, and since
+   `last_seen` changes each time, that meant a commit every 5 minutes — 288
+   a day, each also triggering a Pages rebuild (1250 of them). GitHub
+   responded by starving the repo of runners: a job was seen queued **31
+   hours**, `check.yml`'s hourly scan degraded to 5-11 hourly gaps, and the
+   `schedule:` trigger on the fast check stopped firing entirely (100
+   consecutive runs all came from `repository_dispatch`). Nothing *failed*,
+   which is why it was invisible in the Actions list. `watchlist_check()`
+   now writes nothing unless a status, drop_time or event actually changed,
+   so an uneventful poll leaves the tree clean and the workflow's
+   `git diff --staged --quiet` finds nothing to commit. The dashboard's
+   "last checked" consequently tracks the last meaningful change, not the
+   last poll — that is the intended trade.
+
    Two related gotchas found alongside it: Worker Observability had logging
    effectively off, so "no log line" was not evidence of anything (it is on
    now, 100% sampling, persisted); and because both workflows share one

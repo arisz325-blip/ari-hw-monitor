@@ -500,6 +500,17 @@ def main() -> int:
               baseline_cfg["stock_probe"]["watchlist"] == ["US:hot-wheels-rlc-watched"],
               f"{baseline_cfg['stock_probe']['watchlist']}")
 
+        # A poll where nothing moved must leave the files byte-identical, or
+        # the workflow commits every run — 288 a day, each triggering a Pages
+        # rebuild, which got the repo starved of Actions runners.
+        state_before = (fast_dir / "state.json").read_bytes()
+        data_before = (fast_dir / "docs" / "data.json").read_bytes()
+        run_watchlist_check(fast_dir, base_url)
+        check("an uneventful fast check leaves state.json untouched",
+              (fast_dir / "state.json").read_bytes() == state_before)
+        check("an uneventful fast check leaves docs/data.json untouched",
+              (fast_dir / "docs" / "data.json").read_bytes() == data_before)
+
         fast_catalog["hot-wheels-rlc-watched"].update(available=True, badge="Add to Cart")
         fast_catalog["hot-wheels-rlc-unwatched"].update(available=True, badge="Add to Cart")
         mock_store.set_catalog(fast_catalog)
