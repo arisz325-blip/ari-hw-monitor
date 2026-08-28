@@ -23,7 +23,7 @@ config.json                       all tuning: regions, filters, notify toggles, 
 state.json                        generated — last seen state, the diff baseline
 docs/index.html                   dashboard, incl. the "Watch stock" button
 docs/data.json                    generated — what the dashboard reads
-.github/workflows/check.yml            hourly cron; writes diagnostics to the run Summary
+.github/workflows/check.yml            hourly full scan, dispatched by the Worker at :00
 .github/workflows/watchlist-check.yml  watchlist-only fast poll, every 5min via Cloudflare cron
 .github/workflows/watchlist.yml        turns a "[watchlist] ..." issue into a config.json edit
 tests/                                 offline suite, 62 checks, mock storefront + ntfy + cart + sitemap
@@ -264,6 +264,27 @@ everything and deliberately sends no alerts.
    after any dashboard deploy, then verify with a `cron fired:` line in
    Observability or a `repository_dispatch` run in Actions — never by
    trusting the Settings page.
+
+   **GitHub's `schedule:` trigger is throttled to uselessness on this repo,
+   and stopping the commit spam did not bring it back.** After the fix
+   above the commits went to zero and Pages rebuilds stopped, but over the
+   next ~16 hours `check.yml`'s hourly scan still only ran at 9.3 and 9.8
+   hour gaps — unchanged. Meanwhile `repository_dispatch` from the
+   Cloudflare Worker was honoured hundreds of times without a single miss.
+   Same repo, same runners; the only difference is who presses the button.
+   Ruled out first: the scan was not being cancelled while pending by the
+   5-minute checks — 100 consecutive full-scan runs were all `success`,
+   none cancelled. GitHub simply was not starting them.
+
+   So since 2026-08-28 the Worker dispatches **both** workflows, and the
+   twelve 5-minute slots are divided up (`FULL_SCAN_MINUTE` /
+   `SKIP_MINUTES` in the Worker): `:00` full scan, `:05/:10/:15` skipped
+   because the scan holds the shared concurrency group for ~17.5 min,
+   `:55` skipped so the scan never arrives behind a running fast check and
+   end up being the *pending* run that the next dispatch cancels, and the
+   remaining seven slots are fast checks. Both workflows keep their own
+   `schedule:` underneath as a fallback for when the Worker's cron binding
+   breaks — which it does on every dashboard redeploy.
 
    **Never let a per-5-minute job commit unconditionally.** The fast check
    originally saved `state.json` + `docs/data.json` on every run, and since

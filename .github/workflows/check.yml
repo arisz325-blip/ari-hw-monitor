@@ -1,6 +1,16 @@
 name: Hot Wheels stock check
 
 on:
+  # Driven from the Cloudflare Worker's cron, because GitHub throttles its
+  # own schedule: trigger on this repo severely — this scan degraded to
+  # 9-10 hour gaps and stayed there, while repository_dispatch has been
+  # honoured hundreds of times without a miss. Nothing moved off GitHub;
+  # this only changes who presses the button.
+  repository_dispatch:
+    types: [stock-check]
+  # Kept underneath: it still fires occasionally, and it is the fallback if
+  # the Worker's cron binding breaks again (it does, on every dashboard
+  # redeploy — see worker/watchlist-worker.js).
   schedule:
     - cron: "1 * * * *"
   workflow_dispatch:

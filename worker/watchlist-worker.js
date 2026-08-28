@@ -59,10 +59,30 @@ const MAX_WATCHLIST = 25;
 // cadence is visible next to the code it drives.
 const CRON_HINT = "*/5 * * * *";  // every 5 minutes
 
-// repository_dispatch event_type — must match the `types:` list in
-// .github/workflows/watchlist-check.yml or the dispatch is accepted with a
-// 204 and then silently does nothing.
-const DISPATCH_EVENT = "watchlist-check";
+// repository_dispatch event_types — each must match the `types:` list in the
+// corresponding workflow, or the dispatch is accepted with a 204 and then
+// silently does nothing.
+const FAST_CHECK_EVENT = "watchlist-check";   // .github/workflows/watchlist-check.yml
+const FULL_SCAN_EVENT = "stock-check";        // .github/workflows/check.yml
+
+// Which of the twelve 5-minute slots in an hour do what.
+//
+// GitHub throttles its own `schedule:` triggers on this repo hard — the
+// hourly full scan degraded to 9-10 hour gaps and stayed there, while
+// repository_dispatch from here has been honoured hundreds of times without
+// a single miss. So the full scan is driven from here too. Everything still
+// *runs* on GitHub; this only presses the button.
+//
+// Both workflows share one concurrency group, hence the gaps:
+//   :00        full scan (takes ~17.5 min)
+//   :05 :10 :15  skipped — the scan owns the runner; a fast check dispatched
+//                now could only sit pending and be cancelled by the next one
+//   :55        skipped — leaves the runway clear, so the scan doesn't arrive
+//                behind a still-running fast check and risk being the
+//                *pending* run that the next dispatch cancels
+//   rest       fast check
+const FULL_SCAN_MINUTE = 0;
+const SKIP_MINUTES = new Set([5, 10, 15, 55]);
 
 function cors(resp) {
   resp.headers.set("Access-Control-Allow-Origin", "*");
@@ -88,7 +108,7 @@ async function githubJson(path, token, init = {}) {
   return resp.json();
 }
 
-async function dispatchWatchlistCheck(token) {
+async function dispatch(eventType, token) {
   // Note this deliberately does not go through githubJson(): /dispatches
   // answers 204 with an empty body, so parsing it as JSON would throw on
   // the success path.
@@ -100,15 +120,15 @@ async function dispatchWatchlistCheck(token) {
       "User-Agent": "ari-hw-monitor-watchlist-worker",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ event_type: DISPATCH_EVENT }),
+    body: JSON.stringify({ event_type: eventType }),
   });
   // Logged either way, on purpose. Logging only failures made "no log
   // line" ambiguous between "it worked", "it never ran", and "the log
   // just isn't captured here" — which cost a diagnosis cycle. Nothing
-  // retries: the next tick is 5 minutes away and watchlist-check.yml's
-  // own schedule is still underneath.
+  // retries: the next tick is 5 minutes away, and both workflows still
+  // carry their own GitHub schedule underneath.
   const detail = resp.ok ? "" : `: ${await resp.text()}`;
-  console.log(`dispatch ${DISPATCH_EVENT} -> HTTP ${resp.status}${detail}`);
+  console.log(`dispatch ${eventType} -> HTTP ${resp.status}${detail}`);
   return resp.ok;
 }
 
@@ -130,8 +150,20 @@ export default {
     // distinguishes "the cron never reached this code" from "it ran and
     // the dispatch failed". Awaited rather than handed to ctx.waitUntil()
     // so both lines are attributed to this invocation.
-    console.log(`cron fired: ${event.cron || "(no expression)"}`);
-    await dispatchWatchlistCheck(env.GITHUB_TOKEN);
+    const minute = new Date(event.scheduledTime).getUTCMinutes();
+    const slot = String(minute).padStart(2, "0");
+
+    if (minute === FULL_SCAN_MINUTE) {
+      console.log(`cron fired at :${slot} — full scan`);
+      await dispatch(FULL_SCAN_EVENT, env.GITHUB_TOKEN);
+      return;
+    }
+    if (SKIP_MINUTES.has(minute)) {
+      console.log(`cron fired at :${slot} — skipped (see SKIP_MINUTES)`);
+      return;
+    }
+    console.log(`cron fired at :${slot} — fast check`);
+    await dispatch(FAST_CHECK_EVENT, env.GITHUB_TOKEN);
   },
 
   async fetch(request, env) {
