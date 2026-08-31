@@ -1,0 +1,29 @@
+{
+  "_comment": [
+    "UCP agent profile for this stock monitor. Mattel's robots.txt points",
+    "automated clients at their UCP/MCP endpoint, and that endpoint requires",
+    "meta['ucp-agent'].profile to be a URI it can fetch. This is that document.",
+    "It is served from the monitor's own GitHub Pages site.",
+    "",
+    "Deliberately declares no payment_handlers and no checkout capability:",
+    "this agent reads catalogue data for one collector's personal stock",
+    "notifications and must never transact. Keep it that way."
+  ],
+  "ucp": {
+    "version": "2026-08-25",
+    "services": {},
+    "capabilities": {
+      "dev.ucp.shopping.catalog": [
+        {
+          "version": "2026-08-25",
+          "spec": "https://ucp.dev/2026-08-25/specification/shopping/catalog",
+          "schema": "https://ucp.dev/2026-08-25/schemas/shopping/catalog.json"
+        }
+      ]
+    },
+    "payment_handlers": {}
+  },
+  "name": "ari-hw-monitor",
+  "description": "Personal Hot Wheels restock monitor. Read-only catalogue lookups; never carts, checkouts or orders.",
+  "homepage": "https://github.com/arisz325-blip/ari-hw-monitor"
+}
