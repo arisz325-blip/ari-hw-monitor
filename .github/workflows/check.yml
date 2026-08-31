@@ -12,7 +12,7 @@ on:
   # the Worker's cron binding breaks again (it does, on every dashboard
   # redeploy — see worker/watchlist-worker.js).
   schedule:
-    - cron: "1 * * * *"
+    - cron: "1,31 * * * *"
   workflow_dispatch:
     inputs:
       mode:

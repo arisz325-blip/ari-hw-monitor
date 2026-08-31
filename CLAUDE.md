@@ -23,7 +23,7 @@ config.json                       all tuning: regions, filters, notify toggles, 
 state.json                        generated — last seen state, the diff baseline
 docs/index.html                   dashboard, incl. the "Watch stock" button
 docs/data.json                    generated — what the dashboard reads
-.github/workflows/check.yml            hourly full scan, dispatched by the Worker at :00
+.github/workflows/check.yml            full scan, dispatched by the Worker at :01 and :31
 .github/workflows/watchlist-check.yml  watchlist-only fast poll, every 5min via Cloudflare cron
 .github/workflows/watchlist.yml        turns a "[watchlist] ..." issue into a config.json edit
 tests/                                 offline suite, 62 checks, mock storefront + ntfy + cart + sitemap
@@ -293,12 +293,19 @@ everything and deliberately sends no alerts.
    none cancelled. GitHub simply was not starting them.
 
    So since 2026-08-28 the Worker dispatches **both** workflows, and the
-   twelve 5-minute slots are divided up (`FULL_SCAN_MINUTE` /
-   `SKIP_MINUTES` in the Worker): `:00` full scan, `:05/:10/:15` skipped
-   because the scan holds the shared concurrency group for ~17.5 min,
-   `:55` skipped so the scan never arrives behind a running fast check and
-   end up being the *pending* run that the next dispatch cancels, and the
-   remaining seven slots are fast checks. Both workflows keep their own
+   twelve 5-minute slots are divided up (`FULL_SCAN_MINUTES` /
+   `SKIP_MINUTES` in the Worker). Since 2026-08-31 the scan runs twice an
+   hour at Ari's request, and the cron is offset to `1-59/5` so the slots
+   land on :01, :06 … :56: **:01 and :31 full scan**, :06/:11/:16 and
+   :36/:41/:46 skipped because a ~17-minute scan holds the shared
+   concurrency group across them, leaving **four fast checks at :21, :26,
+   :51, :56**. Two scans an hour is most of the hour — the arithmetic is
+   why the fast check dropped from seven slots to four, and why going to a
+   scan every 15 minutes would leave room for none at all. If the fast
+   check ever needs its full 5-minute cadence back alongside frequent
+   scans, the two workflows have to stop sharing a concurrency group,
+   which trades this for occasional lost commits and duplicate restock
+   alerts when they collide on state.json. Both workflows keep their own
    `schedule:` underneath as a fallback for when the Worker's cron binding
    breaks — which it does on every dashboard redeploy.
 

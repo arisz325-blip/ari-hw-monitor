@@ -57,7 +57,9 @@ const MAX_WATCHLIST = 25;
 // The Cron Trigger to set in the Cloudflare dashboard (Settings > Triggers).
 // Cloudflare stores this itself; the constant is here so the intended
 // cadence is visible next to the code it drives.
-const CRON_HINT = "*/5 * * * *";  // every 5 minutes
+// Offset by one minute so the slots land on :01, :06, :11 … :56, because
+// the full scan is wanted at :01 and :31.
+const CRON_HINT = "1-59/5 * * * *";  // every 5 minutes, starting at :01
 
 // repository_dispatch event_types — each must match the `types:` list in the
 // corresponding workflow, or the dispatch is accepted with a 204 and then
@@ -73,16 +75,18 @@ const FULL_SCAN_EVENT = "stock-check";        // .github/workflows/check.yml
 // a single miss. So the full scan is driven from here too. Everything still
 // *runs* on GitHub; this only presses the button.
 //
-// Both workflows share one concurrency group, hence the gaps:
-//   :00        full scan (takes ~17.5 min)
-//   :05 :10 :15  skipped — the scan owns the runner; a fast check dispatched
-//                now could only sit pending and be cancelled by the next one
-//   :55        skipped — leaves the runway clear, so the scan doesn't arrive
-//                behind a still-running fast check and risk being the
-//                *pending* run that the next dispatch cancels
-//   rest       fast check
-const FULL_SCAN_MINUTE = 0;
-const SKIP_MINUTES = new Set([5, 10, 15, 55]);
+// The full scan runs twice an hour (asked for 2026-08-31) and takes ~17
+// minutes, so it occupies roughly :01-:18 and :31-:48 — over half the hour.
+// Both workflows share one concurrency group, so a fast check dispatched
+// while a scan holds the runner can only sit pending until the next
+// dispatch cancels it. Hence the skips; what is left is four fast checks an
+// hour, paired in the two gaps between scans:
+//   :01 :31              full scan
+//   :06 :11 :16          skipped, first scan still running
+//   :36 :41 :46          skipped, second scan still running
+//   :21 :26 :51 :56      fast check
+const FULL_SCAN_MINUTES = new Set([1, 31]);
+const SKIP_MINUTES = new Set([6, 11, 16, 36, 41, 46]);
 
 function cors(resp) {
   resp.headers.set("Access-Control-Allow-Origin", "*");
@@ -153,7 +157,7 @@ export default {
     const minute = new Date(event.scheduledTime).getUTCMinutes();
     const slot = String(minute).padStart(2, "0");
 
-    if (minute === FULL_SCAN_MINUTE) {
+    if (FULL_SCAN_MINUTES.has(minute)) {
       console.log(`cron fired at :${slot} — full scan`);
       await dispatch(FULL_SCAN_EVENT, env.GITHUB_TOKEN);
       return;
