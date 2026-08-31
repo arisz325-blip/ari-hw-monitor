@@ -224,8 +224,27 @@ everything and deliberately sends no alerts.
 
 1. **Membership item leaks the filter.** AU returns "1-Year RLC Digital
    Membership". Add `membership` and `digital` to `exclude_keywords`.
-2. **Stock counts.** `probe_stock()` implements the Shopify cart-ceiling trick
-   (POST `/cart/add.js` with quantity 99999, read the number out of the 422).
+2. ~~**Stock counts.**~~ **The cart-ceiling trick does not work on this
+   store — tested live 2026-08-31, twice.** `probe_stock()` POSTs
+   `/cart/add.js` with quantity 99999 expecting a 422 naming the ceiling.
+   Mattel answered **HTTP 200 both times**, accepting all 99999: once for a
+   grouping product (Elite 64 Premium Cars, US) and once for a real RLC
+   exclusive (’71 AMC Javelin, AU). Its cart simply does not validate
+   inventory on add, so there is no number to read. The product page has
+   none either — no "only N left", no low-stock wording, no inventory
+   field anywhere in 1.5 MB of HTML. `stock_probe.enabled` is therefore
+   `false` and the whole path is dead weight; don't switch it back on
+   expecting numbers.
+
+   The one real lead left is the endpoint robots.txt points agents at,
+   `/api/ucp/mcp`. It is live and speaks MCP (`initialize` and
+   `tools/list` both answer; 13 tools, and `get_product` advertises
+   "real-time availability"), but calling it returns `UCP discovery
+   failed: Missing profile uri` — it wants a registered agent profile
+   first. That onboarding is unexplored. Even then, "availability" may
+   well mean in/out of stock rather than a count.
+
+   Original note kept for context:
    It is `enabled: false` on purpose — that path is robots-disallowed, and if
    Mattel's bot protection blocks the runner the *whole monitor* dies, not just
    the probe. Never enable it without Ari explicitly asking.

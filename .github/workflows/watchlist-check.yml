@@ -10,18 +10,18 @@ name: Watchlist fast check
 # on the free tier, so treat "every 5 minutes" as "roughly every 5 minutes".
 
 on:
-  # The real driver: a cron trigger on the Cloudflare Worker. GitHub's own
-  # scheduler is best-effort and was measured at a 32-minute median here (94
-  # runs, all successful, gaps 20–117 min) against the 5 it asks for.
+  # Retired 2026-08-31: Ari found the periodic watchlist poll wasn't earning
+  # its keep, and stock is now checked on demand from the dashboard button
+  # instead. Nothing fires this automatically any more — the Worker no
+  # longer dispatches it, and its own `schedule:` is gone so it cannot
+  # start itself back up if GitHub ever relaxes the throttling that has
+  # been suppressing schedules on this repo.
+  #
+  # Left runnable by hand, and still wired for repository_dispatch, so
+  # bringing the poll back is a few lines in the Worker rather than a
+  # rewrite.
   repository_dispatch:
     types: [watchlist-check]
-  # Deliberately kept even though the Worker now drives the cadence: that
-  # cron binding breaks every time the Worker is redeployed from the
-  # dashboard editor (see worker/watchlist-worker.js), and this fallback is
-  # what keeps the monitor at ~30 minutes instead of stopping dead until
-  # someone notices.
-  schedule:
-    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 permissions:

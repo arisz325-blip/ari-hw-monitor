@@ -1,17 +1,18 @@
 /**
  * Cloudflare Worker for the Hot Wheels monitor. Two jobs:
  *
- * 1. fetch()     — lets the dashboard toggle a car on/off the stock-probe
- *                  watchlist with a plain POST, no redirect to GitHub and
- *                  no token in the page.
+ * 1. fetch()     — edits stock_probe.watchlist in config.json from a plain
+ *                  POST, no redirect to GitHub and no token in the page.
  *                  Body: {"action": "add" | "remove", "key": "US:handle"}
+ *                  Currently unused: nothing reads the watchlist since
+ *                  automated probing was switched off (it never worked —
+ *                  see config.json / CLAUDE.md). Left in place, working.
  *
- * 2. scheduled() — fires the watchlist fast check on a cron trigger,
- *                  because GitHub's own scheduler is best-effort: measured
- *                  here at a 32-minute median (94 runs, all successful,
- *                  gaps 20–117 min) against a requested 5. Working since
- *                  2026-08-24, verified punctual (dispatches landed at
- *                  17:40:05 and 17:45:05 UTC, exactly 5 minutes apart).
+ * 2. scheduled() — fires the full scan on a cron trigger, because
+ *                  GitHub's own scheduler is best-effort: measured here at
+ *                  a 32-minute median (94 runs, all successful, gaps 20–117
+ *                  min) against a requested 5, and it throttled the hourly
+ *                  scan to 9-10 hour gaps. Working since 2026-08-24.
  *
  * !! READ THIS BEFORE EDITING THIS FILE !!
  *
@@ -26,9 +27,9 @@
  * (or a repository_dispatch run in the repo's Actions tab) rather than
  * trusting the Settings page, which lies about this.
  *
- * That is also why watchlist-check.yml keeps its own GitHub schedule: this
- * binding will break again on the next edit, and the fallback means the
- * monitor degrades to ~30 minutes instead of stopping.
+ * That is also why check.yml keeps its own GitHub schedule: this binding
+ * will break again on the next edit, and the fallback means the monitor
+ * degrades rather than stopping.
  *
  * The GitHub token lives only here, as a Worker secret (GITHUB_TOKEN). It
  * needs Contents: read and write on this one repo — the same permission the
@@ -64,29 +65,24 @@ const CRON_HINT = "1-59/5 * * * *";  // every 5 minutes, starting at :01
 // repository_dispatch event_types — each must match the `types:` list in the
 // corresponding workflow, or the dispatch is accepted with a 204 and then
 // silently does nothing.
-const FAST_CHECK_EVENT = "watchlist-check";   // .github/workflows/watchlist-check.yml
 const FULL_SCAN_EVENT = "stock-check";        // .github/workflows/check.yml
+// watchlist-check.yml still accepts "watchlist-check", but nothing sends it
+// since the periodic poll was retired — kept so restoring it is one line.
 
-// Which of the twelve 5-minute slots in an hour do what.
-//
 // GitHub throttles its own `schedule:` triggers on this repo hard — the
 // hourly full scan degraded to 9-10 hour gaps and stayed there, while
 // repository_dispatch from here has been honoured hundreds of times without
-// a single miss. So the full scan is driven from here too. Everything still
+// a single miss. So the full scan is driven from here. Everything still
 // *runs* on GitHub; this only presses the button.
 //
-// The full scan runs twice an hour (asked for 2026-08-31) and takes ~17
-// minutes, so it occupies roughly :01-:18 and :31-:48 — over half the hour.
-// Both workflows share one concurrency group, so a fast check dispatched
-// while a scan holds the runner can only sit pending until the next
-// dispatch cancels it. Hence the skips; what is left is four fast checks an
-// hour, paired in the two gaps between scans:
-//   :01 :31              full scan
-//   :06 :11 :16          skipped, first scan still running
-//   :36 :41 :46          skipped, second scan still running
-//   :21 :26 :51 :56      fast check
+// The cron fires every 5 minutes and only two of those slots do anything:
+// the full scan at :01 and :31. The periodic watchlist fast check that used
+// to fill the other slots was retired on 2026-08-31 — Ari found it wasn't
+// earning its keep, and with a ~17-minute scan running twice an hour it had
+// been squeezed down to four slots anyway. The other ten slots now do
+// nothing; the cron stays at 5-minute granularity only so :01 and :31 are
+// reachable.
 const FULL_SCAN_MINUTES = new Set([1, 31]);
-const SKIP_MINUTES = new Set([6, 11, 16, 36, 41, 46]);
 
 function cors(resp) {
   resp.headers.set("Access-Control-Allow-Origin", "*");
@@ -162,12 +158,7 @@ export default {
       await dispatch(FULL_SCAN_EVENT, env.GITHUB_TOKEN);
       return;
     }
-    if (SKIP_MINUTES.has(minute)) {
-      console.log(`cron fired at :${slot} — skipped (see SKIP_MINUTES)`);
-      return;
-    }
-    console.log(`cron fired at :${slot} — fast check`);
-    await dispatch(FAST_CHECK_EVENT, env.GITHUB_TOKEN);
+    console.log(`cron fired at :${slot} — nothing scheduled for this slot`);
   },
 
   async fetch(request, env) {
@@ -186,6 +177,7 @@ export default {
     }
 
     const { action, key } = body || {};
+
     if (!["add", "remove"].includes(action) || typeof key !== "string" || !KEY_RE.test(key)) {
       return cors(new Response(JSON.stringify({ error: "invalid action/key" }), { status: 400 }));
     }

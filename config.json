@@ -62,7 +62,7 @@
     "sold_out": true
   },
   "stock_probe": {
-    "enabled": true,
+    "enabled": false,
     "delay_seconds": 4,
     "max_products_per_run": 8,
     "probe_quantity": 99999,
