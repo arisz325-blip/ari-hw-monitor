@@ -1,12 +1,11 @@
 /**
  * Cloudflare Worker for the Hot Wheels monitor. Two jobs:
  *
- * 1. fetch()     — edits stock_probe.watchlist in config.json from a plain
- *                  POST, no redirect to GitHub and no token in the page.
- *                  Body: {"action": "add" | "remove", "key": "US:handle"}
- *                  Currently unused: nothing reads the watchlist since
- *                  automated probing was switched off (it never worked —
- *                  see config.json / CLAUDE.md). Left in place, working.
+ * 1. fetch()     — {"action": "stock", "key": "US:handle"} re-reads one
+ *                  car's stock figure on demand, for the dashboard button.
+ *                  Also still serves {"action": "add"|"remove"} against
+ *                  stock_probe.watchlist, which nothing reads any more —
+ *                  left working in case the watchlist comes back.
  *
  * 2. scheduled() — fires the full scan on a cron trigger, because
  *                  GitHub's own scheduler is best-effort: measured here at
@@ -84,6 +83,11 @@ const FULL_SCAN_EVENT = "stock-check";        // .github/workflows/check.yml
 // reachable.
 const FULL_SCAN_MINUTES = new Set([1, 31]);
 
+function json(payload, status = 200) {
+  return new Response(JSON.stringify(payload),
+    { status, headers: { "Content-Type": "application/json" } });
+}
+
 function cors(resp) {
   resp.headers.set("Access-Control-Allow-Origin", "*");
   resp.headers.set("Access-Control-Allow-Methods", "POST, OPTIONS");
@@ -132,6 +136,60 @@ async function dispatch(eventType, token) {
   return resp.ok;
 }
 
+// --- on-demand stock lookup -----------------------------------------------
+//
+// Mattel publishes no stock figures, and the two obvious routes are dead:
+// the Shopify cart accepts any quantity you throw at it (tested — no 422 to
+// read a ceiling out of), and the product pages carry nothing. The one place
+// a real number surfaces is their storefront search provider, SearchSpring,
+// whose index carries the raw Shopify variant payload: `inventory_quantity`
+// is reduced to a boolean there, but `old_inventory_quantity` survives as an
+// integer on a small minority of products.
+//
+// Only fired when someone presses the button. The field is transient:
+// measured 2026-08-31, 45 products exposed a number and 25 minutes later
+// only 22 did, 26 having dropped off and 3 appeared. So "no number right
+// now" is the ordinary answer, returned as a 409 the dashboard treats as
+// normal — it keeps showing the last figure the scan caught rather than
+// reporting a failure.
+//
+// The values are real: the ones that persisted moved in small decrements
+// matching sales. But the field is Shopify's value from *before* the last
+// update, so it trails. Say "about" in the UI, never present it as exact.
+const SS_SITE_ID = "f37vx2";
+const SS_ENDPOINT = `https://${SS_SITE_ID}.a.searchspring.io/api/search/search.json`;
+const DATA_URL = "https://arisz325-blip.github.io/ari-hw-monitor/data.json";
+const LOOKUP_COOLDOWN_MS = 15_000;
+const lastLookup = new Map();
+
+async function stockForSku(sku, handle) {
+  const url = `${SS_ENDPOINT}?siteId=${SS_SITE_ID}`
+            + `&q=${encodeURIComponent(sku)}&resultsPerPage=20&resultsFormat=native`;
+  const resp = await fetch(url, { headers: { "Accept": "application/json" } });
+  if (!resp.ok) return { error: `search replied HTTP ${resp.status}` };
+  const body = await resp.json().catch(() => null);
+  // The query is a text search, so it comes back fuzzy — match the exact
+  // handle rather than trusting the first hit.
+  const row = (body?.results || []).find(r => r.handle === handle);
+  if (!row) return { unpublished: true };
+  let variant;
+  try {
+    variant = JSON.parse(decodeHtml(row.ss_variants))[0];
+  } catch {
+    return { error: "could not read the variant data" };
+  }
+  const qty = variant?.old_inventory_quantity;
+  if (typeof qty !== "number") return { unpublished: true };
+  return { stock: qty };
+}
+
+// The index embeds JSON as HTML-escaped text; Workers have no DOM parser.
+function decodeHtml(s) {
+  return String(s)
+    .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&apos;/g, "'")
+    .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
+}
+
 // Workers' atob/btoa are byte-oriented; this keeps UTF-8 (e.g. car titles
 // with curly quotes) intact across the round trip.
 function b64ToText(b64) {
@@ -177,6 +235,32 @@ export default {
     }
 
     const { action, key } = body || {};
+
+    if (action === "stock") {
+      if (typeof key !== "string" || !KEY_RE.test(key)) {
+        return cors(json({ error: "invalid key" }, 400));
+      }
+      const now = Date.now();
+      if (now - (lastLookup.get(key) || 0) < LOOKUP_COOLDOWN_MS) {
+        return cors(json({ error: "Just checked — give it a moment." }, 429));
+      }
+      // Take the sku from published data rather than from the caller, so
+      // this can't be aimed at arbitrary products.
+      const data = await fetch(`${DATA_URL}?t=${now}`)
+        .then(r => (r.ok ? r.json() : null)).catch(() => null);
+      if (!data) return cors(json({ error: "could not read the monitor's data" }, 502));
+      const item = (data.items || []).find(i => i.key === key);
+      if (!item) return cors(json({ error: "not a tracked car" }, 404));
+      if (!item.stock_sku) return cors(json({ error: "no stock number published for this car" }, 409));
+
+      lastLookup.set(key, now);
+      const result = await stockForSku(item.stock_sku, item.handle);
+      console.log(`stock ${key} -> ${JSON.stringify(result)}`);
+      // 409 = "nothing published right now", which is the common case and
+      // not a fault; the dashboard keeps showing the last figure it caught.
+      if (result.unpublished) return cors(json({ unpublished: true }, 409));
+      return cors(result.error ? json(result, 502) : json({ ok: true, key, ...result }));
+    }
 
     if (!["add", "remove"].includes(action) || typeof key !== "string" || !KEY_RE.test(key)) {
       return cors(new Response(JSON.stringify({ error: "invalid action/key" }), { status: 400 }));

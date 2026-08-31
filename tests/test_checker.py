@@ -16,6 +16,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 from tests import mock_store  # noqa: E402
 import checker as checker_mod  # noqa: E402
+from checker import searchspring_stock  # noqa: E402
 from checker import (  # noqa: E402
     Fetcher, header_safe, melbourne_time, parse_human_drop_time,
 )
@@ -503,6 +504,55 @@ def main() -> int:
               not any("Old Dead Stock" in t for t in titles), f"{titles}")
         check("but one that sold out recently still does",
               any("Just Missed It" in t for t in titles), f"{titles}")
+
+        print("\nRun 11b — the stock button only appears where a number exists")
+        ss_catalog = {
+            "hot-wheels-rlc-has-number": {
+                "title": "Hot Wheels RLC Has A Number", "available": True,
+                "badge": "Add to Cart", "tags": ["RLC"],
+                "sku": "AAA11", "ss_stock": 4321,
+            },
+            "hot-wheels-rlc-no-number": {
+                "title": "Hot Wheels RLC No Number", "available": True,
+                "badge": "Add to Cart", "tags": ["RLC"], "sku": "BBB22",
+            },
+        }
+        mock_store.set_catalog(ss_catalog)
+        mock_store.set_collections({})
+
+        ss_dir = Path(tmp) / "ss"
+        ss_dir.mkdir()
+        (ss_dir / "checker.py").write_bytes((ROOT / "checker.py").read_bytes())
+        (ss_dir / "docs").mkdir()
+        ss_cfg = json.loads((ROOT / "config.json").read_text())
+        ss_cfg["collections"] = ["hot-wheels"]
+        ss_cfg["regions"]["AU"]["collections"] = ["hot-wheels"]
+        ss_cfg["stock_probe"].update(enabled=False, watchlist=[])
+        (ss_dir / "config.json").write_text(json.dumps(ss_cfg))
+
+        # The mock serves SearchSpring off the same BASE_OVERRIDE host, so
+        # this exercises the real paging and unescaping path.
+        os.environ["BASE_OVERRIDE"] = base_url
+        found = searchspring_stock(Fetcher({"request_delay_seconds": 0}), "test-site")
+        check("searchspring_stock reads the escaped variant payload",
+              found.get("hot-wheels-rlc-has-number") == ("AAA11", 4321), f"{found}")
+        check("and skips products whose quantity is only the boolean",
+              "hot-wheels-rlc-no-number" not in found, f"{sorted(found)}")
+
+        persist_state(ss_dir, base_url)
+        ssdata = json.loads((ss_dir / "docs" / "data.json").read_text())
+        # key, not handle: both stores carry the same handles here, and
+        # keying by handle silently drops the US row.
+        rows = {r["key"]: r for r in ssdata["items"]}
+        check("a US car with a published number carries stock_sku",
+              rows.get("US:hot-wheels-rlc-has-number", {}).get("stock_sku") == "AAA11",
+              f"{rows.get('US:hot-wheels-rlc-has-number', {}).get('stock_sku')}")
+        check("a US car without one carries no stock_sku, so it gets no button",
+              rows.get("US:hot-wheels-rlc-no-number", {}).get("stock_sku") in (None, ""),
+              f"{rows.get('US:hot-wheels-rlc-no-number', {}).get('stock_sku')}")
+        au = [r for r in ssdata["items"] if r["key"].startswith("AU:")]
+        check("AU cars never get a button (that store has no SearchSpring)",
+              all(not r.get("stock_sku") for r in au), f"{[r.get('stock_sku') for r in au]}")
 
         print("\nRun 12 — watchlist-check catches a restock without a full scan")
         # Give the watched car a live future countdown, same as the real R32

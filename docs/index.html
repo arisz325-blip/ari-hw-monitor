@@ -189,7 +189,6 @@
       <button data-status="upcoming" aria-pressed="false">Upcoming</button>
     </div>
     <input type="search" id="q" placeholder="Search cars…" aria-label="Search cars">
-    <button id="watching-filter" class="toggle-btn" aria-pressed="false">★ Watching only</button>
     <div class="seg" role="group" aria-label="View">
       <button data-view="cards" aria-pressed="true">Cards</button>
       <button data-view="table" aria-pressed="false">Table</button>
@@ -204,9 +203,10 @@
 
   <footer>
     Checks Mattel Creations US &amp; AU hourly · notifications via ntfy<br>
-    Stock counts show only for cars on the watchlist, added instantly with
-    the button above. Numbers update on the next scheduled check, not
-    immediately. A car drops off the watchlist automatically once sold out.<br>
+    Mattel publishes no stock figures. A number leaks through their search
+    index for a few minutes at a time; the scan keeps whatever it catches,
+    and pressing a card's button tries for a fresher one. US store only —
+    the AU store exposes nothing of the kind. Treat these as close, not exact.<br>
     All times shown are Melbourne time (AEST/AEDT).
   </footer>
 </div>
@@ -226,38 +226,55 @@ const EVENT_ICON = {
 };
 
 let DATA = null;
-const filters = { region: "all", status: "all", view: "cards", q: "", watching: false };
+const filters = { region: "all", status: "all", view: "cards", q: "" };
 const WORKER_URL = "https://hw-watchlist-worker.arisz325.workers.dev";
-const watchBusy = new Set(); // keys currently mid-toggle, so double-clicks no-op
 
-function watchButton(it) {
-  const watching = (DATA.watchlist || []).includes(it.key);
-  const busy = watchBusy.has(it.key);
-  const action = watching ? "remove" : "add";
-  const label = busy ? "…" : watching ? "✓ Watching" : "+ Watch stock";
-  return `<button type="button" class="watch-btn${watching ? " on" : ""}"
-    data-key="${esc(it.key)}" data-action="${action}" ${busy ? "disabled" : ""}>${label}</button>`;
+const stockBusy = new Set();    // keys mid-request, so double-clicks no-op
+const stockFresh = new Map();   // key -> number read by pressing, this session
+
+// Mattel doesn't publish stock. The number leaks through their search
+// provider's index, but only for a few minutes after they touch a
+// product's inventory — measured, 45 products had one and 25 minutes later
+// 22 did. So the scan keeps whatever it catches, the card shows that with
+// its timestamp, and pressing tries for a fresher figure. A press that
+// finds nothing is normal, not an error: the stored number stays on screen.
+function stockButton(it) {
+  const stored = it.stock_count;
+  if (stored === undefined || stored === null) return "";
+  const fresh = stockFresh.get(it.key);
+  const shown = fresh !== undefined ? fresh : stored;
+  const when = fresh !== undefined ? "just now" : timeAgo(it.stock_seen_at);
+  const label = stockBusy.has(it.key)
+    ? "checking…"
+    : `~${shown.toLocaleString()} left · ${when}`;
+  return `<button type="button" class="watch-btn${fresh !== undefined ? " on" : ""}"
+    data-stock="${esc(it.key)}" title="Press to re-read the store's figure"
+    ${stockBusy.has(it.key) ? "disabled" : ""}>${label}</button>`;
 }
 
-async function toggleWatch(key, action) {
-  watchBusy.add(key);
+async function checkStock(key) {
+  stockBusy.add(key);
   render();
   try {
     const resp = await fetch(WORKER_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action, key }),
+      body: JSON.stringify({ action: "stock", key }),
     });
     const body = await resp.json();
+    if (resp.status === 409) {
+      setStatus("The store isn't publishing a number for this one right now — "
+              + "showing the last one we caught.");
+      return;
+    }
     if (!resp.ok || !body.ok) throw new Error(body.error || `HTTP ${resp.status}`);
-    DATA.watchlist = body.watchlist;
-    setStatus(action === "add"
-      ? "Added to the watchlist — probing starts on the next check."
-      : "Removed from the watchlist.");
+    stockFresh.set(key, body.stock);
+    setStatus(`~${body.stock.toLocaleString()} left, read just now. `
+            + `The store publishes this as a trailing figure, so it's close, not exact.`);
   } catch (err) {
-    setStatus("Couldn't update the watchlist: " + err.message, true);
+    setStatus("Couldn't re-read the stock number: " + err.message, true);
   } finally {
-    watchBusy.delete(key);
+    stockBusy.delete(key);
     render();
   }
 }
@@ -307,7 +324,6 @@ function visible() {
     if (filters.status === "in_stock" && it.status !== "in_stock") return false;
     if (filters.status === "upcoming" && !["preorder", "coming_soon"].includes(it.status)) return false;
     if (filters.q && !(it.title || "").toLowerCase().includes(filters.q)) return false;
-    if (filters.watching && !(DATA.watchlist || []).includes(it.key)) return false;
     return true;
   });
 }
@@ -339,7 +355,7 @@ function renderCards(items) {
           <span class="chip">${esc(it.region)}</span>
           ${it.price ? `<span class="price">${esc(it.price)}</span>` : ""}
           ${bits.join("")}
-          ${watchButton(it)}
+          ${stockButton(it)}
         </div>
         ${notes.length ? `<div class="note">${notes.join(" · ")}</div>` : ""}
       </div>
@@ -413,11 +429,6 @@ document.getElementById("q").addEventListener("input", e => {
   filters.q = e.target.value.trim().toLowerCase();
   render();
 });
-document.getElementById("watching-filter").addEventListener("click", e => {
-  filters.watching = !filters.watching;
-  e.target.setAttribute("aria-pressed", String(filters.watching));
-  render();
-});
 
 // Cards are plain divs (not <a>) so the "Watch stock" button inside them
 // stays valid HTML; open the product page on click unless the click came
@@ -428,7 +439,7 @@ function openCard(target) {
 }
 document.getElementById("cards").addEventListener("click", e => {
   const btn = e.target.closest(".watch-btn");
-  if (btn) { toggleWatch(btn.dataset.key, btn.dataset.action); return; }
+  if (btn) { checkStock(btn.dataset.stock); return; }
   openCard(e.target);
 });
 document.getElementById("cards").addEventListener("keydown", e => {

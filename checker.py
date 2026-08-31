@@ -31,6 +31,7 @@ import sys
 import time
 import urllib.parse
 from datetime import datetime, timezone
+from html import unescape as html_unescape
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
@@ -343,6 +344,62 @@ def sitemap_product_handles(fetcher: Fetcher, region_cfg: dict) -> set[str]:
     return handles
 
 
+SS_ENDPOINT = "https://{site}.a.searchspring.io/api/search/search.json"
+SS_PAGE_SIZE = 100          # the API caps a page at 100 whatever you ask for
+SS_MAX_PAGES = 30           # ~2600 products today; a stop so this can't run away
+
+
+def searchspring_stock(fetcher: Fetcher, site_id: str) -> dict[str, tuple[str, int]]:
+    """handle -> (sku, quantity) for every product whose stock number leaks.
+
+    Mattel's storefront search is SearchSpring, whose index carries the raw
+    Shopify variant payload. `inventory_quantity` is deliberately reduced to
+    a boolean there, but `old_inventory_quantity` is left as a real integer
+    on a minority of products — about 1.7% of ~2600 indexed, though it
+    happens to cover several of the RLC/Elite 64 cars worth watching. That
+    is the only place a stock number is obtainable at all; the cart-ceiling
+    trick and the product pages give nothing (see CLAUDE.md).
+
+    This runs once per scan and only records *which* products have a number,
+    never the number itself — the dashboard fetches that on demand when the
+    button is pressed, so what it shows is current rather than up to half an
+    hour stale.
+
+    Note the field name: `old_inventory_quantity` is Shopify's value from
+    before the last update, so treat it as a close trailing figure, not a
+    to-the-second count. Best-effort throughout — any failure just means no
+    buttons this scan.
+    """
+    # BASE_OVERRIDE points the whole scan at the offline mock; honour it here
+    # too, or the test suite tries to resolve a searchspring.io subdomain and
+    # sits through the retry/timeout ladder instead of running.
+    override = os.environ.get("BASE_OVERRIDE")
+    base = (f"{override.rstrip('/')}/api/search/search.json" if override
+            else SS_ENDPOINT.format(site=site_id))
+
+    out: dict[str, tuple[str, int]] = {}
+    for page in range(1, SS_MAX_PAGES + 1):
+        data = fetcher.get(
+            f"{base}?siteId={site_id}&resultsPerPage={SS_PAGE_SIZE}"
+            f"&page={page}&resultsFormat=native",
+            as_json=True, quiet=True)
+        results = (data or {}).get("results") or []
+        if not results:
+            break
+        for row in results:
+            handle, sku = row.get("handle"), row.get("sku")
+            if not handle or not sku:
+                continue
+            try:
+                variant = json.loads(html_unescape(row["ss_variants"]))[0]
+            except (KeyError, ValueError, IndexError):
+                continue
+            qty = variant.get("old_inventory_quantity")
+            if isinstance(qty, int) and not isinstance(qty, bool):
+                out[handle] = (sku, qty)
+    return out
+
+
 def looks_relevant(handle: str, filters: dict) -> bool:
     """Cheap pre-filter on handle text alone, before paying for a fetch —
     the sitemap covers the whole store (apparel, other brands, everything),
@@ -564,6 +621,16 @@ def scan_region(fetcher: Fetcher, name: str, region_cfg: dict, cfg: dict,
     probes_done = 0
     seen_handles: set[str] = set()
 
+    # Which products have a readable stock number, re-checked every scan so a
+    # restock or a brand-new listing is assessed as it appears. Only the
+    # yes/no is kept; the number itself is fetched when the button is
+    # pressed. AU has no SearchSpring at all, so no site_id, no buttons.
+    site_id = (region_cfg.get("searchspring") or {}).get("site_id")
+    countable: dict[str, tuple[str, int]] = {}
+    if site_id:
+        countable = searchspring_stock(fetcher, site_id)
+        log(f"  {name}: {len(countable)} products expose a stock number")
+
     def handle_item(handle: str, prefix: str, html: str,
                     only_if_recent: bool = False) -> dict | None:
         """Fetch and classify one product. html is its collection-card
@@ -637,6 +704,14 @@ def scan_region(fetcher: Fetcher, name: str, region_cfg: dict, cfg: dict,
             "tags": product.get("tags") or [],
             "drop_time": human_drop_time or (extract_drop_time(html, handle) if html else None),
             "published_at": product.get("published_at"),
+            # Both None on the scans where this product isn't exposing a
+            # number — which is most of them. diff() keeps the last known
+            # values rather than overwriting with None; see the note there.
+            # sku is carried so the dashboard button can look this one
+            # product up again: SearchSpring's text index doesn't match on
+            # handle, but it does on sku.
+            "stock_sku": countable.get(handle, (None, None))[0],
+            "stock_count": countable.get(handle, (None, None))[1],
         }
 
     default_prefix = region_cfg.get("path_prefix", "")
@@ -730,6 +805,18 @@ def diff(state: dict, items: list[dict], notify_cfg: dict) -> list[dict]:
             "status", "status_label", "stock", "variant_id", "image", "tags",
             "drop_time", "published_at",
         )})
+        # The stock number is only visible for a few minutes after Mattel
+        # touches a product's inventory — measured, 45 products exposed one
+        # and 25 minutes later only 22 did, with 26 gone and 3 new. So it is
+        # kept, not refreshed: blanket-copying these would wipe a real
+        # reading the moment the field went quiet again, which is nearly
+        # every scan. Written only when this scan actually saw a number.
+        if item.get("stock_count") is not None:
+            record["stock_count"] = item["stock_count"]
+            record["stock_seen_at"] = stamp
+        if item.get("stock_sku"):
+            record["stock_sku"] = item["stock_sku"]
+
         record["last_seen"] = stamp
         record.setdefault("first_seen", stamp)
         record.setdefault("history", [])

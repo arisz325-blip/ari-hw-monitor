@@ -123,6 +123,33 @@ class Handler(BaseHTTPRequestHandler):
                 return self._send(200, "<html><body></body></html>", "text/html")
             return self._send(200, _collection_html(note, collection), "text/html")
 
+        # Stand-in for SearchSpring. The real index embeds the Shopify
+        # variant payload as HTML-escaped JSON, with inventory_quantity
+        # reduced to a boolean and old_inventory_quantity sometimes left as
+        # a real integer — that quirk is the whole reason this exists, so
+        # the shape is reproduced faithfully.
+        if path == "/api/search/search.json":
+            page = int(query.get("page", ["1"])[0])
+            handles = list(CATALOG.keys())
+            rows = handles if page == 1 else []
+            out = []
+            for h in rows:
+                p = CATALOG[h]
+                qty = p.get("ss_stock")
+                variant = {
+                    "id": abs(hash(h + "v")) % 10**10,
+                    "inventory_quantity": True,
+                    **({"old_inventory_quantity": qty} if qty is not None else {}),
+                }
+                out.append({
+                    "handle": h,
+                    "sku": p.get("sku", h[:6].upper()),
+                    "name": p["title"],
+                    "ss_variants": json.dumps([variant]).replace('"', "&quot;"),
+                })
+            return self._send(200, json.dumps({"results": out,
+                              "pagination": {"totalResults": len(out)}}), "application/json")
+
         if path == "/sitemap.xml":
             host = self.headers.get("Host", "localhost")
             body = (
