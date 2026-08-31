@@ -110,6 +110,22 @@ a region's collections so a product listed in more than one collection only
 gets fetched/counted once — get this wrong and restock/new-listing events
 double-fire for anything in both lists.
 
+**The sitemap recency gate is for discovery only — never apply it to
+something already tracked.** `is_recent()` exists so the sitemap doesn't
+drag in every RLC car ever made, and `scan_region` passes
+`only_if_recent=True` for sitemap finds. Applying that to items already in
+`state.json` silently stops watching them, because Mattel drops sold-out
+products out of the collections: an older car that sells out vanishes from
+the collection *and* fails the 60-day gate, so the scan never fetches it
+again and its status freezes at whatever it last was. Found 2026-08-31,
+three cars still reading `in_stock` days after selling out (1994 NSX, 1972
+Skyline, 1962 Ford F-100 — published April–June, so all past 60 days). The
+stale label was the harmless part; the real cost is that a **restock on any
+of them would never have fired a notification**, which is the entire point
+of the monitor. `scan_region` now takes `known_keys` and skips the gate for
+those. Symptom to watch for: `present: false` on items in `docs/data.json`
+that are not 404s.
+
 **The dashboard's activity feed comes from `state["recent_events"]` only.**
 Anything that produces events calls `record_events()` *before*
 `write_dashboard_data()`, which reads that log and takes no events

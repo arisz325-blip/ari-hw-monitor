@@ -462,6 +462,26 @@ def main() -> int:
         check("irrelevant sitemap product is pre-filtered out before a fetch",
               "mega-blocks-irrelevant" not in handles_found, f"{handles_found}")
 
+        # An already-tracked car that Mattel drops from the collections once
+        # it sells out must keep being checked, even though it is now old
+        # enough to fail the recency gate. Otherwise its state freezes and a
+        # later restock is never noticed — found live 2026-08-31 with three
+        # cars still reading in_stock days after selling out.
+        sitemap_catalog["hot-wheels-rlc-listed"].update(
+            available=False, badge="Sold Out", published_at="2020-01-01T00:00:00Z")
+        mock_store.set_collections({"hot-wheels": []})  # gone from the collection too
+        mock_store.set_catalog(sitemap_catalog)
+        persist_state(sitemap_dir, base_url)
+        aged = json.loads((sitemap_dir / "docs" / "data.json").read_text())
+        aged_rows = {r["key"]: r for r in aged["items"]}
+        row = aged_rows.get("US:hot-wheels-rlc-listed", {})
+        check("a tracked car aged past the recency gate is still re-checked",
+              row.get("present") is True, f"present={row.get('present')}")
+        check("and its sell-out is actually recorded, not frozen at in_stock",
+              row.get("status") == "sold_out", f"status={row.get('status')}")
+        check("the recency gate still blocks never-tracked old junk",
+              "hot-wheels-rlc-ancient" not in {r["handle"] for r in aged["items"]})
+
         print("\nRun 12 — watchlist-check catches a restock without a full scan")
         # Give the watched car a live future countdown, same as the real R32
         # right now — otherwise it classifies as plain sold_out on the

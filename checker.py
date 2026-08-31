@@ -547,9 +547,14 @@ def probe_stock(fetcher: Fetcher, region_cfg: dict, variant_id: Any,
 # scan
 # --------------------------------------------------------------------------
 
-def scan_region(fetcher: Fetcher, name: str, region_cfg: dict,
-                cfg: dict) -> tuple[list[dict], list[str]]:
-    """Return (items, warnings) for one region."""
+def scan_region(fetcher: Fetcher, name: str, region_cfg: dict, cfg: dict,
+                known_keys: set[str] | None = None) -> tuple[list[dict], list[str]]:
+    """Return (items, warnings) for one region.
+
+    known_keys is the set of state keys already being tracked. The recency
+    gate on sitemap discoveries is skipped for those — see the call site.
+    """
+    known_keys = known_keys or set()
     fetcher.pin_region(region_cfg)
     warnings: list[str] = []
     items: list[dict] = []
@@ -669,10 +674,21 @@ def scan_region(fetcher: Fetcher, name: str, region_cfg: dict,
         if handle in seen_handles or not looks_relevant(handle, filters):
             continue
         seen_handles.add(handle)
-        item = handle_item(handle, default_prefix, "", only_if_recent=True)
+        # The recency gate is for *discovery* only — it stops the sitemap
+        # dragging in every RLC car ever made. Applying it to something
+        # already tracked silently stops watching it: Mattel drops sold-out
+        # items out of the collections, so an older car that sells out
+        # disappears from the scan entirely and its state freezes at
+        # whatever it last was. Found 2026-08-31 with three cars still
+        # reading in_stock days after selling out, and the real cost is not
+        # the stale label — it's that a restock on any of them would never
+        # have been noticed, which is the whole point of the monitor.
+        already_tracked = f"{name}:{handle}" in known_keys
+        item = handle_item(handle, default_prefix, "", only_if_recent=not already_tracked)
         if item:
             items.append(item)
-            log(f"  {name}: found via sitemap, not yet in a collection — {handle}")
+            if not already_tracked:
+                log(f"  {name}: found via sitemap, not yet in a collection — {handle}")
 
     return items, warnings
 
@@ -942,7 +958,8 @@ def run(args: argparse.Namespace) -> int:
         if not region_cfg.get("enabled", True):
             continue
         log(f"Scanning {name}...")
-        items, warnings = scan_region(fetcher, name, region_cfg, cfg)
+        items, warnings = scan_region(fetcher, name, region_cfg, cfg,
+                                      known_keys=set(state["items"]))
         log(f"  {name}: {len(items)} matching products")
         all_items.extend(items)
         all_warnings.extend(warnings)
