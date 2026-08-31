@@ -735,7 +735,16 @@ def diff(state: dict, items: list[dict], notify_cfg: dict) -> list[dict]:
         record.setdefault("history", [])
 
         if prev is None:
-            if not first_run and notify_cfg.get("new", True):
+            # A first sighting that is already sold out and not a recent
+            # release is backfill, not news — nothing to act on. This
+            # matters whenever a collection is added to the config: doing
+            # that surfaces years of dead stock at once (adding the RLC
+            # collection on 2026-08-31 brought in 42 items, every one of
+            # them sold out) and without this each would fire a "New
+            # listing" push. A drop that genuinely sold out between scans
+            # is still recent, so it still notifies.
+            backfill = item["status"] == "sold_out" and not is_recent(item, days=30)
+            if not first_run and not backfill and notify_cfg.get("new", True):
                 events.append({"type": "new", "item": item, "detail": "New listing"})
             record["history"].append({"at": stamp, "event": "first_seen", "status": item["status"]})
         else:

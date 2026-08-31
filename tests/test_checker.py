@@ -482,6 +482,28 @@ def main() -> int:
         check("the recency gate still blocks never-tracked old junk",
               "hot-wheels-rlc-ancient" not in {r["handle"] for r in aged["items"]})
 
+        # Adding a collection surfaces years of dead stock at once. Those
+        # first sightings must not each fire a "New listing" push — but a
+        # drop that genuinely sold out between scans still should.
+        sitemap_catalog["hot-wheels-rlc-old-deadstock"] = {
+            "title": "Hot Wheels RLC Old Dead Stock", "available": False,
+            "badge": "Sold Out", "tags": ["RLC"], "published_at": "2019-05-05T00:00:00Z",
+        }
+        sitemap_catalog["hot-wheels-rlc-just-missed"] = {
+            "title": "Hot Wheels RLC Just Missed It", "available": False,
+            "badge": "Sold Out", "tags": ["RLC"],
+        }
+        mock_store.set_catalog(sitemap_catalog)
+        mock_store.set_collections({"hot-wheels": ["hot-wheels-rlc-old-deadstock",
+                                                   "hot-wheels-rlc-just-missed"]})
+        persist_state(sitemap_dir, base_url)
+        backfill = json.loads((sitemap_dir / "docs" / "data.json").read_text())
+        titles = [e["title"] for e in backfill["recent_events"] if e["type"] == "new"]
+        check("a long-dead listing seen for the first time doesn't fire a new-listing push",
+              not any("Old Dead Stock" in t for t in titles), f"{titles}")
+        check("but one that sold out recently still does",
+              any("Just Missed It" in t for t in titles), f"{titles}")
+
         print("\nRun 12 — watchlist-check catches a restock without a full scan")
         # Give the watched car a live future countdown, same as the real R32
         # right now — otherwise it classifies as plain sold_out on the

@@ -101,6 +101,19 @@ the US store's own Stagea listing was still available). If Ari says "I can
 see it in stock on the site" but the dashboard disagrees, check which of the
 three he's actually looking at before assuming the data is wrong.
 
+**`agents.md` names collections the config didn't scan.** Mattel publishes
+`https://creations.mattel.com/agents.md`, and it lists
+`/collections/hot-wheels-red-line-club` — the dedicated RLC collection,
+which this monitor was not scanning at all. Found 2026-08-31 while looking
+at the UCP endpoint: 42 RLC products in it were untracked. All were sold
+out at the time, so nothing buyable was being missed, but a restock on any
+of them would have been invisible. Added to the US `collections`. When you
+add a collection, expect it to surface years of dead stock in one go —
+`diff()` suppresses the "New listing" push for a first sighting that is
+already sold out and not a recent release, precisely so that doesn't
+become a notification flood. Worth re-reading agents.md occasionally; it
+is Mattel telling you where things are.
+
 **Collections are per-region since 2026-08-20** (`region_cfg.get("collections",
 cfg["collections"])`). Top-level `collections` is `["hot-wheels",
 "cars-vehicles"]`; AU overrides to `["hot-wheels"]` only because
@@ -236,13 +249,25 @@ everything and deliberately sends no alerts.
    `false` and the whole path is dead weight; don't switch it back on
    expecting numbers.
 
-   The one real lead left is the endpoint robots.txt points agents at,
-   `/api/ucp/mcp`. It is live and speaks MCP (`initialize` and
-   `tools/list` both answer; 13 tools, and `get_product` advertises
-   "real-time availability"), but calling it returns `UCP discovery
-   failed: Missing profile uri` — it wants a registered agent profile
-   first. That onboarding is unexplored. Even then, "availability" may
-   well mean in/out of stock rather than a count.
+   **The sanctioned endpoint doesn't have counts either — explored
+   2026-08-31, don't redo this.** `/api/ucp/mcp` (what robots.txt points
+   agents at) is live and speaks MCP. Getting past discovery needs
+   `meta["ucp-agent"].profile` pointing at a UCP profile document; ours is
+   `docs/ucp-agent.json`, but **GitHub Pages cannot host it** — the spec
+   requires `Cache-Control: public, max-age>=60` and Pages sends bare
+   `max-age=600`, which the server rejects as `profile_malformed: Invalid
+   cache control`. Serving the same file through jsDelivr
+   (`cdn.jsdelivr.net/gh/<owner>/<repo>@main/docs/ucp-agent.json`, which
+   sends `public, max-age=604800`) gets discovery to pass.
+   
+   That is as far as it goes: every `tools/call` then answers
+   `Tool not found`, for all three catalogue tools, despite `tools/list`
+   advertising them — so the endpoint is published but not actually open
+   to a profile-only agent (likely wants signed requests / registered
+   onboarding). And it would not have helped anyway: the catalogue spec
+   returns `availability: {available: true|false}` and documents **no**
+   quantity field. Between this, the dead cart trick, and the bare product
+   pages, treat "how many are left" as genuinely unavailable.
 
    Original note kept for context:
    It is `enabled: false` on purpose — that path is robots-disallowed, and if
