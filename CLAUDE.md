@@ -237,7 +237,37 @@ everything and deliberately sends no alerts.
 
 1. **Membership item leaks the filter.** AU returns "1-Year RLC Digital
    Membership". Add `membership` and `digital` to `exclude_keywords`.
-2. ~~**Stock counts.**~~ **The cart-ceiling trick does not work on this
+2. **Stock counts come from SearchSpring, and only sometimes.** Mattel's
+   storefront search is SearchSpring (site id `f37vx2`, in the page source
+   as `SDG.Data.ssId`). Its index carries the raw Shopify variant payload:
+   `inventory_quantity` is reduced to a boolean, but
+   **`old_inventory_quantity` survives as a real integer** on a minority of
+   products. That is the only place a stock number exists anywhere.
+
+   `searchspring_stock()` pages the public endpoint once per scan (28
+   requests, to SearchSpring's CDN not Mattel's store) and records what it
+   finds. The Worker re-reads one product on demand when the dashboard
+   button is pressed, matching on exact `handle` after a fuzzy `q=<sku>`
+   search — the index does not match on handle, which is why `stock_sku` is
+   carried in state.
+
+   **The field is transient, and the design depends on that.** Measured
+   2026-08-31: 45 products exposed a number, 25 minutes later only 22 did —
+   26 gone, 3 new, and 6 of the survivors had moved by small decrements
+   consistent with real sales. So "this product has a readable count" is not
+   a stable property. `diff()` therefore *keeps* `stock_count` /
+   `stock_seen_at` rather than overwriting them each scan — blanket-copying
+   would wipe a real reading on the very next scan — and a press that finds
+   nothing returns 409, which the dashboard shows as "not published right
+   now" while leaving the stored figure up.
+
+   Two caveats to preserve in any UI: the name is `old_inventory_quantity`,
+   Shopify's value from *before* the last update, so it trails — never
+   present it as exact. And **AU has none of this**: no SearchSpring, no
+   other search provider, no inventory in its predictive search or
+   `/products.json`, and its UCP endpoint returns booleans. US only.
+
+3. **The cart-ceiling trick does not work on this
    store — tested live 2026-08-31, twice.** `probe_stock()` POSTs
    `/cart/add.js` with quantity 99999 expecting a 422 naming the ceiling.
    Mattel answered **HTTP 200 both times**, accepting all 99999: once for a
@@ -400,7 +430,7 @@ everything and deliberately sends no alerts.
    item you actually want fast-checked needs to resolve to `coming_soon`
    (needs a real countdown Mattel published), not bare `sold_out`, or it
    won't survive on the list to be fast-checked at all.
-3. ~~**`drop_time` is never populated** in real runs~~ — root-caused and fixed
+4. ~~**`drop_time` is never populated** in real runs~~ — root-caused and fixed
    2026-08-20. The countdown never lives on the collection card at all; it's
    a `cs-countdown__block` on the **product detail page**, present as static
    boilerplate on *every* product (even released ones, with a stale past
@@ -424,11 +454,9 @@ everything and deliberately sends no alerts.
    for a `.js` fetch, since the sitemap covers the *entire* store (Barbie,
    apparel, everything), not just what we track. Anything it finds that a
    collection didn't goes through the exact same `handle_item()` path,
-   `html=""`, so `upcoming_drop_from_product_page()` (item 3 above) still
+   `html=""`, so `upcoming_drop_from_product_page()` (item 4 above) still
    catches the coming-soon case. `/pages/launch-calendar` was a dead end
    (client-rendered, nothing in a plain GET) — don't re-try that one.
-4. **The UCP/MCP endpoint** is the interesting unexplored lead for real stock
-   data, legitimately. Needs a POST/SSE client.
 5. **The ntfy topic is guessable** — `hw-ari-7f3k9qz2x` is the example name from
    a public README. Rotating it means changing the phone subscription and the
    `NTFY_TOPIC` repo secret together.
