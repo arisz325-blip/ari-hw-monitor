@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-09-01T00:21:40+00:00",
-  "started_at": "2026-09-01T00:01:35+00:00",
+  "generated_at": "2026-09-01T00:51:39+00:00",
+  "started_at": "2026-09-01T00:31:38+00:00",
   "counts": {
     "total": 110,
     "in_stock": 33,
@@ -350,7 +350,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HW_RLC_MembershipCard.webp?v=1750380596",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "16.00 AUD",
       "price_cents": 1600,
       "published_at": "2025-06-11T06:29:49+10:00",
@@ -426,7 +426,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JJY58_PS_25_084.jpg?v=1774225976",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "39.99 AUD",
       "price_cents": 3999,
       "published_at": "2026-03-28T09:50:59+11:00",
@@ -465,7 +465,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ec8jgkvbkvq9z3il0hos.jpg?v=1763511684",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "22.00 USD",
       "price_cents": 2200,
       "published_at": "2025-11-05T12:24:56-06:00",
@@ -508,7 +508,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_HWR93_PS_25_0051.jpg?v=1754280441",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "29.99 AUD",
       "price_cents": 2999,
       "published_at": "2026-08-18T08:57:21+10:00",
@@ -548,7 +548,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/fkxa4jbjomzzacmw8l6e_66bb1374-0510-458f-8fe8-13e4a87a0bcc.jpg?v=1763508438",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "11.00 USD",
       "price_cents": 1100,
       "published_at": "2025-08-06T15:21:03-05:00",
@@ -556,8 +556,8 @@
       "status": "in_stock",
       "status_label": "In Stock",
       "stock": null,
-      "stock_count": 166,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_count": 165,
+      "stock_seen_at": "2026-09-01T00:51:39+00:00",
       "stock_sku": "HWR93",
       "tags": [
         "2025",
@@ -595,7 +595,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HWC_PDP_JCP43_PS_26_0090.jpg?v=1787007374",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "22.00 USD",
       "price_cents": 2200,
       "published_at": "2026-07-29T16:26:37-05:00",
@@ -603,8 +603,8 @@
       "status": "in_stock",
       "status_label": "In Stock",
       "stock": null,
-      "stock_count": 14283,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_count": 14281,
+      "stock_seen_at": "2026-09-01T00:51:39+00:00",
       "stock_sku": "JCP43",
       "tags": [
         "2026",
@@ -634,7 +634,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ng2jq8wf4eczmzduowpo_ccff4a96-79be-4791-94d7-c5c4b433f090.jpg?v=1763509314",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "20.00 USD",
       "price_cents": 2000,
       "published_at": "2025-01-17T13:36:23-06:00",
@@ -679,7 +679,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/tquxb3gl1jeh1fbmbroo.jpg?v=1775080852",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "22.00 USD",
       "price_cents": 2200,
       "published_at": "2026-04-08T13:45:08-05:00",
@@ -725,7 +725,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/cptqjdybisfmxtcmxozc.jpg?v=1787769356",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "22.00 USD",
       "price_cents": 2200,
       "published_at": "2026-08-19T15:15:22-05:00",
@@ -763,7 +763,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_HWR97_PS_25_2343.jpg?v=1756851299",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "52.99 AUD",
       "price_cents": 5299,
       "published_at": "2026-08-18T08:57:05+10:00",
@@ -804,7 +804,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ap6i86a3pnrrhsdomtr9.jpg?v=1781730771",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "32.00 USD",
       "price_cents": 3200,
       "published_at": "2026-06-24T14:09:01-05:00",
@@ -812,8 +812,8 @@
       "status": "in_stock",
       "status_label": "In Stock",
       "stock": null,
-      "stock_count": 9485,
-      "stock_seen_at": "2026-08-31T22:21:32+00:00",
+      "stock_count": 9483,
+      "stock_seen_at": "2026-09-01T00:51:39+00:00",
       "stock_sku": "HWR92",
       "tags": [
         "2026",
@@ -843,7 +843,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP__Banner_HWR96_M.jpg?v=1769649079",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "37.09 AUD",
       "price_cents": 3709,
       "published_at": "2026-02-03T08:58:35+11:00",
@@ -882,7 +882,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/mufmjdn170rgonpbgzum.jpg?v=1772210642",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "37.00 USD",
       "price_cents": 3700,
       "published_at": "2026-02-04T12:39:38-06:00",
@@ -921,7 +921,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/gc8ghkkyrtfqsghcjskf_826c0f65-1459-4403-8662-ba6576a1f467.jpg?v=1763511693",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "22.00 USD",
       "price_cents": 2200,
       "published_at": "2025-10-15T13:36:13-05:00",
@@ -967,7 +967,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_A-Spot_Announce_JJY60_M.jpg?v=1780538145",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "39.99 AUD",
       "price_cents": 3999,
       "published_at": "2026-06-16T08:58:01+10:00",
@@ -1006,7 +1006,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JJY70_PS_26_0298.jpg?v=1783989389",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "46.99 AUD",
       "price_cents": 4699,
       "published_at": "2026-07-28T08:59:02+10:00",
@@ -1045,7 +1045,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/fe7qarzail3dglrhvpgi.jpg?v=1784564563",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-07-24T11:58:44-05:00",
@@ -1054,7 +1054,7 @@
       "status_label": "In Stock",
       "stock": null,
       "stock_count": 9863,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_seen_at": "2026-09-01T00:51:39+00:00",
       "stock_sku": "JJY70",
       "tags": [
         "Brand: Hot Wheels Collectors",
@@ -1087,7 +1087,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JJY64_PS_26_0096.jpg?v=1783303869",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "57.99 AUD",
       "price_cents": 5799,
       "published_at": "2026-07-14T08:59:04+10:00",
@@ -1127,7 +1127,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/f5gwfmnr1z007veulypv.jpg?v=1783014404",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "38.00 USD",
       "price_cents": 3800,
       "published_at": "2026-07-10T12:34:24-05:00",
@@ -1135,8 +1135,8 @@
       "status": "in_stock",
       "status_label": "In Stock",
       "stock": null,
-      "stock_count": 1707,
-      "stock_seen_at": "2026-08-31T22:21:32+00:00",
+      "stock_count": 1702,
+      "stock_seen_at": "2026-09-01T00:51:39+00:00",
       "stock_sku": "JJY64",
       "tags": [
         "2026",
@@ -1169,7 +1169,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/q58xvt62gnpvm0fqpwao.jpg?v=1778178699",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "33.00 USD",
       "price_cents": 3300,
       "published_at": "2026-05-15T11:41:24-05:00",
@@ -1210,7 +1210,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/hbbwkwpqfnh9c752oha2.jpg?v=1767977974",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "275.00 USD",
       "price_cents": 27500,
       "published_at": "2026-01-27T11:10:59-06:00",
@@ -1252,7 +1252,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/nhvs7nnswee0hdn51chm.jpg?v=1772127418",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-03-06T13:24:20-06:00",
@@ -1260,8 +1260,8 @@
       "status": "in_stock",
       "status_label": "In Stock",
       "stock": null,
-      "stock_count": 4441,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_count": 4440,
+      "stock_seen_at": "2026-09-01T00:51:39+00:00",
       "stock_sku": "JJY67",
       "tags": [
         "2026",
@@ -1295,7 +1295,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/tl5xyaaylkpceuy3b91s.jpg?v=1770413535",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "33.00 USD",
       "price_cents": 3300,
       "published_at": "2026-02-13T13:22:07-06:00",
@@ -1339,7 +1339,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/pc4gcl56tmwcjdgpefbn.jpg?v=1774042867",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-03-27T13:31:44-05:00",
@@ -1381,7 +1381,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/er27tzta2kt0cqo4xkld.jpg?v=1771442275",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-02-20T12:39:44-06:00",
@@ -1426,7 +1426,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/teql3mdplgpbolvak65q.jpg?v=1763511677",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "33.00 USD",
       "price_cents": 3300,
       "published_at": "2025-09-25T13:12:17-05:00",
@@ -1471,7 +1471,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HWC_PDP_JJY62_C_26_0442.jpg?v=1787007437",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-04-24T14:34:46-05:00",
@@ -1513,7 +1513,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/eucnby6qkcsdoq79pc3i.jpg?v=1771459513",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "9.99 USD",
       "price_cents": 999,
       "published_at": "2022-02-10T17:28:45-06:00",
@@ -1521,8 +1521,8 @@
       "status": "in_stock",
       "status_label": "In Stock",
       "stock": null,
-      "stock_count": 380766,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_count": 380763,
+      "stock_seen_at": "2026-09-01T00:51:39+00:00",
       "stock_sku": "HNB06",
       "tags": [
         "Brand: Hot Wheels Collectors",
@@ -1557,7 +1557,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JCP68_PS_25_0649.jpg?v=1754038857",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "46.99 AUD",
       "price_cents": 4699,
       "published_at": "2026-07-21T08:52:25+10:00",
@@ -1600,7 +1600,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JCP12_PS_25_3305.jpg?v=1751521072",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "39.99 AUD",
       "price_cents": 3999,
       "published_at": "2026-08-18T08:57:40+10:00",
@@ -1640,7 +1640,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JCP13_PS_25_0056.jpg?v=1754621936",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "39.99 AUD",
       "price_cents": 3999,
       "published_at": "2025-08-09T07:34:03+10:00",
@@ -1681,7 +1681,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/r97zcufqccfbrgjl97fa.jpg?v=1763509320",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "99.00 USD",
       "price_cents": 9900,
       "published_at": "2025-09-10T14:03:38-05:00",
@@ -1723,7 +1723,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/r9lvvkzgqdvv8fu0s6sj.jpg?v=1786126968",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-08-14T14:45:25-05:00",
@@ -1762,7 +1762,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/zxmsi9tbs92ibmlhxrub.png?v=1684950387",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "24.99 USD",
       "price_cents": 2499,
       "published_at": "2021-11-18T10:59:15-06:00",
@@ -1770,6 +1770,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GLH85",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -1782,9 +1785,6 @@
       "title": "HWC Special Edition '32 Ford",
       "url": "https://creations.mattel.com/products/hwc-special-edition-32-ford-glh85?country=US",
       "variant_id": 39850868506829,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GLH85",
       "key": "US:hwc-special-edition-32-ford-glh85",
       "present": true
     },
@@ -1801,7 +1801,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/q8brhmjzuwr7tdduybhb.png?v=1763509250",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "29.99 USD",
       "price_cents": 2999,
       "published_at": "2021-11-18T10:59:07-06:00",
@@ -1809,6 +1809,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -20000,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GLH86",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -1820,9 +1823,6 @@
       "title": "HWC Special Edition \u201964 Impala",
       "url": "https://creations.mattel.com/products/hwc-special-edition-64-impala-glh86?country=US",
       "variant_id": 39850869653709,
-      "stock_count": -20000,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GLH86",
       "key": "US:hwc-special-edition-64-impala-glh86",
       "present": true
     },
@@ -1839,7 +1839,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/wazsll1tisw3gkduj8yr.jpg?v=1763509100",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "29.99 USD",
       "price_cents": 2999,
       "published_at": "2021-11-18T11:12:50-06:00",
@@ -1847,6 +1847,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GXJ24",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -1859,9 +1862,6 @@
       "title": "HWC Special Editions \u201955 Mercedes-Benz 300 SL",
       "url": "https://creations.mattel.com/products/hwc-special-editions-55-mercedes-benz-300-sl-gxj24?country=US",
       "variant_id": 39850868900045,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GXJ24",
       "key": "US:hwc-special-editions-55-mercedes-benz-300-sl-gxj24",
       "present": true
     },
@@ -1878,7 +1878,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/nf62vmhor0gycapvmdxk.png?v=1684952119",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "20.00 USD",
       "price_cents": 2000,
       "published_at": "2024-09-27T11:17:05-05:00",
@@ -1886,6 +1886,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HWRLC2021",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -1903,9 +1906,6 @@
       "title": "Hot Wheels 2021 RLC Membership Car Kit",
       "url": "https://creations.mattel.com/products/2021-rlc-membership-car-kit-hwrlc2021?country=US",
       "variant_id": 39852157731021,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HWRLC2021",
       "key": "US:2021-rlc-membership-car-kit-hwrlc2021",
       "present": true
     },
@@ -1922,7 +1922,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/trmxwme5uzvgu3kbymrr.jpg?v=1684946478",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2024-05-28T11:00:07-05:00",
@@ -1930,6 +1930,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HWCRLC2022",
       "tags": [
         "2022 Membership kit",
         "Brand: Hot Wheels Collectors",
@@ -1944,9 +1947,6 @@
       "title": "Hot Wheels 2022 RLC Membership \u201972 Nissan Skyline H/T 2000 GT-R",
       "url": "https://creations.mattel.com/products/2022-rlc-membership-72-nissan-skyline-h-t-2000-gt-r?country=US",
       "variant_id": 40650710286541,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HWCRLC2022",
       "key": "US:2022-rlc-membership-72-nissan-skyline-h-t-2000-gt-r",
       "present": true
     },
@@ -1963,7 +1963,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/o1y3adx9k2sg7fpsr0ql_67c3e256-7c72-428b-87a4-54f6dba8af6a.jpg?v=1684953213",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2023-02-27T16:47:16-06:00",
@@ -1971,6 +1971,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HWRLC2023",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -1987,9 +1990,6 @@
       "title": "Hot Wheels 2023 RLC Membership \u201993 Ford Cobra R",
       "url": "https://creations.mattel.com/products/2023-rlc-membership-93-ford-cobra-r-hwrlc2023?country=US",
       "variant_id": 41510656901325,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HWRLC2023",
       "key": "US:2023-rlc-membership-93-ford-cobra-r-hwrlc2023",
       "present": true
     },
@@ -2043,7 +2043,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JCP43_PS_26_0005.jpg?v=1784596465",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "29.99 AUD",
       "price_cents": 2999,
       "published_at": "2026-08-10T10:15:17+10:00",
@@ -2127,7 +2127,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JCP45_PS_26_102.jpg?v=1786935521",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "last_sellout_duration": "5.0 days",
       "price": "34.99 AUD",
       "price_cents": 3499,
@@ -2258,7 +2258,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JNF07_PS_26_2920_a0d66fbb-d484-4e33-babe-4df7e10fa34b.jpg?v=1778111549",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "29.99 AUD",
       "price_cents": 2999,
       "published_at": "2026-05-12T08:56:08+10:00",
@@ -2296,7 +2296,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/kj0rhl5d5vejnpilmd9h.jpg?v=1752710914",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2024-09-26T15:08:39-05:00",
@@ -2304,6 +2304,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -3696,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HNL24",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -2317,9 +2320,6 @@
       "title": "Hot Wheels RLC 1972 Skyline H/T 2000GT-R",
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-1972-skyline-ht-2000gt-r-hnl24?country=US",
       "variant_id": 47433878896845,
-      "stock_count": -3696,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HNL24",
       "key": "US:hot-wheels-rlc-1972-skyline-ht-2000gt-r-hnl24",
       "present": true
     },
@@ -2336,7 +2336,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/y1vdbmqwhrznjj8e2ynq.jpg?v=1729033090",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2025-05-08T17:55:12-05:00",
@@ -2400,7 +2400,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ygcytu2ju4elapvhbwy5.jpg?v=1786126968",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "last_sellout_duration": "48 min",
       "price": "28.00 USD",
       "price_cents": 2800,
@@ -2417,7 +2417,7 @@
       "status_label": "Sold Out",
       "stock": null,
       "stock_count": 0,
-      "stock_seen_at": "2026-08-31T22:51:47+00:00",
+      "stock_seen_at": "2026-09-01T00:51:39+00:00",
       "stock_sku": "JJY59",
       "tags": [
         "2026",
@@ -2451,7 +2451,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/osh4tw82qokmkclwkghd_95e22512-6ba4-41fd-95cc-0acd39c8a34d.jpg?v=1708503201",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2024-05-28T11:00:01-05:00",
@@ -2459,6 +2459,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGW19",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -2471,9 +2474,6 @@
       "title": "Hot Wheels RLC Exclusive '32 Ford",
       "url": "https://creations.mattel.com/products/rlc-exclusive-32-ford-hgw19?country=US",
       "variant_id": 41046882058445,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGW19",
       "key": "US:rlc-exclusive-32-ford-hgw19",
       "present": true
     },
@@ -2490,7 +2490,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/t6yxq7huw4jwbecqwvpg.jpg?v=1708503211",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "35.00 USD",
       "price_cents": 3500,
       "published_at": "2023-11-20T10:55:39-06:00",
@@ -2498,6 +2498,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GXJ27",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -2512,9 +2515,6 @@
       "title": "Hot Wheels RLC Exclusive 1944 Willys MB",
       "url": "https://creations.mattel.com/products/rlc-exclusive-1944-willys-mb-gxj27?country=US",
       "variant_id": 40331458969805,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GXJ27",
       "key": "US:rlc-exclusive-1944-willys-mb-gxj27",
       "present": true
     },
@@ -2538,7 +2538,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ctctioyp3hzdufxzym9l.jpg?v=1778797106",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "last_sellout_duration": "6.6 days",
       "price": "28.00 USD",
       "price_cents": 2800,
@@ -2583,7 +2583,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/HGW23_W_22_1962_Ford_F100_256.jpg?v=1656355482",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2023-06-22T11:00:15-05:00",
@@ -2591,6 +2591,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -1,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGW23",
       "tags": [
         "2023SUMMERREOFFER",
         "brand_RLC",
@@ -2605,9 +2608,6 @@
       "title": "Hot Wheels RLC Exclusive 1962 Ford F100",
       "url": "https://creations.mattel.com/products/rlc-exclusive-1962-ford-f100-hgw23?country=US",
       "variant_id": 40931206398157,
-      "stock_count": -1,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGW23",
       "key": "US:rlc-exclusive-1962-ford-f100-hgw23",
       "present": true
     },
@@ -2624,7 +2624,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HWF20_01.jpg?v=1726242956",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2025-05-08T18:09:26-05:00",
@@ -2632,6 +2632,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HWF20",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -2646,9 +2649,6 @@
       "title": "Hot Wheels RLC Exclusive 1964 Chevy Impala SS",
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-1964-chevrolet-impala-hwf20?country=US",
       "variant_id": 47638025404621,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HWF20",
       "key": "US:hot-wheels-rlc-1964-chevrolet-impala-hwf20",
       "present": true
     },
@@ -2665,7 +2665,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/eypwauuexaamk7q5dauo.jpg?v=1763509335",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "18.00 USD",
       "price_cents": 1800,
       "published_at": "2024-11-22T11:52:50-06:00",
@@ -2704,7 +2704,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/jm0vnodwfewkrwnx7ym6.jpg?v=1729807940",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2025-05-08T18:10:54-05:00",
@@ -2743,7 +2743,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HWF17_01.jpg?v=1724428756",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2025-05-08T17:56:40-05:00",
@@ -2751,6 +2751,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -1,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HWF17",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -2766,9 +2769,6 @@
       "title": "Hot Wheels RLC Exclusive 1970 Ford Mustang Boss 302",
       "url": "https://creations.mattel.com/products/rlc-ford-mustang-boss-302-hwf17?country=US",
       "variant_id": 47855842525389,
-      "stock_count": -1,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HWF17",
       "key": "US:rlc-ford-mustang-boss-302-hwf17",
       "present": true
     },
@@ -2785,7 +2785,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/jcnxbkigb7xoizna3nvi.jpg?v=1752711188",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2024-09-26T15:25:11-05:00",
@@ -2793,6 +2793,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -11,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HNL22",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -2806,9 +2809,6 @@
       "title": "Hot Wheels RLC Exclusive 1971 De Tomaso Mangusta",
       "url": "https://creations.mattel.com/products/rlc-exclusive-1971-de-tomaso-mangusta-hnl22?country=US",
       "variant_id": 41650627608781,
-      "stock_count": -11,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HNL22",
       "key": "US:rlc-exclusive-1971-de-tomaso-mangusta-hnl22",
       "present": true
     },
@@ -2825,7 +2825,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/ffwhmp5vbm9tfjgfjvuk.jpg?v=1684950727",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2022-11-21T16:12:07-06:00",
@@ -2833,6 +2833,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GXJ15",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -2847,9 +2850,6 @@
       "title": "Hot Wheels RLC Exclusive 1972 Skyline H/T 2000GT-R",
       "url": "https://creations.mattel.com/products/rlc-exclusive-1972-skyline-h-t-2000gt-r?country=US",
       "variant_id": 40172044320973,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GXJ15",
       "key": "US:rlc-exclusive-1972-skyline-h-t-2000gt-r",
       "present": true
     },
@@ -2873,7 +2873,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/w7cjactrfbkq67rtm6ek.jpg?v=1775164022",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "last_sellout_duration": "6.6 days",
       "price": "30.00 USD",
       "price_cents": 3000,
@@ -2918,7 +2918,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HWF19_01.jpg?v=1726603158",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2025-05-08T17:57:27-05:00",
@@ -2926,6 +2926,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -3,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HWF19",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -2940,9 +2943,6 @@
       "title": "Hot Wheels RLC Exclusive 1975 Chevrolet Monte Carlo",
       "url": "https://creations.mattel.com/products/rlc-75-chevy-monte-carlo-hwf19?country=US",
       "variant_id": 47890511528141,
-      "stock_count": -3,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HWF19",
       "key": "US:rlc-75-chevy-monte-carlo-hwf19",
       "present": true
     },
@@ -2959,7 +2959,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/qgbdzfj4t6qcc7baevqk_03f85d69-8cc4-4a43-9f31-9b5e1e5fcd81.jpg?v=1684955109",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2023-11-20T10:55:58-06:00",
@@ -2967,6 +2967,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGK77",
       "tags": [
         "2023SUMMERREOFFER",
         "Brand: Hot Wheels Collectors",
@@ -2982,9 +2985,6 @@
       "title": "Hot Wheels RLC Exclusive 1975 Chevrolet Monte Carlo Lowrider",
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-1975-chevrolet-monte-carlo-hgk77?country=US",
       "variant_id": 41509760303309,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGK77",
       "key": "US:hot-wheels-rlc-1975-chevrolet-monte-carlo-hgk77",
       "present": true
     },
@@ -3001,7 +3001,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/trqd5elxyrosodetcsdu.jpg?v=1782325231",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "28.00 USD",
       "price_cents": 2800,
       "published_at": "2026-06-25T12:13:38-05:00",
@@ -3039,7 +3039,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/ydnyecgciekkenqgio30.jpg?v=1763508435",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "27.00 USD",
       "price_cents": 2700,
       "published_at": "2025-09-17T12:39:38-05:00",
@@ -3077,7 +3077,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/xhdqezgt2ybhzdptywql.jpg?v=1763509682",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2024-09-27T11:29:49-05:00",
@@ -3085,6 +3085,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGK85",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3095,9 +3098,6 @@
       "title": "Hot Wheels RLC Exclusive 1986 Porsche 959",
       "url": "https://creations.mattel.com/products/rlc-exclusive-1986-porsche-959-hgk85?country=US",
       "variant_id": 41620377010381,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGK85",
       "key": "US:rlc-exclusive-1986-porsche-959-hgk85",
       "present": true
     },
@@ -3168,7 +3168,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/qmcar47brgbtc1kh0iez.jpg?v=1684952414",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2022-03-01T10:59:31-06:00",
@@ -3176,6 +3176,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -1,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GXJ17",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3190,9 +3193,6 @@
       "title": "Hot Wheels RLC Exclusive 1991 BMW M3",
       "url": "https://creations.mattel.com/products/rlc-exclusive-1991-bmw-m3-gxj17?country=US",
       "variant_id": 40619469275341,
-      "stock_count": -1,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GXJ17",
       "key": "US:rlc-exclusive-1991-bmw-m3-gxj17",
       "present": true
     },
@@ -3209,7 +3209,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/j5iqkwrna84uh49f2byt_d7b6c2d4-cab3-4f64-96ef-e72ee489bf4e.jpg?v=1723643142",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2025-05-08T17:54:49-05:00",
@@ -3217,6 +3217,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HWF06",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3232,9 +3235,6 @@
       "title": "Hot Wheels RLC Exclusive 1992 GMC Typhoon",
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-92-gmc-typhoon-hwf06?country=US",
       "variant_id": 47828275101901,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HWF06",
       "key": "US:hot-wheels-rlc-92-gmc-typhoon-hwf06",
       "present": true
     },
@@ -3251,7 +3251,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/b3tdqvylxtpxrfo7cdue_2162c83e-611f-43eb-8572-e6ecdfefb3da.png?v=1708501490",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "24.99 USD",
       "price_cents": 2499,
       "published_at": "2023-11-20T10:55:38-06:00",
@@ -3259,6 +3259,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GXJ20",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3273,9 +3276,6 @@
       "title": "Hot Wheels RLC Exclusive 1993 Ford Mustang Cobra R",
       "url": "https://creations.mattel.com/products/rlc-exclusive-1993-ford-mustang-cobra-r-gxj20?country=US",
       "variant_id": 39852158451917,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GXJ20",
       "key": "US:rlc-exclusive-1993-ford-mustang-cobra-r-gxj20",
       "present": true
     },
@@ -3299,7 +3299,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/dacq9qpu0afs4zvwlvsx.jpg?v=1778799764",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "last_sellout_duration": "6.6 days",
       "price": "38.00 USD",
       "price_cents": 3800,
@@ -3343,7 +3343,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/lowl14r0bxtb0sb08pku.jpg?v=1763508429",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "27.00 USD",
       "price_cents": 2700,
       "published_at": "2025-09-17T12:43:23-05:00",
@@ -3381,7 +3381,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/debxrcd4cfcc0g8zbo9t.jpg?v=1708503228",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2022-08-26T14:00:09-05:00",
@@ -3389,6 +3389,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -20007,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GXJ28",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3403,9 +3406,6 @@
       "title": "Hot Wheels RLC Exclusive 2006 BMW M3 - Blue",
       "url": "https://creations.mattel.com/products/rlc-exclusive-2006-bmw-m3-gxj28?country=US",
       "variant_id": 40408542675149,
-      "stock_count": -20007,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GXJ28",
       "key": "US:rlc-exclusive-2006-bmw-m3-gxj28",
       "present": true
     },
@@ -3422,7 +3422,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/pqwbmxzzzzq65yulzrje_8b81ca41-9805-4bf4-ac61-b0ba69a258e7.jpg?v=1708501494",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "24.99 USD",
       "price_cents": 2499,
       "published_at": "2024-09-26T15:24:08-05:00",
@@ -3430,6 +3430,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -58,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GLH84",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3445,9 +3448,6 @@
       "title": "Hot Wheels RLC Exclusive 2006 BMW M3 - Yellow",
       "url": "https://creations.mattel.com/products/rlc-exclusive-2006-bmw-m3-glh84?country=US",
       "variant_id": 39850869063885,
-      "stock_count": -58,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GLH84",
       "key": "US:rlc-exclusive-2006-bmw-m3-glh84",
       "present": true
     },
@@ -3464,7 +3464,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/vfnb67iaelge6i1onbzi.png?v=1684948471",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "249.99 USD",
       "price_cents": 24999,
       "published_at": "2021-06-23T15:35:07-05:00",
@@ -3472,6 +3472,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GLH99",
       "tags": [
         "Brand: Hot Wheels",
         "Brand: Hot Wheels Collectors",
@@ -3486,9 +3489,6 @@
       "title": "Hot Wheels RLC Exclusive 2020 Super Treasure Hunt Set",
       "url": "https://creations.mattel.com/products/rlc-exclusive-2020-super-treasure-hunt-set-glh99?country=US",
       "variant_id": 39850869227725,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GLH99",
       "key": "US:rlc-exclusive-2020-super-treasure-hunt-set-glh99",
       "present": true
     },
@@ -3551,7 +3551,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JJY59_PS_26_0467.jpg?v=1787203315",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "44.99 AUD",
       "price_cents": 4499,
       "published_at": "2026-08-25T09:52:31+10:00",
@@ -3592,7 +3592,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/l7xpb5k96h1cszqwadx2.jpg?v=1708503197",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "24.99 USD",
       "price_cents": 2499,
       "published_at": "2021-11-18T10:58:22-06:00",
@@ -3600,6 +3600,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GLH92",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3612,9 +3615,6 @@
       "title": "Hot Wheels RLC Exclusive Custom Mustang",
       "url": "https://creations.mattel.com/products/rlc-exclusive-custom-mustang?country=US",
       "variant_id": 39850868146381,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GLH92",
       "key": "US:rlc-exclusive-custom-mustang",
       "present": true
     },
@@ -3631,7 +3631,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/p3d2xomm70gxpjbxyl8u.jpg?v=1681428469",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2023-11-20T11:54:51-06:00",
@@ -3639,6 +3639,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HNL17",
       "tags": [
         "2023SUMMERREOFFER",
         "Brand: Hot Wheels Collectors",
@@ -3655,9 +3658,6 @@
       "title": "Hot Wheels RLC Exclusive Custom \u201972 Datsun 240Z",
       "url": "https://creations.mattel.com/products/rlc-exclusive-custom-72-datsun-24oz-hnl17?country=US",
       "variant_id": 41576120713421,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HNL17",
       "key": "US:rlc-exclusive-custom-72-datsun-24oz-hnl17",
       "present": true
     },
@@ -3674,7 +3674,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/mywzteakymptc3mdxiuc_d948d01c-104e-48c3-9697-376ff39f4db3.jpg?v=1708504114",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2023-11-20T11:54:45-06:00",
@@ -3682,6 +3682,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGW17",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3695,9 +3698,6 @@
       "title": "Hot Wheels RLC Exclusive Datsun 150",
       "url": "https://creations.mattel.com/products/rlc-exclusive-datsun-150-hgw17?country=US",
       "variant_id": 40724278280397,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGW17",
       "key": "US:rlc-exclusive-datsun-150-hgw17",
       "present": true
     },
@@ -3714,7 +3714,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JJY72_PS_26_245.jpg?v=1786331899",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "82.99 AUD",
       "price_cents": 8299,
       "published_at": "2026-08-18T09:20:01+10:00",
@@ -3754,7 +3754,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/njcyx51l6ortsrilo1ev.jpg?v=1786470616",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "50.00 USD",
       "price_cents": 5000,
       "published_at": "2026-07-31T15:11:37-05:00",
@@ -3763,7 +3763,7 @@
       "status_label": "Sold Out",
       "stock": null,
       "stock_count": -3,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_seen_at": "2026-09-01T00:51:39+00:00",
       "stock_sku": "JJY72",
       "tags": [
         "2026",
@@ -3797,7 +3797,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/zgakdtfxcrprtifcdufm.jpg?v=1708503221",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2022-11-21T16:11:08-06:00",
@@ -3805,6 +3805,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -20002,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GXJ23",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3819,9 +3822,6 @@
       "title": "Hot Wheels RLC Exclusive Holiday \u201964 Impala",
       "url": "https://creations.mattel.com/products/rlc-exclusive-holiday-64-impala?country=US",
       "variant_id": 40378095337677,
-      "stock_count": -20002,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GXJ23",
       "key": "US:rlc-exclusive-holiday-64-impala",
       "present": true
     },
@@ -3838,7 +3838,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/p26jzhyzrlduxk6s5ec0_a4ae951b-bda7-4627-8159-ac3ddb094b71.jpg?v=1708501520",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2022-05-20T11:00:02-05:00",
@@ -3846,6 +3846,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGW15",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3858,9 +3861,6 @@
       "title": "Hot Wheels RLC Exclusive Honda S2000",
       "url": "https://creations.mattel.com/products/rlc-exclusive-honda-s2000-hgw15?country=US",
       "variant_id": 40712402632909,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGW15",
       "key": "US:rlc-exclusive-honda-s2000-hgw15",
       "present": true
     },
@@ -3877,7 +3877,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/yfw9bm6rxxjgfzkuolli.jpg?v=1763512514",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2024-03-25T15:56:49-05:00",
@@ -3885,6 +3885,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "JFH82",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3898,9 +3901,6 @@
       "title": "Hot Wheels RLC Exclusive Hot Wheels Kawa-Bug-A Membership Car",
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-kawa-bug-a-jfh82?country=US",
       "variant_id": 47408262578381,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "JFH82",
       "key": "US:hot-wheels-rlc-kawa-bug-a-jfh82",
       "present": true
     },
@@ -3917,7 +3917,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/pmswo3z7q6pii8u2ynpn_91ac0dde-51cf-4388-9a5a-a81cef439a49.jpg?v=1700247093",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2024-05-28T10:59:06-05:00",
@@ -3925,6 +3925,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HNL26",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3940,9 +3943,6 @@
       "title": "Hot Wheels RLC Exclusive Magnus Walker \u201cUrban Outlaw\u201d Porsche 964",
       "url": "https://creations.mattel.com/products/rlc-exclusive-magnus-walker-urban-outlaw-porsche-964-hnl26?country=US",
       "variant_id": 47300630905037,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HNL26",
       "key": "US:rlc-exclusive-magnus-walker-urban-outlaw-porsche-964-hnl26",
       "present": true
     },
@@ -3959,7 +3959,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HGK75_01.jpg?v=1711727471",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "35.00 USD",
       "price_cents": 3500,
       "published_at": "2024-09-26T15:16:47-05:00",
@@ -3967,6 +3967,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -450,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGK75",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -3983,9 +3986,6 @@
       "title": "Hot Wheels RLC Exclusive McLaren F1",
       "url": "https://creations.mattel.com/products/rlc-mclaren-f1-hgk75?country=US",
       "variant_id": 47426903867597,
-      "stock_count": -450,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGK75",
       "key": "US:rlc-mclaren-f1-hgk75",
       "present": true
     },
@@ -4002,7 +4002,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/u2mvi0uqnpru7ylpp2yz.jpg?v=1763513134",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2022-11-21T16:10:30-06:00",
@@ -4010,6 +4010,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGW16",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4023,9 +4026,6 @@
       "title": "Hot Wheels RLC Exclusive Mustang Boss Hoss",
       "url": "https://creations.mattel.com/products/rlc-exclusive-mustang-boss-hoss-hgw16?country=US",
       "variant_id": 40676187177165,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGW16",
       "key": "US:rlc-exclusive-mustang-boss-hoss-hgw16",
       "present": true
     },
@@ -4042,7 +4042,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/fc9djzwigfdi3fknukb1.jpg?v=1708501517",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2023-11-20T11:54:46-06:00",
@@ -4050,6 +4050,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGK73",
       "tags": [
         "BFCMREOFFER",
         "Brand: Hot Wheels Collectors",
@@ -4064,9 +4067,6 @@
       "title": "Hot Wheels RLC Exclusive Nissan Skyline GT-R",
       "url": "https://creations.mattel.com/products/rlc-exclusive-nissan-skyline-gt-r-hgk73?country=US",
       "variant_id": 40857648398541,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGK73",
       "key": "US:rlc-exclusive-nissan-skyline-gt-r-hgk73",
       "present": true
     },
@@ -4083,7 +4083,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HWF14_W_24_149.jpg?v=1715355604",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2024-10-28T11:49:10-05:00",
@@ -4091,6 +4091,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -317,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HWF14",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4106,9 +4109,6 @@
       "title": "Hot Wheels RLC Exclusive Nissan Skyline GT-R BNR34",
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-nissan-skyline-gt-r-r34-hwf14?country=US",
       "variant_id": 47588327391437,
-      "stock_count": -317,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HWF14",
       "key": "US:hot-wheels-rlc-nissan-skyline-gt-r-r34-hwf14",
       "present": true
     },
@@ -4125,7 +4125,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/tp6i5uualswsgwumxk6p.jpg?v=1763508429",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2025-09-17T12:48:16-05:00",
@@ -4161,7 +4161,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/nxlihuarwfmduzyghtyd.jpg?v=1684953854",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "17.50 USD",
       "price_cents": 1750,
       "published_at": "2023-11-08T15:33:41-06:00",
@@ -4169,6 +4169,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGK89",
       "tags": [
         "2023SUMMERSALE",
         "ALWAYSONSALE",
@@ -4191,9 +4194,6 @@
       "title": "Hot Wheels RLC Exclusive Real Riders Wheels Pack - Set 3",
       "url": "https://creations.mattel.com/products/rlc-exclusive-real-riders-wheels-pack-set-3-hgk89?country=US",
       "variant_id": 40922089554125,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGK89",
       "key": "US:rlc-exclusive-real-riders-wheels-pack-set-3-hgk89",
       "present": true
     },
@@ -4210,7 +4210,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/yfjvabrsgoxabhakkunm.jpg?v=1708503224",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "14.00 USD",
       "price_cents": 1400,
       "published_at": "2022-09-09T11:01:53-05:00",
@@ -4218,6 +4218,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGK90",
       "tags": [
         "ALWAYSONSALE",
         "Brand: Hot Wheels Collectors",
@@ -4238,9 +4241,6 @@
       "title": "Hot Wheels RLC Exclusive Real Riders Wheels Pack \u2013 Set 4",
       "url": "https://creations.mattel.com/products/rlc-exclusive-real-riders-wheels-pack-set-4-hgk90?country=US",
       "variant_id": 41030438224077,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGK90",
       "key": "US:rlc-exclusive-real-riders-wheels-pack-set-4-hgk90",
       "present": true
     },
@@ -4257,7 +4257,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/rm7lkmjynu00ugj5ms1u.jpg?v=1763508992",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2023-11-20T11:54:44-06:00",
@@ -4265,6 +4265,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HCK30",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4279,9 +4282,6 @@
       "title": "Hot Wheels RLC Exclusive TV Series Batmobile",
       "url": "https://creations.mattel.com/products/rlc-exclusive-tv-series-batmobile-hck30?country=US",
       "variant_id": 40277800845517,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HCK30",
       "key": "US:rlc-exclusive-tv-series-batmobile-hck30",
       "present": true
     },
@@ -4298,7 +4298,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/bx3koqefduot4pzurwy9_9142e118-2e7e-44ab-832e-762d2c167d2a.png?v=1708501482",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "24.99 USD",
       "price_cents": 2499,
       "published_at": "2021-06-23T16:17:24-05:00",
@@ -4306,6 +4306,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -1,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GLH95",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4320,9 +4323,6 @@
       "title": "Hot Wheels RLC Exclusive Volkswagen Drag Bus",
       "url": "https://creations.mattel.com/products/rlc-exclusive-volkswagen-drag-bus-glh95?country=US",
       "variant_id": 39850869129421,
-      "stock_count": -1,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GLH95",
       "key": "US:rlc-exclusive-volkswagen-drag-bus-glh95",
       "present": true
     },
@@ -4339,7 +4339,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/i6fnyjnjakmpsmcz7lwy.jpg?v=1752711311",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2024-09-26T15:17:44-05:00",
@@ -4347,6 +4347,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -324,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HNL29",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4360,9 +4363,6 @@
       "title": "Hot Wheels RLC Exclusive sELECTIONs Kawa-Bug-A",
       "url": "https://creations.mattel.com/products/rlc-exclusive-selections-kawa-bug-a-hnl29?country=US",
       "variant_id": 41654498197709,
-      "stock_count": -324,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HNL29",
       "key": "US:rlc-exclusive-selections-kawa-bug-a-hnl29",
       "present": true
     },
@@ -4379,7 +4379,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/dtf9iclbzmeri3hplnfl.jpg?v=1732646697",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2026-03-03T17:07:04-06:00",
@@ -4419,7 +4419,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HMY25_01.jpg?v=1714406510",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2024-09-26T15:19:47-05:00",
@@ -4427,6 +4427,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -174,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HMY25",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4442,9 +4445,6 @@
       "title": "Hot Wheels RLC Exclusive \u201821 Pagani Huayra R",
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-21-pagani-huayra-r-hmy25?country=US",
       "variant_id": 47536222109901,
-      "stock_count": -174,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HMY25",
       "key": "US:hot-wheels-rlc-21-pagani-huayra-r-hmy25",
       "present": true
     },
@@ -4461,7 +4461,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/jrl3cpesngtyw8hnifxw.jpg?v=1763513069",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "35.00 USD",
       "price_cents": 3500,
       "published_at": "2023-11-20T11:54:49-06:00",
@@ -4469,6 +4469,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGK79",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4480,9 +4483,6 @@
       "title": "Hot Wheels RLC Exclusive \u201921 Ford Bronco Wildtrak",
       "url": "https://creations.mattel.com/products/rlc-exclusive-21-ford-bronco-wildtrak-hgk79?country=US",
       "variant_id": 41393900388557,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGK79",
       "key": "US:rlc-exclusive-21-ford-bronco-wildtrak-hgk79",
       "present": true
     },
@@ -4499,7 +4499,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0743/5550/7423/files/HWC_PDP_JJY74_PS_26_0686.jpg?v=1784596398",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "62.99 AUD",
       "price_cents": 6299,
       "published_at": "2026-08-11T10:11:44+10:00",
@@ -4541,7 +4541,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/tr7i1ghlxyx8xdcj7ian.jpg?v=1785881237",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "38.00 USD",
       "price_cents": 3800,
       "published_at": "2026-07-31T15:07:38-05:00",
@@ -4582,7 +4582,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/l8i6ssxw9lnxlpgcnqts.jpg?v=1763511675",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2025-10-06T17:58:03-05:00",
@@ -4623,7 +4623,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HMY24_01.jpg?v=1723218393",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "35.00 USD",
       "price_cents": 3500,
       "published_at": "2025-05-08T17:53:32-05:00",
@@ -4631,6 +4631,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -2,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HMY24",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4645,9 +4648,6 @@
       "title": "Hot Wheels RLC Exclusive \u201961 Lincoln Continental",
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-1961-lincoln-continental-convertible-hmy24?country=US",
       "variant_id": 47816504246477,
-      "stock_count": -2,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HMY24",
       "key": "US:hot-wheels-rlc-1961-lincoln-continental-convertible-hmy24",
       "present": true
     },
@@ -4664,7 +4664,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/cxp4cfbrxi4wrxk9wa4s.jpg?v=1684950211",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "24.99 USD",
       "price_cents": 2499,
       "published_at": "2021-11-18T11:17:50-06:00",
@@ -4672,6 +4672,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GXJ07",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4685,9 +4688,6 @@
       "title": "Hot Wheels RLC Exclusive \u201966 Super Nova",
       "url": "https://creations.mattel.com/products/rlc-exclusive-66-super-nova-gxj07?country=US",
       "variant_id": 39850868605133,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GXJ07",
       "key": "US:rlc-exclusive-66-super-nova-gxj07",
       "present": true
     },
@@ -4704,7 +4704,7 @@
         }
       ],
       "image": null,
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2025-05-08T17:56:10-05:00",
@@ -4744,7 +4744,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/bzghozuiabdkji5uoh4q.jpg?v=1684951479",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2023-11-20T11:54:44-06:00",
@@ -4752,6 +4752,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GXJ16",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4766,9 +4769,6 @@
       "title": "Hot Wheels RLC Exclusive \u201969 Chevrolet Camaro SS",
       "url": "https://creations.mattel.com/products/rlc-exclusive-69-chevrolet-camaro-ss-gxj16?country=US",
       "variant_id": 40195342827725,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GXJ16",
       "key": "US:rlc-exclusive-69-chevrolet-camaro-ss-gxj16",
       "present": true
     },
@@ -4785,7 +4785,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/mjgfv4os60bokxkbsvul_ef2d7549-c03a-431a-9baa-43a3d5747cd7.jpg?v=1708501497",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2024-05-28T10:59:43-05:00",
@@ -4793,6 +4793,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGK76",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4807,9 +4810,6 @@
       "title": "Hot Wheels RLC Exclusive \u201cKawa-Bug-A\u201d \u201849 VW Beetle",
       "url": "https://creations.mattel.com/products/rlc-exclusive-kawa-bug-a-49-vw-beetle-hgk76?country=US",
       "variant_id": 41382130417869,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGK76",
       "key": "US:rlc-exclusive-kawa-bug-a-49-vw-beetle-hgk76",
       "present": true
     },
@@ -4826,7 +4826,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/HMY21_PS_24_480.jpg?v=1712332563",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2024-09-26T15:16:13-05:00",
@@ -4834,6 +4834,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -742,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HMY21",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4850,9 +4853,6 @@
       "title": "Hot Wheels RLC Mercedes-AMG G 63 4x4\u00b2\u202f",
       "url": "https://creations.mattel.com/products/hot-wheels-rlc-mercedes-amg-g-63-4x42-hmy21?country=US",
       "variant_id": 47454708236493,
-      "stock_count": -742,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HMY21",
       "key": "US:hot-wheels-rlc-mercedes-amg-g-63-4x42-hmy21",
       "present": true
     },
@@ -4869,7 +4869,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/files/rgqppio79qmlrfu7s0f0.jpg?v=1724433069",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "25.00 USD",
       "price_cents": 2500,
       "published_at": "2022-11-22T10:05:16-06:00",
@@ -4877,6 +4877,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": -20011,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "GLH88",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4890,9 +4893,6 @@
       "title": "Hot Wheels RLC sELECTIONs \u201941 Willys Gasser",
       "url": "https://creations.mattel.com/products/rlc-selections-41-willys-gasser-glh88?country=US",
       "variant_id": 39850869293261,
-      "stock_count": -20011,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "GLH88",
       "key": "US:rlc-selections-41-willys-gasser-glh88",
       "present": true
     },
@@ -4909,7 +4909,7 @@
         }
       ],
       "image": "//cdn.shopify.com/s/files/1/0568/1132/3597/products/lcwlsbk7flqlki4yj2ma_397dd162-31cc-41b7-b792-f006e856e349.jpg?v=1708501520",
-      "last_seen": "2026-09-01T00:21:40+00:00",
+      "last_seen": "2026-09-01T00:51:39+00:00",
       "price": "30.00 USD",
       "price_cents": 3000,
       "published_at": "2023-11-20T11:54:47-06:00",
@@ -4917,6 +4917,9 @@
       "status": "sold_out",
       "status_label": "Sold Out",
       "stock": null,
+      "stock_count": 0,
+      "stock_seen_at": "2026-09-01T00:21:40+00:00",
+      "stock_sku": "HGW25",
       "tags": [
         "Brand: Hot Wheels Collectors",
         "brand_RLC",
@@ -4929,9 +4932,6 @@
       "title": "Hot Wheels RLC sELECTIONs \u201982 Lamborghini Countach LP 500 S",
       "url": "https://creations.mattel.com/products/rlc-selections-82-lamborghini-countach-lp500-s-hgw25?country=US",
       "variant_id": 40889119965389,
-      "stock_count": 0,
-      "stock_seen_at": "2026-09-01T00:21:40+00:00",
-      "stock_sku": "HGW25",
       "key": "US:rlc-selections-82-lamborghini-countach-lp500-s-hgw25",
       "present": true
     }
