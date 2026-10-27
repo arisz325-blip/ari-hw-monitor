@@ -14,7 +14,17 @@ from __future__ import annotations
 import json
 import threading
 import urllib.parse
+from datetime import datetime, timedelta, timezone
 from http.server import BaseHTTPRequestHandler, HTTPServer
+
+# The default `published_at` for a catalog entry that doesn't set one. It has to
+# stay *relative* to today: checker.diff() suppresses the "new listing" push for
+# a first sighting that is already sold out and older than 30 days, so a frozen
+# literal date passes when written and fails silently once it ages out. The
+# hardcoded "2026-08-01" did exactly that — the suite went red on 2026-08-31 and
+# stayed red, on the check that exists to prove a real drop still notifies.
+RECENT_PUBLISHED_AT = (datetime.now(timezone.utc) - timedelta(days=5)).strftime(
+    "%Y-%m-%dT%H:%M:%SZ")
 
 # handle -> product definition. Tests mutate this between runs.
 CATALOG: dict[str, dict] = {}
@@ -42,7 +52,7 @@ def _product_js(handle: str, region_price: int) -> dict:
         "available": product["available"],
         "tags": product.get("tags", []),
         "product_type": product.get("product_type", "Vehicle"),
-        "published_at": product.get("published_at", "2026-08-01T00:00:00Z"),
+        "published_at": product.get("published_at", RECENT_PUBLISHED_AT),
         "images": [f"https://cdn.example/{handle}.jpg"],
         "variants": [{
             "id": abs(hash(handle + "v")) % 10**10,

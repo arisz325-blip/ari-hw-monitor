@@ -125,6 +125,51 @@ def main() -> int:
               any(r["status"] == "in_stock" for r in data["items"]))
         check("no parse warnings", data["warnings"] == [], f"{data['warnings']}")
 
+        print("\nRun 1b — digital memberships are filtered out, membership cars are not")
+        # Both shipped as in_stock and were tracked (and could notify) until
+        # 2026-10-28. The exclusion has to be "digital membership", not the
+        # broader "membership": five real RLC membership *cars* (2022 Skyline,
+        # 2023 Cobra R, Kawa-Bug-A, 2021 kit, 1965 Shelby Cobra) carry
+        # "Membership" in their titles and must keep being watched.
+        shipped_filters = json.loads((ROOT / "config.json").read_text())["filters"]
+        membership_products = {
+            "AU:1-year-rlc-digital-membership": {
+                "title": "1-Year RLC Digital Membership",
+                "handle": "1-year-rlc-digital-membership",
+                "product_type": "",
+                "tags": ["Brand: Hot Wheels Collectors", "brand_RLC",
+                         "Category: Digital Memberships", "MC_Exclusive", "RLC"],
+            },
+            "US:1-year-rlc-digital-membership-hnb06": {
+                "title": "Hot Wheels Red Line Club 1-Year Digital Membership",
+                "handle": "1-year-rlc-digital-membership-hnb06",
+                "product_type": "",
+                "tags": ["brand_RLC", "Category: Digital Memberships", "RLC",
+                         "RLC_membership", "Type: Digital Membership"],
+            },
+        }
+        for label, product in membership_products.items():
+            check(f"{label} is not tracked",
+                  not checker_mod.matches_filters(product, shipped_filters))
+
+        membership_cars = {
+            "US:2022-rlc-membership-72-nissan-skyline-h-t-2000-gt-r": {
+                "title": "Hot Wheels 2022 RLC Membership ’72 Nissan Skyline H/T 2000 GT-R",
+                "handle": "2022-rlc-membership-72-nissan-skyline-h-t-2000-gt-r",
+                "product_type": "Vehicle",
+                "tags": ["2022 Membership kit", "RLC", "Category: Vehicles"],
+            },
+            "US:2023-rlc-membership-93-ford-cobra-r-hwrlc2023": {
+                "title": "Hot Wheels 2023 RLC Membership ’93 Ford Cobra R",
+                "handle": "2023-rlc-membership-93-ford-cobra-r-hwrlc2023",
+                "product_type": "Vehicle",
+                "tags": ["RLC", "Category: Vehicles", "2023 Membership kit"],
+            },
+        }
+        for label, product in membership_cars.items():
+            check(f"{label} is still tracked (exclusion isn't too broad)",
+                  checker_mod.matches_filters(product, shipped_filters))
+
         print("\nRun 2 — restock + brand-new listing + upcoming drop")
         catalog = json.loads(json.dumps(BASE_CATALOG))
         catalog["hot-wheels-elite-64-mazda-rx7"].update(available=True, badge="Add to Cart")
