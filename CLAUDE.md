@@ -26,7 +26,7 @@ docs/data.json                    generated — what the dashboard reads
 .github/workflows/check.yml            full scan, dispatched by the Worker at :01 and :31
 .github/workflows/watchlist-check.yml  watchlist-only fast poll, every 5min via Cloudflare cron
 .github/workflows/watchlist.yml        turns a "[watchlist] ..." issue into a config.json edit
-tests/                                 offline suite, 62 checks, mock storefront + ntfy + cart + sitemap
+tests/                                 offline suite, 78 checks, mock storefront + ntfy + cart + sitemap
 ```
 
 ## Facts that cost real debugging time
@@ -202,7 +202,7 @@ passed through both.
 ## Running things
 
 ```bash
-python -m tests.test_checker        # 62 offline checks, no network, ~40s
+python -m tests.test_checker        # 78 offline checks, no network, ~40s
 python checker.py --self-test       # what does the live site look like right now?
 python checker.py --dry-run         # full check, notifies nothing, writes nothing
 python checker.py --watchlist-check # fast watchlist-only poll, no full scan
@@ -235,8 +235,28 @@ everything and deliberately sends no alerts.
 
 ## Open items
 
-1. **Membership item leaks the filter.** AU returns "1-Year RLC Digital
-   Membership". Add `membership` and `digital` to `exclude_keywords`.
+1. ~~**Membership item leaks the filter.**~~ — fixed 2026-10-28. It was two
+   items, not one, and both were **in stock and tracked**, so either could have
+   pushed a "Back in stock" or a price change at any time:
+   `AU:1-year-rlc-digital-membership` and
+   `US:1-year-rlc-digital-membership-hnb06`.
+   The exclusion added is **`digital membership`**, deliberately *not* the
+   `membership` + `digital` this note used to suggest. `matches_filters()`
+   matches an exclude keyword as a plain substring of title + handle +
+   product_type + tags, so bare `membership` would also have dropped five
+   genuine cars — the 2022 ’72 Skyline, 2023 ’93 Cobra R, Kawa-Bug-A
+   Membership Car, 2021 Car Kit and the 1965 Shelby Cobra 427 S/C — whose
+   titles all contain "Membership". Both membership products carry a
+   `Category: Digital Memberships` tag, so the narrower phrase still catches
+   them; `Run 1b` in `tests/test_checker.py` now guards both directions.
+   Leftover to know about: `diff()` never prunes `state["items"]`, and
+   `write_dashboard_data()` renders every state record with
+   `present = key in live_keys`, so until the two keys are deleted from
+   `state.json` they linger on the dashboard as stale `in_stock` rows that
+   read `present: false`. Deleting them is safe (they are a generated cache,
+   not history worth keeping) but it touches a file the Actions runs rewrite
+   twice an hour, so do it as its own commit rather than bundling it into an
+   unrelated change.
 2. **Stock counts come from SearchSpring, and only sometimes.** Mattel's
    storefront search is SearchSpring (site id `f37vx2`, in the page source
    as `SDG.Data.ssId`). Its index carries the raw Shopify variant payload:
