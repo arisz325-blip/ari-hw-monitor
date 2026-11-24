@@ -7276,6 +7276,18 @@
   ],
   "runs": [
     {
+      "at": "2026-11-24T13:32:09+00:00",
+      "events": 0,
+      "items": 0,
+      "warnings": [
+        "US: could not load /collections/hot-wheels on any known path prefix \u2014 the region URL may have changed",
+        "US: could not load /collections/cars-vehicles on any known path prefix \u2014 the region URL may have changed",
+        "US: could not load /collections/hot-wheels-red-line-club on any known path prefix \u2014 the region URL may have changed",
+        "AU: could not load /collections/hot-wheels on any known path prefix \u2014 the region URL may have changed",
+        "No products matched in any region. Either the filters are too narrow or the page structure changed \u2014 run with --self-test."
+      ]
+    },
+    {
       "at": "2026-11-24T13:02:03+00:00",
       "events": 0,
       "items": 117,
@@ -7565,12 +7577,6 @@
     },
     {
       "at": "2026-11-23T14:10:00+00:00",
-      "events": 0,
-      "items": 117,
-      "warnings": []
-    },
-    {
-      "at": "2026-11-23T13:49:01+00:00",
       "events": 0,
       "items": 117,
       "warnings": []
